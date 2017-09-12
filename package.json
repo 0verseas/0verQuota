@@ -1,0 +1,16 @@
+{
+	"name": "0verseas-quota",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "harp compile . dist",
+		"serve": "harp server"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bootstrap": "^4.0.0-beta",
+		"harp": "^0.24.0"
+	}
+}

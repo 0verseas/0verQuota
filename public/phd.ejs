@@ -1,0 +1,145 @@
+<div class="container">
+
+  <%- partial("partials/_nav.ejs", { system: "phd" }) %>
+
+  <h3>說明之類的 Undefined</h3>
+  <div id="exampleAccordion" data-children=".item">
+    <div class="item">
+      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
+        >招生名額依據
+      </a>
+      <div id="exampleAccordion1" class="collapse show" role="tabpanel">
+        <p>
+          <ol>
+            <li>業經教育部105年10月18日臺教高通字第1050141274號、105年10月21日臺教技(四)字第1050122517號函核定在案。</li>
+            <li>各梯次名額係依本會105年10月17日第1次常務委員會決議事項辦理。</li>
+          </ol>
+        </p>
+      </div>
+    </div>
+    <div class="item">
+      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion2" aria-expanded="false" aria-controls="exampleAccordion2">
+        >招生管道
+      </a>
+      <div id="exampleAccordion2" class="collapse" role="tabpanel" style="padding: 0 1rem">
+        <h6 class="mb-3">個人申請制</h6>
+        <p>除國立臺灣師範大學僑生先修部馬來西亞春季班結業生及緬甸生外，其餘地區僑生(含港澳生)皆可申請。</p>
+        <h6>聯合分發制</h6>
+        <p>
+          <ul>
+            <li>第一梯次(s1)：馬來西亞(持華文獨中統考文憑)</li>
+            <li>第二梯次(s2)：馬來西亞(STPM/A-LEVEL/O-LEVEL/SPM)、一般地區(歐洲、美洲、非洲、大洋洲及其他免試地區)。</li>
+            <li>第三梯次(s3)：海外測驗(日本、韓國、菲律賓、新加坡、泰北、緬甸、海外臺灣學校高中畢業生及澳門)。</li>
+            <li>第四梯次(s4)：國立臺灣師範大學僑生先修部結業生。</li>
+            <li>第五梯次(s5)：印尼輔訓班結業生、香港。</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    <div class="item">
+      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion3" aria-expanded="false" aria-controls="exampleAccordion3">
+        >注意事項
+      </a>
+      <div id="exampleAccordion3" class="collapse" role="tabpanel">
+        <p>
+          <ol>
+            <li>提供中英文查詢，直接點選「查詢」，即可顯示該類組所有系所。</li>
+            <li>個人申請為不分類組招生，以「個人申請(校名)」及「個人申請(系名)」搜尋，會顯示所有個人申請系所。</li>
+            <li>修業年限除各校於學士班系所分則欄有特別規定外，皆為四年。</li>
+            <li>所謂「依一般限制」，係指患有精神病、活動性肺結核、惡性傳染病及重症慢性疾病等情形者，均不得申請。</li>
+            <li>身心障礙學生如欲申請赴臺升學，應先了解並自行評估各校系能否依不同需求類別及程度，提供學習輔具資源及生活照輔措施，以作為選填志 願之參考，以免造成無法順利就學之困擾。</li>
+          </ol>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>系所查詢 Undefined</h3>
+  <form action="">
+    <div class="form-row">
+      <div class="col-md-6">
+        <small class="text-muted">依關鍵字過濾學校列表 Filter the school list by key word</small>
+        <input type="text" class="form-control" id="school-keywords" placeholder="學校關鍵字 School Keywords">
+      </div>
+      <div class="col-md-6">
+        <small class="text-muted">選擇學校 School</small>
+        <select class="form-control" id="shcool">
+          <option selected>所有學校 All Schools</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <small class="text-muted">選擇類組 Group</small>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="">
+            第一類組 First Group
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="">
+            第二類組 Second Group
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" value="">
+            第三類組 Third Group
+          </label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <small class="text-muted">選擇學群 xuequn</small>
+        <select class="form-control" id="xuequn">
+          <option selected>所有學群 All xuequn</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-12">
+        <small class="text-muted">關鍵字過濾 Key word filter</small>
+        <input type="text" class="form-control" id="keywords" placeholder="關鍵字 Keywords">
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>志願代碼</th>
+        <th>學校名稱</th>
+        <th>系組名稱</th>
+        <th>隸屬類組</th>
+        <th>主要學群</th>
+        <th>個人申請</th>
+        <th>聯合分發<br>總額 s1 s2 s3 s4 s5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1001</td>
+        <td>國立臺灣大學<br>Nation T U</td>
+        <td>中國文學系<br>Chinese Sys</td>
+        <td>第一類組<br>DiYiLeiZu</td>
+        <td>文理學群<br>WenLiXueQun</td>
+        <td>0</td>
+        <td>17 01 05 02 03 06</td>
+      </tr>
+      <tr>
+        <td>1001</td>
+        <td>國立臺灣大學<br>Nation T U</td>
+        <td>外國文學系<br>DXXXX Sys</td>
+        <td>第一類組<br>DiYiLeiZu</td>
+        <td>文理學群<br>WenLiXueQun</td>
+        <td>0</td>
+        <td>17 各梯次皆可選填<br>至名額用完為止</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

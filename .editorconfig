@@ -1,0 +1,36 @@
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{html,ejs}]
+indent_style = space
+indent_size = 2
+quote_type = double
+
+[*.{css,scss}]
+indent_style = space
+indent_size = 2
+quote_type = double
+
+[*.md]
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+[*.js]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = lf
+indent_style = space
+indent_size = 2
+quote_type = single
+spaces_around_operators = true
+
+[*.{json,yaml}]
+indent_style = tab
+indent_size = 4
+quote_type = double
