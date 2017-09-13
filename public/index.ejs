@@ -59,21 +59,21 @@
   <h3>系所查詢 Undefined</h3>
   <form action="">
     <div class="form-row">
-      <div class="col-md-6">
-        <small class="text-muted">依關鍵字過濾學校列表 Filter the school list by key word</small>
-        <input type="text" class="form-control" id="school-keywords" placeholder="學校關鍵字 School Keywords">
+      <div class="form-group col-lg-6">
+        <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 Filter the school list by key word</label>
+        <input type="text" class="form-control" id="schoolKeywords" placeholder="暨南">
       </div>
-      <div class="col-md-6">
-        <small class="text-muted">選擇學校 School</small>
-        <select class="form-control" id="shcool">
+      <div class="form-group col-lg-6">
+        <label for="schoolList" class="form-control-label">選擇學校 School</label>
+        <select class="form-control" id="schoolList">
           <option selected>所有學校 All Schools</option>
         </select>
       </div>
     </div>
 
     <div class="form-row">
-      <div class="col-md-6">
-        <small class="text-muted">選擇類組 Group</small>
+      <div class="form-group col-md-6">
+        <label class="form-control-label">選擇類組 Group</label>
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" value="">
@@ -93,8 +93,8 @@
           </label>
         </div>
       </div>
-      <div class="col-md-6">
-        <small class="text-muted">選擇學群 xuequn</small>
+      <div class="form-group col-md-6">
+        <label for="xuequn" class="form-control-label">選擇學群 xuequn</label>
         <select class="form-control" id="xuequn">
           <option selected>所有學群 All xuequn</option>
         </select>
@@ -102,9 +102,9 @@
     </div>
 
     <div class="form-row">
-      <div class="col-md-12">
-        <small class="text-muted">關鍵字過濾 Key word filter</small>
-        <input type="text" class="form-control" id="keywords" placeholder="關鍵字 Keywords">
+      <div class="form-group col-md-12">
+        <label for="keywords" class="form-control-label">關鍵字過濾 Key word filter</label>
+        <input type="text" class="form-control" id="keywords" placeholder="資訊管理">
       </div>
     </div>
   </form>
