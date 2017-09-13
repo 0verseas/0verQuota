@@ -2,13 +2,13 @@
 
   <%- partial("partials/_nav.ejs", { system: "bachelor" }) %>
 
-  <h3>說明之類的 Undefined</h3>
-  <div id="exampleAccordion" data-children=".item">
-    <div class="item">
-      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
+  <div class="announcement" id="announcement" data-children=".announcement-item">
+    <h4>宣告 Announcement</h4>
+    <div class="announcement-item">
+      <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="true" aria-controls="announcement1">
         >招生名額依據
       </a>
-      <div id="exampleAccordion1" class="collapse show" role="tabpanel">
+      <div id="announcement1" class="collapse show" role="tabpanel">
         <p>
           <ol>
             <li>業經教育部105年10月18日臺教高通字第1050141274號、105年10月21日臺教技(四)字第1050122517號函核定在案。</li>
@@ -17,11 +17,11 @@
         </p>
       </div>
     </div>
-    <div class="item">
-      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion2" aria-expanded="false" aria-controls="exampleAccordion2">
+    <div class="announcement-item">
+      <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement2" aria-expanded="false" aria-controls="announcement2">
         >招生管道
       </a>
-      <div id="exampleAccordion2" class="collapse" role="tabpanel" style="padding: 0 1rem">
+      <div id="announcement2" class="collapse" role="tabpanel" style="padding: 0 1rem">
         <h6 class="mb-3">個人申請制</h6>
         <p>除國立臺灣師範大學僑生先修部馬來西亞春季班結業生及緬甸生外，其餘地區僑生(含港澳生)皆可申請。</p>
         <h6>聯合分發制</h6>
@@ -36,11 +36,11 @@
         </p>
       </div>
     </div>
-    <div class="item">
-      <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion3" aria-expanded="false" aria-controls="exampleAccordion3">
+    <div class="announcement-item">
+      <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
         >注意事項
       </a>
-      <div id="exampleAccordion3" class="collapse" role="tabpanel">
+      <div id="announcement3" class="collapse" role="tabpanel">
         <p>
           <ol>
             <li>提供中英文查詢，直接點選「查詢」，即可顯示該類組所有系所。</li>

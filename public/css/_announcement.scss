@@ -1,0 +1,12 @@
+.announcement {
+  &-title {
+    display: block;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+}
+
+@include media-breakpoint-up(sm) {}
+@include media-breakpoint-up(md) {}
+@include media-breakpoint-up(lg) {}
+@include media-breakpoint-up(xl) {}
