@@ -12,6 +12,10 @@ td,th {
   text-align: center;
 }
 
+.td-br {
+  display: block;
+}
+
 @include media-breakpoint-up(sm) {
   .header h3 {
     font-size: $h3-font-size;
