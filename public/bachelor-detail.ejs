@@ -1,163 +1,113 @@
-<div class="container">
+<div class="container" style="max-width: 57rem;">
   <%- partial("partials/_nav.ejs", { system: "bachelor" }) %>
-  <h2 class="text-center">國立暨南國際大學 資訊管理學系 學士班</h2>
-  <h2 class="text-center">Nxxxxxxxxxxxxxxx xxxxxxxxxxxx xxxxx</h2>
-  <nav class="nav nav-tabs" id="myTab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true">學校資訊 School Information</a>
-    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo">系所資訊 Department Information</a >
-    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem">審查項目 ShenCa Item</a >
+  <h2 class="text-center ">國立暨南國際大學 資訊管理學系 學士班</h2>
+  <h3 class="text-center">Nxxxxxxxxxxxxxxx xxxxxxxxxxxx xxxxx</h3>
+
+  <nav class="nav nav-pills nav-fill mt-3" id="myTab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true">學校資訊 <small>School Information</small></a>
+    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo">系所資訊 <small>Department Information</small></a>
+    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem">審查項目 <small>ShenCa Item</small></a >
   </nav>
+
+  <hr>
+
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-schoolInfo" role="tabpanel" aria-labelledby="nav-schoolInfo-tab">
-      <div class="card my-2">
-        <div class="card-header bg-primary text-white">
-          基本資訊 Basic Information
-        </div>
-        <div class="card-block">
-          <div class="row mx-auto my-2">
-            <div class="col-6 row">
-              <h6 class="col-6">電話號碼 Phone</h6>
-              <span class="col-6">456436743673</span>
-            </div>
-            <div class="col-6 row">
-              <h6 class="col-6">傳真號碼 Fax</h6>
-              <span class="col-6">43523i83673</span>
-            </div>
-          </div>
-          <div class="row mx-auto my-2">
-            <div class="col-6 row">
-              <h6 class="col-6">中文網站 Chinese Website</h6>
-              <span class="col-6">jgfkdlhgslkh</span>
-            </div>
-            <div class="col-6 row">
-              <h6 class="col-6">英文網站 English Website</h6>
-              <span class="col-6">lfkjgjlkjsdglkjl</span>
-            </div>
-          </div>
-          <div class="row mx-auto my-2">
-            <h6 class="col-3">地址 Address</h6>
-            <div class="col-9">
-              <p class="">10617臺北市羅斯福路4段1號</p>
-              <p class="">No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan R.O.C.</p>
-            </div>
-          </div>
-          <div class="row mx-auto my-2">
-            <div class="col-6 row">
-              <h6 class="col-11">
-                招收中五生 zhāo shōu zhōng wǔ shēng
-              </h6>
-              <span class="oi oi-check col-1"></span>
-            </div>
-            <div class="col-6 row">
-              <h6 class="col-11">
-                單獨招收僑生 dān dú zhāo shōu qiáo shēng
-              </h6>
-              <span class="oi oi-x col-1"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card my-2">
-        <div class="card-header bg-primary text-white">
-          住宿資訊 Dorm Information
-        </div>
-        <div class="card-block">
-          <div class="row mx-auto my-2">
-            <div class="col-6 row">
-              <h6 class="col-11">
-                  提供住宿 zhāo shōu zhōng wǔ shēng
-              </h6>
-              <span class="oi oi-check col-1"></span>
-            </div>
-          </div>
-          <div class="mx-3 my-2">
-            <h6>說明 Description</h6>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-              人類、神族和蟲族是《星海爭霸II》裡的三大種族，各有獨特的單位、建築和遊戲風格。三個種族特有的設計可讓遊玩風格不同的玩家選擇自己最上手的種族；這個專區將帶你熟悉這三個種族。
-            </p>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-              The terrans, protoss, and zerg are the three races of StarCraft II, each featuring unique units, buildings, and game mechanics. They all offer different gameplay experiences tailored to different play styles; this section will familiarize you with each race.
-            </p>
-          </div>
-        </div>
+      <div>
+        <h4>基本資訊 <small class="text-muted">Basic Information</small></h4>
+        <dl class="row ">
+          <dt class="col-sm-4">電話號碼 <small class="text-muted">Phone</small></dt>
+          <dd class="col-sm-8">+886-49123456</dd>
+
+          <dt class="col-sm-4">傳真號碼 <small class="text-muted">Fax</small></dt>
+          <dd class="col-sm-8">+886-49123456 </dd>
+
+          <dt class="col-sm-4">地址 <small class="text-muted">Address</small></dt>
+          <dd class="col-sm-8">
+            <p>10617臺北市羅斯福路4段1號</p>
+            <p>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan R.O.C.</p>
+          </dd>
+
+          <dt class="col-sm-4">中文網站 <small class="text-muted">Chinese Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-8 col-md-4">招收中五生 <small class="text-muted">zhāo shōu zhōng wǔ shēng</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-8 col-md-4">單獨招收僑生 <small class="text-muted">dān dú zhāo shōu qiáo shēng</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-x"></span></dd>
+        </dl>
       </div>
 
-      <div class="card my-2">
-        <div class="card-header bg-primary text-white">
-          獎學金資訊 jiǎng xué jīn zī xùn
-        </div>
-        <div class="card-block">
-          <div class="row mx-auto my-2">
-            <div class="col-6 row">
-              <h6 class="col-11">
-                  提供獎學金 shì fǒu tí gōng jiǎng xué jīn✓
-              </h6>
-              <span class="oi oi-check col-1"></span>
-            </div>
-          </div>
-          <div class="mx-3 my-2">
-            <div class="row">
-              <h6 class="col-4">中文說明網址 Chinese shuō míng URL </h6>
-              <a href="http://gocfs.osa.ntu.edu.tw/news/news.php?class=101">http://gocfs.osa.ntu.edu.tw/news/news.php?class=101</a>
-            </div>
-          </div>
-          <div class="mx-3 my-2">
-            <div class="row">
-              <h6 class="col-4">英文說明網址 English shuō míng URL </h6>
-              <a href="http://gocfs.osa.ntu.edu.tw/news/news.php?class=101">http://gocfs.osa.ntu.edu.tw/news/news.php?class=101</a>
-            </div>
-          </div>
-          <div class="mx-3 my-2">
-            <h6>負責單位 fù zé dān wèi</h6>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-                學務處生活輔導組及僑生及陸生輔導組
-            </p>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-              English_gjhslfgklhks
-            </p>
-          </div>
-        </div>
+      <hr>
+
+      <div>
+        <h4>住宿資訊 <small class="text-muted">Dorm Information</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">提供宿舍 <small class="text-muted">tí gōng sù shè</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-sm-4">說明 <small class="text-muted">Introuction</small></dt>
+          <dd class="col-sm-8">
+            <p>新生保障住宿</p>
+            <p>eng_dorm_info</p>
+          </dd>
+        </dl>
       </div>
 
-      <div class="card my-2">
-        <div class="card-header bg-primary text-white">
-          學則資訊 xué zé zī xùn
-        </div>
-        <div class="card-block">
-          <div class="mx-3 my-2">
-            <h6>備註 bèi zhù</h6>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-              一、校址：文學院、理學院、社會科學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院及法律學院位於台北
- 市羅斯福路4段1號、哲學系及人類學系位於台北市思源街18號、醫學院位於台北市仁愛路1段1號、公共衛生學院位於台北市徐州路17
- 號。二、電話：文學院、理學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院(02)33663366、社會科學院
- (02)33668300、政治學系(02)33668450、經濟學系(02)33668440、法律學院(02)33668900 、醫學院(02)23123456、公共衛生學院
- (02)33668012。
-            </p>
-          </div>
-          <div class="mx-3 my-2">
-            <p>
-              English_gjhslfgklhkslkrjgnksglk
-            </p>
-          </div>
-        </div>
+      <hr>
+
+      <div>
+        <h4>獎學金資訊 <small class="text-muted">jiǎng xué jīn zī xùn</small></h4>
+        <dl class="row">
+          <dt class="col-8 col-md-4">提供獎學金 <small class="text-muted">tí gōng jiǎng xué jīn</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-sm-4">中文說明 <small class="text-muted">Chinese shuō míng</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://gocfs.osa.ntu.edu.tw/news/news.phpsssssssaaaaaaa" target="_blank">http://gocfs.osa.ntu.edu.tw/news/news.phpsssssssaaaaaaa</a>
+          </dd>
+
+          <dt class="col-sm-4">英文說明 <small class="text-muted">English shuō mínge</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://gocfs.osa.ntu.edu.tw/news/news.php?class=101" target="_blank">http://gocfs.osa.ntu.edu.tw/news/news.php?class=101</a>
+          </dd>
+
+          <dt class="col-sm-4">負責單位 <small class="text-muted">fù zé dān wèi</small></dt>
+          <dd class="col-sm-8">
+            <p>學務處生活輔導組及僑生及陸生輔導組</p>
+            <p>eng_scholarship_dept</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>學則資訊 <small class="text-muted">xué zé zī xùn</small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">備註 <small class="text-muted">bèi zhù</small></dt>
+          <dd class="col-md-8">
+            <p>一、校址：文學院、理學院、社會科學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院及法律學院位於台北市羅斯福路4段1號、哲學系及人類學系位於台北市思源街18號、醫學院位於台北市仁愛路1段1號、公共衛生學院位於台北市徐州路17號。二、電話：文學院、理學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院(02)33663366、社會科學院(02)33668300、政治學系(02)33668450、經濟學系(02)33668440、法律學院(02)33668900 、醫學院(02)23123456、公共衛生學院(02)33668012。</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
       </div>
     </div>
 
     <div class="tab-pane fade" id="nav-deptInfo" role="tabpanel" aria-labelledby="nav-deptInfo-tab">
       系所資訊
     </div>
+
     <div class="tab-pane fade" id="nav-shenchaItem" role="tabpanel" aria-labelledby="nav-shenchaItem-tab">
       審查項目
-      </div>
+    </div>
   </div>
 </div>

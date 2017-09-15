@@ -16,6 +16,11 @@ td,th {
   display: block;
 }
 
+.text-link {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 @include media-breakpoint-up(sm) {
   .header h3 {
     font-size: $h3-font-size;
