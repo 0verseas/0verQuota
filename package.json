@@ -3,13 +3,20 @@
 	"version": "0.0.1",
 	"description": "",
 	"main": "index.js",
+	"babel": {
+		"presets": [
+			"env"
+		]
+	},
 	"scripts": {
-		"build": "harp compile . dist",
+		"build": "harp compile . dist && babel dist/js -d dist/js",
 		"serve": "harp server"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.6.0",
 		"bootstrap": "^4.0.0-beta",
 		"harp": "^0.24.0"
 	}
