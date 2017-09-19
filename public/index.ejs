@@ -61,12 +61,12 @@
     <div class="form-row">
       <div class="form-group col-lg-6">
         <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 Filter the school list by key word</label>
-        <input type="text" class="form-control" id="schoolKeywords" placeholder="暨南">
+        <input type="text" class="form-control" id="school-keyword" placeholder="暨南">
       </div>
       <div class="form-group col-lg-6">
         <label for="schoolList" class="form-control-label">選擇學校 School</label>
-        <select class="form-control" id="schoolList">
-          <option selected>所有學校 All Schools</option>
+        <select class="form-control" id="school-list">
+          <option selected>請選擇學校 Select School PLZ</option>
         </select>
       </div>
     </div>
@@ -95,7 +95,7 @@
       </div>
       <div class="form-group col-md-6">
         <label for="xuequn" class="form-control-label">選擇學群 xuequn</label>
-        <select class="form-control" id="xuequn">
+        <select class="form-control" id="department-group">
           <option selected>所有學群 All xuequn</option>
         </select>
       </div>
@@ -129,7 +129,7 @@
         <th>s5</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="result-body">
       <tr>
         <td>1001</td>
         <td><span class="td-br">國立臺灣大學</span><span class="td-br">Nation T U</span></td>
