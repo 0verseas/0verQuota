@@ -1,7 +1,7 @@
 const API = (function () {
   const baseUrl = env.baseUrl;
 
-  function getSchoolsList() {
+  function getSchools() {
     const request = fetch(`${baseUrl}/schools`, {
       credentials: 'include'
     });
@@ -9,7 +9,7 @@ const API = (function () {
     return _requestHandle(request);
   }
 
-  function getDepartmentsList(schoolId = 'all', systemId = 'all') {
+  function getDepartments(schoolId = 'all', systemId = 'all') {
     const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments`, {
       credentials: 'include'
     });
@@ -52,8 +52,8 @@ const API = (function () {
   }
 
   return {
-    getSchoolsList,
-    getDepartmentsList,
+    getSchools,
+    getDepartments,
     getDepartmentDetail,
     getDepartmentGroups,
   }
