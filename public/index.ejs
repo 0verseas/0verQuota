@@ -61,12 +61,12 @@
     <div class="form-row">
       <div class="form-group col-lg-6">
         <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 Filter the school list by key word</label>
-        <input type="text" class="form-control" id="school-keyword" placeholder="暨南">
+        <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.fliterSchoolList(this.value)">
       </div>
       <div class="form-group col-lg-6">
         <label for="schoolList" class="form-control-label">選擇學校 School</label>
-        <select class="form-control" id="school-list">
-          <option selected>請選擇學校 Select School PLZ</option>
+        <select class="form-control" id="school-list" onchange="app.selectSchool(this.options[this.selectedIndex].value)">
+          <option value="" disabled selected>請選擇學校 Select School PLZ</option>
         </select>
       </div>
     </div>
@@ -109,7 +109,7 @@
     </div>
   </form>
 
-  <table class="table table-striped table-bordered table-responsive ">
+  <table class="table table-sm table-striped table-bordered table-responsive">
     <thead>
       <tr>
         <th rowspan="2">志願代碼</th>
