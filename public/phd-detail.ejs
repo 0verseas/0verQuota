@@ -1,3 +1,267 @@
-<div class="container">
+<div class="container" style="max-width: 57rem;">
   <%- partial("partials/_nav.ejs", { system: "phd" }) %>
+  <h2 class="text-center ">國立暨南國際大學 資訊管理學系 博士班</h2>
+  <h3 class="text-center">Nxxxxxxxxxxxxxxx xxxxxxxxxxxx xxxxx</h3>
+
+  <nav class="nav nav-pills nav-fill mt-3" id="myTab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true">學校資訊 <small>School Information</small></a>
+    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo">系所資訊 <small>Department Information</small></a>
+    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem">審查項目 <small>ShenCa Item</small></a >
+  </nav>
+
+  <hr>
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-schoolInfo" role="tabpanel" aria-labelledby="nav-schoolInfo-tab">
+      <div>
+        <h4>基本資訊 <small class="text-muted">Basic Information</small></h4>
+        <dl class="row ">
+          <dt class="col-sm-4">電話號碼 <small class="text-muted">Phone</small></dt>
+          <dd class="col-sm-8">+886-49123456</dd>
+
+          <dt class="col-sm-4">傳真號碼 <small class="text-muted">Fax</small></dt>
+          <dd class="col-sm-8">+886-49123456 </dd>
+
+          <dt class="col-sm-4">地址 <small class="text-muted">Address</small></dt>
+          <dd class="col-sm-8">
+            <p>10617臺北市羅斯福路4段1號</p>
+            <p>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan R.O.C.</p>
+          </dd>
+
+          <dt class="col-sm-4">中文網站 <small class="text-muted">Chinese Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-8 col-md-4">招收中五生 <small class="text-muted">zhāo shōu zhōng wǔ shēng</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-8 col-md-4">單獨招收僑生 <small class="text-muted">dān dú zhāo shōu qiáo shēng</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-x"></span></dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>住宿資訊 <small class="text-muted">Dorm Information</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">提供宿舍 <small class="text-muted">tí gōng sù shè</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-sm-4">說明 <small class="text-muted">Introuction</small></dt>
+          <dd class="col-sm-8">
+            <p>新生保障住宿</p>
+            <p>eng_dorm_info</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>獎學金資訊 <small class="text-muted">jiǎng xué jīn zī xùn</small></h4>
+        <dl class="row">
+          <dt class="col-8 col-md-4">提供獎學金 <small class="text-muted">tí gōng jiǎng xué jīn</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-sm-4">中文說明 <small class="text-muted">Chinese shuō míng</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://gocfs.osa.ntu.edu.tw/news/news.phpsssssssaaaaaaa" target="_blank">http://gocfs.osa.ntu.edu.tw/news/news.phpsssssssaaaaaaa</a>
+          </dd>
+
+          <dt class="col-sm-4">英文說明 <small class="text-muted">English shuō mínge</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://gocfs.osa.ntu.edu.tw/news/news.php?class=101" target="_blank">http://gocfs.osa.ntu.edu.tw/news/news.php?class=101</a>
+          </dd>
+
+          <dt class="col-sm-4">負責單位 <small class="text-muted">fù zé dān wèi</small></dt>
+          <dd class="col-sm-8">
+            <p>學務處生活輔導組及僑生及陸生輔導組</p>
+            <p>eng_scholarship_dept</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>學則資訊 <small class="text-muted">xué zé zī xùn</small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">備註 <small class="text-muted">bèi zhù</small></dt>
+          <dd class="col-md-8">
+            <p>一、校址：文學院、理學院、社會科學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院及法律學院位於台北市羅斯福路4段1號、哲學系及人類學系位於台北市思源街18號、醫學院位於台北市仁愛路1段1號、公共衛生學院位於台北市徐州路17號。二、電話：文學院、理學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院(02)33663366、社會科學院(02)33668300、政治學系(02)33668450、經濟學系(02)33668440、法律學院(02)33668900 、醫學院(02)23123456、公共衛生學院(02)33668012。</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="nav-deptInfo" role="tabpanel" aria-labelledby="nav-deptInfo-tab">
+      <div>
+        <h4>基本資訊 <small class="text-muted">Basic Information</small></h4>
+        <dl class="row ">
+          <dt class="col-sm-4">系所代碼 <small class="text-muted">xi suo dai ma </small></dt>
+          <dd class="col-sm-8">10102</dd>
+
+          <dt class="col-sm-4">讀卡代碼 <small class="text-muted">Dou Ka Dai Ma </small></dt>
+          <dd class="col-sm-8">1002 </dd>
+
+          <dt class="col-sm-4">中文網站 <small class="text-muted">Chinese Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
+          <dd class="col-sm-8">
+            <a class="text-link" href="http://www.ncnu.edu.tw/" target="_blank">http://www.ncnu.edu.tw/</a>
+          </dd>
+
+          <dt class="col-sm-4">性別招生限制 <small class="text-muted">Zhao Shou Xing Bie Xian Zhi </small></dt>
+          <dd class="col-sm-8">男女兼收</dd>
+
+          <dt class="col-sm-12">學群 <small class="text-muted">Xiao Qun </small></dt>
+          <dd class="col-12">
+            <dl class="row mb-0">
+              <dt class="col-sm-4 pl-4">主要 <small class="text-muted">Main </small></dt>
+              <dd class="col-sm-8">外語學群（WenLiXueQun）</dd>
+              <dt class="col-sm-4 pl-4">次要 <small class="text-muted">Second </small></dt>
+              <dd class="col-sm-8">無（None）<dd>
+            </dl>
+          </dd>
+
+          <dt class="col-sm-12">最近一次系所評鑑 <small class="text-muted">Zui Jin Yi Ci Xi Suo Ping Jian Xiao Qun </small></dt>
+          <dd class="col-12">
+            <dl class="row mb-0">
+              <dt class="col-sm-4 pl-4">說明 <small class="text-muted">Description </small></dt>
+              <dd class="col-sm-8">
+                <p>條件通過</p>
+                <p>eng_description</p>
+              </dd>
+            </dl>
+          </dd>
+
+          <dt class="col-8 col-md-4">單獨招收僑生 <small class="text-muted">dān dú zhāo shōu qiáo shēng</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-8 col-md-4">開設僑生專班 <small class="text-muted">Kai She Qiao Sheng Zhuan Ban </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-x"></span></dd>
+
+          <dt class="col-8 col-md-4">招生外生專班 <small class="text-muted">Zhao Shou Wai Sheng Zhuan Ban</small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>學則資訊 <small class="text-muted">xué zé zī xùn</small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">備註 <small class="text-muted">bèi zhù</small></dt>
+          <dd class="col-md-8">
+            <p>一、校址：文學院、理學院、社會科學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院及法律學院位於台北市羅斯福路4段1號、哲學系及人類學系位於台北市思源街18號、醫學院位於台北市仁愛路1段1號、公共衛生學院位於台北市徐州路17號。二、電話：文學院、理學院、工學院、生物資源暨農學院、管理學院、生命科學院、電機資訊學院(02)33663366、社會科學院(02)33668300、政治學系(02)33668450、經濟學系(02)33668440、法律學院(02)33668900 、醫學院(02)23123456、公共衛生學院(02)33668012。</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+      <hr>
+      <div>
+        <h4>名額分配 <small class="text-muted">xué zé zī xùn</small></h4>
+        <dl class="row">
+          <dt class="col-sm-4">個人申請名額 <small class="text-muted">Ge Ren Shen Qing ming e</small></dt>
+          <dd class="col-sm-8"><strong class="text-danger">7 </strong>名</dd>
+
+          <dt class="col-sm-4">單獨招收僑生名額 <small class="text-muted">Dāndú zhāoshōu qiáo shēng ming e</small></dt>
+          <dd class="col-sm-8"><strong class="text-danger">7 </strong>名</dd>
+        </dl>
+      </div>
+
+    </div>
+
+    <div class="tab-pane fade" id="nav-shenchaItem" role="tabpanel" aria-labelledby="nav-shenchaItem-tab">
+      <div>
+        <h4>審查費用 <small class="text-muted">Zuìgāo xuélì zhèngmíng</small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>這很重要，一定要繳</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>最高學歷證明 <small class="text-muted">Zuìgāo xuélì zhèngmíng</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">必繳資料 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>這很重要，一定要繳</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>高中歷年成績單正本 <small class="text-muted">Gāozhōng lìnián cheng jī dān zhèngběn</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">必繳資料 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-x"></span></dd>
+
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>這很重要，一定要繳</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>師長推薦函 <small class="text-muted">Zuìgāo xuélì zhèngmíng</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">必繳資料 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+
+          <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+          <dd class="col-12">
+            <dl class="row mb-0">
+              <dt class="col-sm-4 pl-4">收件人英文姓名 <small class="text-muted">Shōu jiàn rén yīngwén xìngmíng</small></dt>
+              <dd class="col-sm-8">Yuer Lee</dd>
+              <dt class="col-sm-4 pl-4">聯絡電話 <small class="text-muted">Liánluò diànhuà</small></dt>
+              <dd class="col-sm-8">92084508503</dd>
+              <dt class="col-sm-4 pl-4">英文收件地址 <small class="text-muted">Shōu jiàn dìzhǐ yīngwén</small></dt>
+              <dd class="col-sm-8">No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan R.O.C.</dd>
+              <dt class="col-sm-4 pl-4">電子郵件 <small class="text-muted">E-mail</small></dt>
+              <dd class="col-sm-8">passerbyid@gmail.com</dd>
+              <dt class="col-sm-4 pl-4">收件期限 <small class="text-muted">deadline</small></dt>
+              <dd class="col-sm-8">2017/09/16</dd>
+
+            </dl>
+          </dd>
+
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>這很重要，一定要繳</p>
+            <p>English_gjhslfgklhkslkrjgnksglk</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
 </div>
+
