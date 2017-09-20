@@ -26,24 +26,14 @@
   // 擷取學校列表
   function _getSchoolList() {
     API.getSchoolsList()
-    .then(function(res) {
-      if(res.ok) {
-        return res.json();
-      } else {
-        throw res
-      }
-    }).then(function(data) {
+    .then(function(data) {
       // 留存所有學校列表
       allSchoolList = data;
       // 擺放學校列表
       _setSchoolList(data);
-
-      return data.info_status
     }).catch(function(err) {
-      err.json && err.json().then((data) => {
-        console.error(data);
-      });
-    })
+      console.error(err);
+    });
   }
 
   // 過濾學校清單
