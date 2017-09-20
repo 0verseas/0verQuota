@@ -90,7 +90,7 @@ const app = (function () {
     `);
 
     // 擺放學校列表
-    for (school of schoolList) {
+    for (let school of schoolList) {
       $schoolList.append(`<option value="${school.id}">${school.title} ${school.eng_title}</option>`);
     }
   }
@@ -106,7 +106,7 @@ const app = (function () {
     `);
 
     // 擺放學校列表
-    for (group of departmentGroups) {
+    for (let group of departmentGroups) {
       $departmentGroupList.append(`<option>${group.title} ${group.eng_title}</option>`);
     }
   }
@@ -127,7 +127,7 @@ const app = (function () {
       `);
     } else {
       // 擺放各系所資料
-      for (department of school.departments) {
+      for (let department of school.departments) {
         $resultBody.append(`
           <tr>
             <td>${department.card_code}</td>
