@@ -57,7 +57,7 @@ const app = (function () {
     const group3 = $isGroup3.prop("checked") ? '3' : '0';
 
     // 準備網址參數
-    const params = new URLSearchParams({
+    const paramsStr = jQuery.param({
       school: schoolId,
       group: departmentGroupId,
       keyword,
@@ -66,7 +66,7 @@ const app = (function () {
       'third-group': group3,
     });
     // 準備新網址
-    const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${params.toString()}`;
+    const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
     // 更新網址
     window.history.pushState({path: newurl}, '', newurl);
 
