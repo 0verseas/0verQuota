@@ -49,11 +49,26 @@ const app = (function () {
     let filterSchools = JSON.parse(JSON.stringify(schools));
 
     // 擷取過濾條件
+    const schoolId = $schoolList.val();
     const departmentGroupId = $departmentGroupList.val();
     const keyword = $keyword.val();
     const group1 = $isGroup1.prop("checked") ? '1' : '0';
     const group2 = $isGroup2.prop("checked") ? '2' : '0';
     const group3 = $isGroup3.prop("checked") ? '3' : '0';
+
+    // 準備網址參數
+    const params = new URLSearchParams({
+      school: schoolId,
+      group: departmentGroupId,
+      keyword,
+      'first-group': group1,
+      'second-group': group2,
+      'third-group': group3,
+    });
+    // 準備新網址
+    const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${params.toString()}`;
+    // 更新網址
+    window.history.pushState({path: newurl}, '', newurl);
 
     // 過濾每間學校資料
     for (let school of filterSchools) {
@@ -107,12 +122,35 @@ const app = (function () {
   }
 
   function _init() {
+    // 擷取網址參數
+    const params = new URLSearchParams(document.location.search.substring(1));
+    const schoolId = params.get('school');
+    const groupId = params.get('group');
+    const keyword = params.get('keyword');
+    const isGroup1 = JSON.parse(params.get('first-group'));
+    const isGroup2 = JSON.parse(params.get('second-group'));
+    const isGroup3 = JSON.parse(params.get('third-group'));
+
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(() => {
       // 擺放學校列表
       _setSchoolList(schoolList = allSchools);
       // 擺放學群列表
       _setDepartmentGroupList(departmentGroups);
+
+      // 同步過濾參數
+      $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
+      $departmentGroupList.children(`[value=${groupId}]`).prop('selected', true);
+      $keyword.prop('value', keyword);
+      $isGroup1.prop('checked', isGroup1);
+      $isGroup2.prop('checked', isGroup2);
+      $isGroup3.prop('checked', isGroup3);
+
+      // 若參數有，則預選擇學校
+      if (schoolId) {
+        selectSchool(schoolId);
+      }
+
     }).catch(error => {
       console.log(error)
     });
