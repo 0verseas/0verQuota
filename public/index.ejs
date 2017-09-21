@@ -61,7 +61,7 @@
     <div class="form-row">
       <div class="form-group col-lg-6">
         <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 <small class="text-muted">Filter the school list by key word</small></label>
-        <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.fliterSchoolList(this.value)">
+        <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.filterSchoolList(this.value)">
       </div>
       <div class="form-group col-lg-6">
         <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">School</small></label>
@@ -76,26 +76,26 @@
         <label class="form-control-label">選擇類組 <small class="text-muted">Group</small></label>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" id="isGroup1" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
+            <input class="form-check-input" id="isGroup1" type="checkbox" value="" onchange="app.filterDepartmentList()">
             第一類組 <small class="text-muted">First Group</small>
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" id="isGroup2" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
+            <input class="form-check-input" id="isGroup2" type="checkbox" value="" onchange="app.filterDepartmentList()">
             第二類組 <small class="text-muted">Second Group</small>
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" id="isGroup3" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
+            <input class="form-check-input" id="isGroup3" type="checkbox" value="" onchange="app.filterDepartmentList()">
             第三類組 <small class="text-muted">Third Group</small>
           </label>
         </div>
       </div>
       <div class="form-group col-md-6">
         <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
-        <select class="form-control" id="department-group" onchange="app.fliterDepartmentList()">
+        <select class="form-control" id="department-group" onchange="app.filterDepartmentList()">
           <option value="all" selected>所有學群 All xuequn</option>
         </select>
       </div>
@@ -104,7 +104,7 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="keywords" class="form-control-label">關鍵字過濾 <small class="text-muted">Key word filter</small></label>
-        <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.fliterDepartmentList()">
+        <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.filterDepartmentList()">
       </div>
     </div>
   </form>

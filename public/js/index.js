@@ -33,7 +33,7 @@ const app = (function () {
    */
 
   // 過濾學校列表
-  function fliterSchoolList(keyword = '') {
+  function filterSchoolList(keyword = '') {
     // 取得以關鍵字過濾中英文名稱的學校列表
     const newSchoolList =  allSchools.filter(school => {
       return school.eng_title.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || school.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
@@ -44,9 +44,9 @@ const app = (function () {
   }
 
   // 過濾系所列表
-  function fliterDepartmentList() {
+  function filterDepartmentList() {
     // 載入目前選擇的所有學校資料（clone array of object）
-    let fliterSchools = JSON.parse(JSON.stringify(schools));
+    let filterSchools = JSON.parse(JSON.stringify(schools));
 
     // 擷取過濾條件
     const departmentGroupId = $departmentGroupList.val();
@@ -56,7 +56,7 @@ const app = (function () {
     const group3 = $isGroup3.prop("checked") ? '3' : '0';
 
     // 過濾每間學校資料
-    for (let school of fliterSchools) {
+    for (let school of filterSchools) {
       // 取得以符合過濾條件的系所列表
       school.departments = school.departments.filter(department => {
         // 類組條件
@@ -73,7 +73,7 @@ const app = (function () {
     }
 
     // 重新擺放系所列表
-    _setDepartmentList(fliterSchools);
+    _setDepartmentList(filterSchools);
   }
 
   // 一選擇學校就拉該學校資料
@@ -82,7 +82,7 @@ const app = (function () {
       // 留存學校資料
       schools = data;
       // 過濾系所列表
-      fliterDepartmentList();
+      filterDepartmentList();
     }).catch(error => {
       // 清空系所列表
       _setDepartmentList();
@@ -183,9 +183,9 @@ const app = (function () {
   }
 
   return {
-    fliterSchoolList,
+    filterSchoolList,
     selectSchool,
-    fliterDepartmentList
+    filterDepartmentList
   }
 
 })();
