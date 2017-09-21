@@ -76,27 +76,27 @@
         <label class="form-control-label">選擇類組 Group</label>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup1" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
             第一類組 First Group
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup2" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
             第二類組 Second Group
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup3" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
             第三類組 Third Group
           </label>
         </div>
       </div>
       <div class="form-group col-md-6">
         <label for="xuequn" class="form-control-label">選擇學群 xuequn</label>
-        <select class="form-control" id="department-group">
-          <option selected>所有學群 All xuequn</option>
+        <select class="form-control" id="department-group" onchange="app.fliterDepartmentList()">
+          <option value="all" selected>所有學群 All xuequn</option>
         </select>
       </div>
     </div>
@@ -104,7 +104,7 @@
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="keywords" class="form-control-label">關鍵字過濾 Key word filter</label>
-        <input type="text" class="form-control" id="keywords" placeholder="資訊管理">
+        <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.fliterDepartmentList()">
       </div>
     </div>
   </form>
@@ -131,28 +131,7 @@
     </thead>
     <tbody id="result-body">
       <tr>
-        <td>1001</td>
-        <td><span class="td-br">國立臺灣大學</span><span class="td-br">Nation T U</span></td>
-        <td><span class="td-br">中國文學系</span><span class="td-br">Chinese Sys</span></td>
-        <td><span class="td-br">第一類組</span><span class="td-br">DiYiLeiZu</span></td>
-        <td><span class="td-br">文理學群</span><span class="td-br">WenLiXueQun</span></td>
-        <td>0</td>
-        <td>17</td>
-        <td>01</td>
-        <td>05</td>
-        <td>02</td>
-        <td>06</td>
-        <td>03</td>
-      </tr>
-      <tr>
-        <td>1001</td>
-        <td><span class="td-br">國立臺灣大學</span><span class="td-br">Nation T U</span></td>
-        <td><span class="td-br">外國文學系</span><span class="td-br">DXXXX Sys</span></td>
-        <td><span class="td-br">第一類組</span><span class="td-br">DiYiLeiZu</span></td>
-        <td><span class="td-br">文理學群</span><span class="td-br">WenLiXueQun</span></td>
-        <td>0</td>
-        <td>17</td>
-        <td colspan="5">各梯次皆可選填至名額用完為止</td>
+        <td colspan="12">請選擇過濾條件</td>
       </tr>
     </tbody>
   </table>
