@@ -3,10 +3,10 @@
   <%- partial("partials/_nav.ejs", { system: "bachelor" }) %>
 
   <div class="announcement" id="announcement" data-children=".announcement-item">
-    <h4>宣告 Announcement</h4>
+    <h4>宣告 <small class="text-muted">Announcement</small></h4>
     <div class="announcement-item">
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="true" aria-controls="announcement1">
-        >招生名額依據
+        >招生名額依據 <small class="text-muted">zhāo shēng míng é yī jù</small>
       </a>
       <div id="announcement1" class="collapse show" role="tabpanel">
         <p>
@@ -19,7 +19,7 @@
     </div>
     <div class="announcement-item">
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement2" aria-expanded="false" aria-controls="announcement2">
-        >招生管道
+        >招生管道 <small class="text-muted">zhāo shēng guǎn dào</small>
       </a>
       <div id="announcement2" class="collapse" role="tabpanel" style="padding: 0 1rem">
         <h6 class="mb-3">個人申請制</h6>
@@ -38,7 +38,7 @@
     </div>
     <div class="announcement-item">
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
-        >注意事項
+        >注意事項 <small class="text-muted">zhù yì shì xiàng </small>
       </a>
       <div id="announcement3" class="collapse" role="tabpanel">
         <p>
@@ -56,15 +56,15 @@
 
   <hr>
 
-  <h3>系所查詢 Undefined</h3>
+  <h3>系所查詢 <small class="text-muted">xì suǒ chá xún </small></h3>
   <form action="">
     <div class="form-row">
       <div class="form-group col-lg-6">
-        <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 Filter the school list by key word</label>
+        <label for="schoolKeywords" class="form-control-label">依關鍵字過濾學校列表 <small class="text-muted">Filter the school list by key word</small></label>
         <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.fliterSchoolList(this.value)">
       </div>
       <div class="form-group col-lg-6">
-        <label for="schoolList" class="form-control-label">選擇學校 School</label>
+        <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">School</small></label>
         <select class="form-control" id="school-list" onchange="app.selectSchool(this.options[this.selectedIndex].value)">
           <option value="" disabled selected>請選擇學校 Select School PLZ</option>
         </select>
@@ -73,28 +73,28 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label class="form-control-label">選擇類組 Group</label>
+        <label class="form-control-label">選擇類組 <small class="text-muted">Group</small></label>
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" id="isGroup1" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
-            第一類組 First Group
+            第一類組 <small class="text-muted">First Group</small>
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" id="isGroup2" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
-            第二類組 Second Group
+            第二類組 <small class="text-muted">Second Group</small>
           </label>
         </div>
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" id="isGroup3" type="checkbox" value="" checked onchange="app.fliterDepartmentList()">
-            第三類組 Third Group
+            第三類組 <small class="text-muted">Third Group</small>
           </label>
         </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="xuequn" class="form-control-label">選擇學群 xuequn</label>
+        <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
         <select class="form-control" id="department-group" onchange="app.fliterDepartmentList()">
           <option value="all" selected>所有學群 All xuequn</option>
         </select>
@@ -103,7 +103,7 @@
 
     <div class="form-row">
       <div class="form-group col-md-12">
-        <label for="keywords" class="form-control-label">關鍵字過濾 Key word filter</label>
+        <label for="keywords" class="form-control-label">關鍵字過濾 <small class="text-muted">Key word filter</small></label>
         <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.fliterDepartmentList()">
       </div>
     </div>
@@ -112,16 +112,16 @@
   <table class="table table-sm table-striped table-bordered table-responsive">
     <thead>
       <tr>
-        <th rowspan="2">志願代碼</th>
-        <th rowspan="2">學校名稱</th>
-        <th rowspan="2">系組名稱</th>
-        <th rowspan="2">隸屬類組</th>
-        <th rowspan="2">主要學群</th>
-        <th rowspan="2">個人申請</th>
-        <th colspan="6">聯合分發</th>
+        <th rowspan="2"><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">zhì yuàn dài mǎ</small></span></th>
+        <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">xué xiào míng chēng </small></span></th>
+        <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">xì zǔ míng chēng</small></span></th>
+        <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">lì shǔ lèi zǔ </small></span></th>
+        <th rowspan="2"><span class="td-br">主要學群</span><span class="td-br"><small class="text-muted">zhǔ yào xué qún </small></span></th>
+        <th rowspan="2"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">gè rén shēn qǐng </small></span></th>
+        <th colspan="6"><span class="td-br">聯合分發</span><span class="td-br"><small class="text-muted">lián hé fèn fā </small></span></th>
       </tr>
       <tr>
-        <th>總額</th>
+        <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
         <th>s1</th>
         <th>s2</th>
         <th>s3</th>
