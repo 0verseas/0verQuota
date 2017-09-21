@@ -162,6 +162,7 @@ const app = (function () {
         for (let department of school.departments) {
           $resultBody.append(`
             <tr>
+              <td><a href="/bachelor-detail.html?id=${department.id}&school_code=${department.school_code}" target="_blank"><span class="oi oi-external-link p-3"></span></a></td>
               <td>${department.card_code}</td>
               <td><span class="td-br">${school.title}</span><span class="td-br">${school.eng_title}</span></td>
               <td><span class="td-br">${department.title}</span><span class="td-br">${department.eng_title}</span></td>
