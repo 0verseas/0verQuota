@@ -61,9 +61,9 @@ const app = (function () {
       school: schoolId,
       group: departmentGroupId,
       keyword,
-      'first-group': group1,
-      'second-group': group2,
-      'third-group': group3,
+      'first-group': group1 != 0,
+      'second-group': group2 != 0,
+      'third-group': group3 != 0,
     });
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
