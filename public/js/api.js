@@ -17,8 +17,8 @@ const API = (function () {
     return _requestHandle(request);
   }
 
-  function getDepartmentDetail(departmentId) {
-    const request =  fetch(`${baseUrl}/departments/${departmentId}`, {
+  function getDepartmentDetail(system, schoolId, departmentId) {
+    const request =  fetch(`${baseUrl}/schools/${schoolId}/systems/${system}/departments/${departmentId}`, {
       credentials: 'include'
     });
 
