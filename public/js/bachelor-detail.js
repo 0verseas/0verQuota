@@ -19,13 +19,9 @@ const app = (function () {
   const $hasFiveYearStudentAllowed = $('#has-five-year-student-allowed');
   const $hasSelfEnrollment = $('#has-self-enrollment');
   const $hasDorm = $('#has-dorm');
-  const $dormInfo = $('#dorm-info');
-  const $engDormInfo = $('#eng-dorm-info');
+  const $dormDl = $('#dorm-dl');
   const $hasScholarship = $('#has-scholarship');
-  const $scholarshipUrl = $('#scholarship-url');
-  const $engScholarshipUrl = $('#eng-scholarship-url');
-  const $scholarshipDept = $('#scholarship-dept');
-  const $engScholarshipDept = $('#eng-scholarship-dept');
+  const $scholarshipDl = $('#scholarship-dl');
   const $systemDescription = $('#system-description');
   const $systemEngDescription = $('#system-eng-description');
 
@@ -76,14 +72,35 @@ const app = (function () {
     $schoolEngUrl.html(`<a href="${data.eng_url}" target="_blank">${data.eng_url}</a>`);
     $hasFiveYearStudentAllowed.html(data.has_five_year_student_allowed ? `<span class="oi oi-check"></sapn>` :`<span class="oi oi-x"></sapn>`);
     $hasSelfEnrollment.html(data.has_self_enrollment ? `<span class="oi oi-check"></sapn>` :`<span class="oi oi-x"></sapn>`);
+
     $hasDorm.html(data.has_dorm ? `<span class="oi oi-check"></sapn>` :`<span class="oi oi-x"></sapn>`);
-    $dormInfo.html(data.dorm_info);
-    $engDormInfo.html(data.eng_dorm_info);
+    if (data.has_dorm) {
+      $dormDl.append(`
+      <dt class="col-sm-4">說明 <small class="text-muted">Introuction</small></dt>
+      <dd class="col-sm-8">
+        <p>${data.dorm_info}</p>
+        <p>${data.eng_dorm_info}</p>
+      </dd>
+      `);
+    }
+
     $hasScholarship.html(data.has_scholarship ? `<span class="oi oi-check"></sapn>` :`<span class="oi oi-x"></sapn>`);
-    $scholarshipUrl.html(`<a href="${data.scholarship_url}" target="_blank">${data.scholarship_url}</a>`);
-    $engScholarshipUrl.html(`<a href="${data.eng_scholarship_url}" target="_blank">${data.eng_scholarship_url}</a>`);
-    $scholarshipDept.html(data.scholarship_dept);
-    $engScholarshipDept.html(data.eng_scholarship_dept);
+    if (data.has_scholarship) {
+      $scholarshipDl.append(`
+      <dt class="col-sm-4">中文說明 <small class="text-muted">Chinese shuō míng</small></dt>
+      <dd class="col-sm-8"><a href="${data.scholarship_url}" target="_blank">${data.scholarship_url}</a></dd>
+
+      <dt class="col-sm-4">英文說明 <small class="text-muted">English shuō mínge</small></dt>
+      <dd class="col-sm-8"><a href="${data.eng_scholarship_url}" target="_blank">${data.eng_scholarship_url}</a></dd>
+
+      <dt class="col-sm-4">負責單位 <small class="text-muted">fù zé dān wèi</small></dt>
+      <dd class="col-sm-8">
+        <p>${data.scholarship_dept}</p>
+        <p id="eng-scholarship-dept">${data.eng_scholarship_dept}</p>
+      </dd>
+      `);
+    }
+
     $systemDescription.html(data.systems[0].description);
     $systemEngDescription.html(data.systems[0].eng_description);
 
@@ -95,8 +112,12 @@ const app = (function () {
     $deptEngUrl.html(`<a href="${data.departments[0].eng_url}" target="_blank">${data.departments[0].eng_url}</a>`);
     $groupCode.html(data.departments[0].group_code);
     $genderLimit.html(data.departments[0].gender_limit);
-    $mainGroup.html(data.departments[0].main_group_data.title);
-    $subGroup.html(data.departments[0].sub_group);
+    $mainGroup.html(`${data.departments[0].main_group_data.title} ${data.departments[0].main_group_data.eng_title}`);
+    if (data.departments[0].sub_group != null) {
+      $subGroup.html(`${data.departments[0].sub_group_data.title} ${data.departments[0].sub_group_data.eng_title}`);
+    } else {
+      $subGroup.html(`無 None`);
+    }
     $evalTitle.html(data.departments[0].evaluation_level.title);
     $evalEngTitle.html(data.departments[0].evaluation_level.eng_title);
     $deptHasSelfEnrollment.html(data.departments[0].has_self_enrollment ? `<span class="oi oi-check"></span>` : `<span class="oi oi-x"></span>`);
