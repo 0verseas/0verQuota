@@ -147,6 +147,36 @@ const app = (function () {
     `);
     }
 
+      // 判斷是不是師長推薦函
+      if(doc.type_id == 8) {
+        // 需要紙本
+        let paper = doc.paper;
+        if (paper != null) {
+          appendData += `
+          <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+          <dd class="col-12">
+            <dl class="row mb-0">
+              <dt class="col-sm-4 pl-4">收件人英文姓名 <small class="text-muted">Shōu jiàn rén yīngwén xìngmíng</small></dt>
+              <dd class="col-sm-8">${paper.recipient}</dd>
+              <dt class="col-sm-4 pl-4">聯絡電話 <small class="text-muted">Liánluò diànhuà</small></dt>
+              <dd class="col-sm-8">${paper.phone}</dd>
+              <dt class="col-sm-4 pl-4">英文收件地址 <small class="text-muted">Shōu jiàn dìzhǐ yīngwén</small></dt>
+              <dd class="col-sm-8">${paper.address}</dd>
+              <dt class="col-sm-4 pl-4">電子郵件 <small class="text-muted">E-mail</small></dt>
+              <dd class="col-sm-8">${paper.email}</dd>
+              <dt class="col-sm-4 pl-4">收件期限 <small class="text-muted">deadline</small></dt>
+              <dd class="col-sm-8">${paper.deadline}</dd>
+            </dl>
+          </dd>
+          `;
+        } else {
+          appendData += `
+          <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-x"></span></dd>
+          `;
+        }
+      }
 
   }
 
