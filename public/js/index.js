@@ -198,14 +198,38 @@ const app = (function () {
       // 擺放各系所資料
       for (let school of schoolData) {
         for (let department of school.departments) {
+          // 設定簡便連結
+          const detailURL = `bachelor-detail.html?id=${department.id}&school_code=${department.school_code}`;
+
+          // 擺放各系所資料
           $resultBody.append(`
             <tr>
-              <td><a href="bachelor-detail.html?id=${department.id}&school_code=${department.school_code}" target="_blank"><span class="oi oi-external-link p-3"></span></a></td>
               <td>${department.card_code}</td>
-              <td><span class="td-br">${school.title}</span><span class="td-br">${school.eng_title}</span></td>
-              <td><span class="td-br">${department.title}</span><span class="td-br">${department.eng_title}</span></td>
+
+              <td>
+                <span class="td-br">${school.title}</span>
+                <span class="td-br">${school.eng_title}</span>
+              </td>
+
+              <td>
+                <a href="${detailURL}" target="_blank">
+                  <span class="td-br">${department.title}</span>
+                  <span class="td-br">${department.eng_title}</span>
+                </a>
+              </td>
+
               <td>${department.group_code}</td>
-              <td><span class="td-br">${department.main_group_data.title}</span><span class="td-br">${department.main_group_data.eng_title}</span></td>
+
+              <td>
+                <span class="td-br">${department.main_group_data.title}</span>
+                <span class="td-br">${department.main_group_data.eng_title}</span>
+              </td>
+
+              <td>
+                <span class="td-br">${department.sub_group == null ? '無' : department.sub_group_data.title}</span>
+                <span class="td-br">${department.sub_group == null ? 'NaN' : department.sub_group_data.eng_title}</span>
+              </td>
+
               <td>${department.admission_selection_quota}</td>
               <td>${department.admission_placement_quota}</td>
               <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
