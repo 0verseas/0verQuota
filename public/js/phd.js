@@ -64,7 +64,7 @@ const app = (function () {
       // 過濾每間學校資料
       for (let school of filterSchools) {
         // 取得以符合過濾條件的系所列表
-        school.departments = school.graduate_departments.filter(department => {
+        school.graduate_departments = school.graduate_departments.filter(department => {
           // 學群條件（主要、次要學群其一）
           if ((departmentGroupId !== 'all') && (department.main_group != departmentGroupId) && (department.sub_group != departmentGroupId)) {
             return false;
