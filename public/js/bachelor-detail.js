@@ -130,6 +130,22 @@ const app = (function () {
     if (data.departments[0].application_docs.length == 0) {
       $('#nav-shenchaItem-tab').remove();
     }
+    // 審查費用
+    if (data.departments[0].has_review_fee) {
+      $shenchaItemDiv.append(`
+      <div>
+        <h4>審查費用 <small class="text-muted">Zuìgāo xuélì zhèngmíng</small></h4>
+        <dl class="row">
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>${data.departments[0].review_fee_detail}</p>
+            <p>${data.departments[0].eng_review_fee_detail}</p>
+          </dd>
+        </dl>
+      </div>
+      <hr>
+    `);
+    }
 
 
   }
