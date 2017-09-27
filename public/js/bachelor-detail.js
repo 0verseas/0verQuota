@@ -147,6 +147,19 @@ const app = (function () {
     `);
     }
 
+    for (doc of data.departments[0].application_docs) {
+      let appendData = ``;
+      let required = 'x';
+      if (doc.required) {
+        required = 'check';
+      }
+      appendData += `
+      <div>
+        <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
+        <dl class="row ">
+          <dt class="col-8 col-md-4">必繳資料 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+          <dd class="col-4 col-md-8"><span class="oi oi-${required}"></span></dd>
+      `;
       // 判斷是不是師長推薦函
       if(doc.type_id == 8) {
         // 需要紙本
@@ -177,6 +190,18 @@ const app = (function () {
           `;
         }
       }
+      appendData += `
+          <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
+          <dd class="col-md-8">
+            <p>${doc.description}</p>
+            <p>${doc.eng_description}</p>
+          </dd>
+        </dl>
+      </div>
+      <hr>
+      `;
+      $shenchaItemDiv.append(appendData);
+    }
 
   }
 
