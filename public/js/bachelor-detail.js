@@ -127,6 +127,9 @@ const app = (function () {
     $deptEngDescription.html(data.departments[0].eng_description);
 
     // render 審查項目
+    if (data.departments[0].application_docs.length == 0) {
+      $('#nav-shenchaItem-tab').remove();
+    }
 
 
   }
