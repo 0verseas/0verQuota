@@ -138,6 +138,8 @@ const app = (function () {
       renderData(data);
 
     }).catch(error => {
+      alert(`Can't find the department, please try again.`);
+      window.location.replace('index.html');
       console.error(error);
     });
   }
