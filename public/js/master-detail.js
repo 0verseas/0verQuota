@@ -70,6 +70,7 @@ const app = (function () {
 
   // render 所有資料
   function renderData(data){
+    console.log(data);
     $schoolTitle.html(`${data.title} ${data.graduate_departments[0].title}`);
     $schoolEngTitle.html(`${data.eng_title} ${data.graduate_departments[0].eng_title}`);
 
@@ -170,7 +171,7 @@ const app = (function () {
           <dd class="col-4 col-md-8"><span class="oi oi-${required}"></span></dd>
       `;
       // 判斷是不是師長推薦函
-      if(doc.type_id == 8) {
+      if(doc.type_id == 46) {
         // 需要紙本
         let paper = doc.paper;
         if (paper != null) {
@@ -228,12 +229,12 @@ const app = (function () {
   }
 
   function _init() {
-    // 擷取網址參數
+    // 擷取網址 hash
     let hash = window.location.hash.substring(1);
-    if (hash ==  null || hash != 'nav-schoolInfo' || hash != 'nav-deptInfo' ||hash != 'nav-shenchaItem') {
+    if (hash ==  null && hash != 'nav-schoolInfo' && hash != 'nav-deptInfo' && hash != 'nav-shenchaItem') {
       hash = 'nav-schoolInfo';
     }
-    $(`.nav-pills a[href="#${hash}"`).tab('show');
+    $(`.nav-pills a[href="#${hash}"]`).tab('show');
 
     // render 所有資料
     getDepartmentDetail(id, schoolCode);
