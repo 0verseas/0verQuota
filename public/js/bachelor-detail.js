@@ -111,7 +111,11 @@ const app = (function () {
     $deptUrl.html(`<a href="${data.departments[0].url}" target="_blank">${data.departments[0].url}</a>`);
     $deptEngUrl.html(`<a href="${data.departments[0].eng_url}" target="_blank">${data.departments[0].eng_url}</a>`);
     $groupCode.html(data.departments[0].group_code);
-    $genderLimit.html(data.departments[0].gender_limit);
+    if (data.departments[0].gender_limit != null) {
+      $genderLimit.html(data.departments[0].gender_limit);
+    } else {
+      $genderLimit.html(`無 None`);
+    }
     $mainGroup.html(`${data.departments[0].main_group_data.title} ${data.departments[0].main_group_data.eng_title}`);
     if (data.departments[0].sub_group != null) {
       $subGroup.html(`${data.departments[0].sub_group_data.title} ${data.departments[0].sub_group_data.eng_title}`);
