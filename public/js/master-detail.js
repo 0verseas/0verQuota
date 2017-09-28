@@ -170,7 +170,7 @@ const app = (function () {
           <dd class="col-4 col-md-8"><span class="oi oi-${required}"></span></dd>
       `;
       // 判斷是不是師長推薦函
-      if(doc.type_id == 8) {
+      if(doc.type_id == 46) {
         // 需要紙本
         let paper = doc.paper;
         if (paper != null) {
