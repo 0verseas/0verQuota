@@ -151,7 +151,7 @@ const app = (function () {
     `);
     }
 
-    for (doc of data.departments[0].application_docs) {
+    for (let doc of data.departments[0].application_docs) {
       let appendData = ``;
       let required = 'x';
       if (doc.required) {
