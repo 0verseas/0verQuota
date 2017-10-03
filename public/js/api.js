@@ -22,7 +22,27 @@ const API = (function () {
       credentials: 'include'
     });
 
-    return _requestHandle(request);
+    return _requestHandle(request).then(data => {
+      // 取得學制欄位名稱
+      let systemPropertyName = 'departments';
+      if ((system === 'master') || (system === 'phd')) {
+        systemPropertyName = 'graduate_departments';
+      } else if (system === 'two-year') {
+        systemPropertyName = 'two_year_tech_departments';
+      }
+
+      // 整理資料
+      const newData = {
+        school: data,
+        system: data.systems[0],
+        department: data[systemPropertyName][0]
+      }
+
+      delete newData.school.systems;
+      delete newData.school.departments;
+
+      return newData;
+    });
   }
 
   function getDepartmentGroups() {
@@ -41,7 +61,7 @@ const API = (function () {
         return response.json();
       } else {
         // 結果不 ok 就回傳 error
-        return response.json().then((data) => {
+        return response.json().then(data => {
           // 每個錯誤訊息都仍一個 error
           for (message of data.messages) {
             throw(new Error(`${response.status} (${message})`));
