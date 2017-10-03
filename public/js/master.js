@@ -59,7 +59,7 @@ const app = (function () {
       // 準備新網址
       const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
       // 更新網址
-      window.history.pushState({path: newurl}, '', newurl);
+      window.history.replaceState({path: newurl}, '', newurl);
 
       // 過濾每間學校資料
       for (let school of filterSchools) {
