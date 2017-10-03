@@ -199,7 +199,7 @@ const app = (function () {
       for (let school of schoolData) {
         for (let department of school.departments) {
           // 設定簡便連結
-          const detailURL = `bachelor-detail.html?id=${department.id}&school_code=${department.school_code}`;
+          const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school-id}`;
 
           // 擺放各系所資料
           $resultBody.append(`

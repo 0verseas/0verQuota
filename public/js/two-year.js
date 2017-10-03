@@ -180,7 +180,7 @@ const app = (function () {
         for (let school of schoolData) {
           for (let department of school.two_year_tech_departments) {
             // 設定簡便連結
-            const detailURL = `two-year-detail.html?id=${department.id}&school_code=${school.id}`;
+            const detailURL = `two-year-detail.html?id=${department.id}&school-id=${school.id}`;
 
             // 擺放各系所資料
             $resultBody.append(`
