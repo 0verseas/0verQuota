@@ -96,7 +96,7 @@ const app = (function () {
     window.history.replaceState({path: newurl}, null, newurl);
 
     // 顯示所選之分頁
-    $(`#infoTab a[href="${tab}"]`).tab('show');
+    $(`#infoTab a[href="#${tab}"]`).tab('show');
   }
 
   // render 所有資料
