@@ -1,0 +1,14 @@
+<%
+  let currentSystem;
+  for (item of nav) {
+    if (system == item.system) {
+      currentSystem = item;
+      break;
+    }
+  }
+%>
+
+<div class="headline">
+  <h1><%= currentSystem.headline %></h1>
+  <p class="lead"><%= subline %></p>
+</div>

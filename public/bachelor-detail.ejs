@@ -1,7 +1,11 @@
+<%- partial("partials/_header", { system: "bachelor" }) %>
+
 <div class="container" style="max-width: 57rem;">
-  <%- partial("partials/_nav.ejs", { system: "bachelor" }) %>
-  <h2 class="text-center" id="dept-title"></h2>
-  <h3 class="text-center" id="dept-eng-title"></h3>
+
+  <div class="headline">
+    <h2 id="dept-title"></h2>
+    <p class="lead" id="dept-eng-title"></p>
+  </div>
 
   <nav class="nav nav-pills nav-fill mt-3" id="infoTab" role="tablist">
     <a class="nav-item nav-link" id="nav-schoolInfo-tab" data-toggle="pill" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">學校資訊 <small>School Information</small></a>

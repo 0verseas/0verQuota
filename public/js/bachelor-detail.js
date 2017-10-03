@@ -106,8 +106,8 @@ const app = (function () {
     const falseIconHtml = '<span class="oi oi-x"></sapn>';
 
     // 系所標題
-    $deptTitle.html(`${school.title} ${department.title}`);
-    $deptEngTitle.html(`${school.eng_title} ${department.eng_title}`);
+    $deptTitle.html(`${school.title} ${department.title} 學士班`);
+    $deptEngTitle.html(`${school.eng_title} ${department.eng_title} (Bachelor)`);
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);

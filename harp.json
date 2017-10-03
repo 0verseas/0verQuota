@@ -1,25 +1,30 @@
 {
 	"globals": {
 		"title": "海聯系所名額查詢系統",
-		"headline": "系所名額查詢系統（2018 年秋季入學）",
+		"headline": "系所名額查詢系統",
+		"subline": "2018 年秋季入學",
 		"nav": [
 			{
 				"title": "學士班",
+				"headline": "學士班名額查詢",
 				"link": "index",
 				"system": "bachelor"
 			},
 			{
 				"title": "香港二年學士班",
+				"headline": "香港二年學士班名額查詢",
 				"link": "two-year",
 				"system": "twoYear"
 			},
 			{
 				"title": "碩士班",
+				"headline": "碩士班名額查詢",
 				"link": "master",
 				"system": "master"
 			},
 			{
 				"title": "博士班",
+				"headline": "博士班名額查詢",
 				"link": "phd",
 				"system": "phd"
 			}

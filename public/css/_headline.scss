@@ -1,0 +1,9 @@
+.headline {
+  text-align: center;
+  padding: 2rem 1.3rem;
+}
+
+@include media-breakpoint-up(sm) {}
+@include media-breakpoint-up(md) {}
+@include media-breakpoint-up(lg) {}
+@include media-breakpoint-up(xl) {}
