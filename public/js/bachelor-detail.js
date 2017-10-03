@@ -196,7 +196,7 @@ const app = (function () {
         <div>
           <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
           <dl class="row">
-            <dt class="col-8 col-md-4">必繳資料 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+            <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
             <dd class="col-4 col-md-8">${doc.required ? trueIconHtml : falseIconHtml}</dd>
       `;
 
