@@ -127,9 +127,9 @@ const app = (function () {
     const schoolId = params.get('school');
     const groupId = params.get('group');
     const keyword = params.get('keyword');
-    const isGroup1 = JSON.parse(params.get('first-group'));
-    const isGroup2 = JSON.parse(params.get('second-group'));
-    const isGroup3 = JSON.parse(params.get('third-group'));
+    const isGroup1 = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
+    const isGroup2 = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
+    const isGroup3 = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(() => {
