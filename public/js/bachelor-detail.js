@@ -102,8 +102,8 @@ const app = (function () {
   // render 所有資料
   function renderData(school, system, department) {
     // 設定 boolean 顯示字串
-    trueIconHtml = '<span class="oi oi-check"></sapn>';
-    falseIconHtml = '<span class="oi oi-x"></sapn>';
+    const trueIconHtml = '<span class="oi oi-check"></sapn>';
+    const falseIconHtml = '<span class="oi oi-x"></sapn>';
 
     // 系所標題
     $deptTitle.html(`${school.title} ${department.title}`);
