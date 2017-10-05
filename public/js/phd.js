@@ -180,14 +180,18 @@ const app = (function () {
         for (let school of schoolData) {
           for (let department of school.graduate_departments) {
             // 設定簡便連結
-            const detailURL = `phd-detail.html?id=${department.id}&school-id=${school.id}`;
+            const schoolURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
+            const detailURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
+            const shenchaItemURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
 
             // 擺放各系所資料
             $resultBody.append(`
               <tr>
                 <td>
-                  <span class="td-br">${school.title}</span>
-                  <span class="td-br">${school.eng_title}</span>
+                  <a href="${schoolURL}" target="_blank">
+                    <span class="td-br">${school.title}</span>
+                    <span class="td-br">${school.eng_title}</span>
+                  </a>
                 </td>
 
                 <td>
@@ -197,7 +201,14 @@ const app = (function () {
                   </a>
                 </td>
 
-                <td>${department.admission_selection_quota}</td>
+                <td>
+                  <a href="${shenchaItemURL}" target="_blank">
+                    <span class="td-br">審查項目</span>
+                    <span class="td-br">ShenCha Item</span>
+                  </a>
+                </td>
+
+                <td>${department.admission_selection_quo`ta`}</td>
                 <td>${department.self_enrollment_quota}</td>
               </tr>
             `);

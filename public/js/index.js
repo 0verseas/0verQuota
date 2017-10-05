@@ -199,7 +199,9 @@ const app = (function () {
       for (let school of schoolData) {
         for (let department of school.departments) {
           // 設定簡便連結
-          const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}`;
+          const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
+          const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
+          const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
 
           // 擺放各系所資料
           $resultBody.append(`
@@ -207,8 +209,10 @@ const app = (function () {
               <td>${department.card_code}</td>
 
               <td>
-                <span class="td-br">${school.title}</span>
-                <span class="td-br">${school.eng_title}</span>
+                <a href="${schoolURL}" target="_blank">
+                  <span class="td-br">${school.title}</span>
+                  <span class="td-br">${school.eng_title}</span>
+                </a>
               </td>
 
               <td>
@@ -219,6 +223,13 @@ const app = (function () {
               </td>
 
               <td>${department.group_code}</td>
+
+              <td>
+                <a href="${shenchaItemURL}" target="_blank">
+                  <span class="td-br">審查項目</span>
+                  <span class="td-br">ShenCha Item</span>
+                </a>
+              </td>
 
               <td>${department.admission_selection_quota}</td>
               <td>${department.admission_placement_quota}</td>
