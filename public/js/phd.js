@@ -197,16 +197,6 @@ const app = (function () {
                   </a>
                 </td>
 
-                <td>
-                  <span class="td-br">${department.main_group_data.title || 'test'}</span>
-                  <span class="td-br">${department.main_group_data.eng_title || 'test'}</span>
-                </td>
-
-                <td>
-                  <span class="td-br">${department.sub_group == null ? '無' : department.sub_group_data.title}</span>
-                  <span class="td-br">${department.sub_group == null ? 'NaN' : department.sub_group_data.eng_title}</span>
-                </td>
-
                 <td>${department.admission_selection_quota}</td>
                 <td>${department.self_enrollment_quota}</td>
               </tr>
