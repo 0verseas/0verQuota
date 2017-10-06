@@ -34,14 +34,11 @@ const app = (function () {
   const $systemEngDescription = $('#system-eng-description');
 
   // 系所資料 DOM
-  const $deptId = $('#dept-id');
   const $deptUrl = $('#dept-url');
   const $deptEngUrl = $('#dept-eng-url');
   const $genderLimit = $('#gender-limit');
   const $mainGroup = $('#main-group');
   const $subGroup = $('#sub-group');
-  const $evalTitle = $('#eval-title');
-  const $evalEngTitle = $('#eval-eng-title');
   const $deptHasSelfEnrollment = $('#dept-has-self-enrollment');
   const $deptHasSpecialClass = $('#dept-has-special-class');
   const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
@@ -144,11 +141,8 @@ const app = (function () {
     $systemEngDescription.html(system.eng_description);
 
     // 系所基本資料
-    $deptId.html(department.id);
     $deptUrl.html(`<a href="${department.url}" target="_blank">${department.url}</a>`);
     $deptEngUrl.html(`<a href="${department.eng_url}" target="_blank">${department.eng_url}</a>`);
-    $evalTitle.html(department.evaluation_level.title);
-    $evalEngTitle.html(department.evaluation_level.eng_title);
     $deptHasSelfEnrollment.html(department.has_self_enrollment ? trueIconHtml : falseIconHtml);
     $deptHasSpecialClass.html(department.has_special_class ? trueIconHtml : falseIconHtml);
     $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
