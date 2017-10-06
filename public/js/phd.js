@@ -201,15 +201,14 @@ const app = (function () {
                   </a>
                 </td>
 
+                <td>${department.admission_selection_quota}</td>
+
                 <td>
                   <a href="${shenchaItemURL}" target="_blank">
                     <span class="td-br">審查項目</span>
                     <span class="td-br">ShenCha Item</span>
                   </a>
                 </td>
-
-                <td>${department.admission_selection_quo`ta`}</td>
-                <td>${department.self_enrollment_quota}</td>
               </tr>
             `);
           }

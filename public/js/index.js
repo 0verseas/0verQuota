@@ -224,6 +224,8 @@ const app = (function () {
 
               <td>${department.group_code}</td>
 
+              <td>${department.admission_selection_quota}</td>
+
               <td>
                 <a href="${shenchaItemURL}" target="_blank">
                   <span class="td-br">審查項目</span>
@@ -231,7 +233,6 @@ const app = (function () {
                 </a>
               </td>
 
-              <td>${department.admission_selection_quota}</td>
               <td>${department.admission_placement_quota}</td>
               <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
               <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
