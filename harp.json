@@ -1,9 +1,9 @@
 {
 	"globals": {
 		"title": "海聯系所名額查詢系統",
-		"headline": "系所名額查詢系統",
+		"headline": "僑生及港澳生招生名額查詢系統",
 		"subline": "2018 年秋季入學",
-		"nav": [
+		"systems": [
 			{
 				"title": "學士班",
 				"headline": "學士班名額查詢",
