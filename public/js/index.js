@@ -168,6 +168,15 @@ const app = (function () {
     for (let school of newSchoolList) {
       $schoolList.append(`<option value="${school.id}">${school.title} ${school.eng_title}</option>`);
     }
+
+    // 若過濾結果為只有一個，直接幫使用者選定該校
+    if (newSchoolList.length === 1) {
+      // 提取該校 id
+      const schoolId = newSchoolList[0].id;
+      // 幫使用者選定
+      $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
+      selectSchool(schoolId);
+    }
   }
 
   // 設定學群列表下拉選單
