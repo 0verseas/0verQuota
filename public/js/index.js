@@ -197,61 +197,67 @@ const app = (function () {
     // 重置系所表格
     $resultBody.html(``);
 
+    // 設立是否有系所資料之旗
+    let hasDepartment = false;
+
     // 擺放系所列表
-    // 無資料則顯示提示
-    if (schoolData.length === 0) {
+    // 擺放各系所資料
+    for (let school of schoolData) {
+      for (let department of school.departments) {
+        // 有資料，澤改變旗幟狀態
+        hasDepartment = true;
+
+        // 設定簡便連結
+        const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
+        const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
+        const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
+
+        // 擺放各系所資料
+        $resultBody.append(`
+          <tr>
+            <td>${department.card_code}</td>
+
+            <td>
+              <a href="${schoolURL}" target="_blank">
+                <span class="td-br">${school.title}</span>
+                <span class="td-br">${school.eng_title}</span>
+              </a>
+            </td>
+
+            <td>
+              <a href="${detailURL}" target="_blank">
+                <span class="td-br">${department.title}</span>
+                <span class="td-br">${department.eng_title}</span>
+              </a>
+            </td>
+
+            <td>${department.group_code}</td>
+
+            <td>${department.admission_selection_quota}</td>
+
+            <td>
+              <a href="${shenchaItemURL}" target="_blank">
+                <span class="td-br">審查項目</span>
+                <span class="td-br">ShenCha Item</span>
+              </a>
+            </td>
+
+            <td>${department.admission_placement_quota}</td>
+            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+          </tr>
+        `);
+      }
+    }
+
+    // 若無系所資料，顯示提示
+    if (!hasDepartment) {
       $resultBody.append(`
         <tr><td colspan=12>無符合條件的系所</td></tr>
       `);
-    } else {
-      // 擺放各系所資料
-      for (let school of schoolData) {
-        for (let department of school.departments) {
-          // 設定簡便連結
-          const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
-          const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
-          const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
-
-          // 擺放各系所資料
-          $resultBody.append(`
-            <tr>
-              <td>${department.card_code}</td>
-
-              <td>
-                <a href="${schoolURL}" target="_blank">
-                  <span class="td-br">${school.title}</span>
-                  <span class="td-br">${school.eng_title}</span>
-                </a>
-              </td>
-
-              <td>
-                <a href="${detailURL}" target="_blank">
-                  <span class="td-br">${department.title}</span>
-                  <span class="td-br">${department.eng_title}</span>
-                </a>
-              </td>
-
-              <td>${department.group_code}</td>
-
-              <td>${department.admission_selection_quota}</td>
-
-              <td>
-                <a href="${shenchaItemURL}" target="_blank">
-                  <span class="td-br">審查項目</span>
-                  <span class="td-br">ShenCha Item</span>
-                </a>
-              </td>
-
-              <td>${department.admission_placement_quota}</td>
-              <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-              <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-              <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-              <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-              <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-            </tr>
-          `);
-        }
-      }
     }
   }
 
