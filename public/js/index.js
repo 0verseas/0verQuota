@@ -12,6 +12,7 @@ const app = (function () {
   const $isGroup1 = $('#isGroup1');
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
+  const $filterAlert = $('#filter-alert');
 
   /**
    * init
@@ -93,6 +94,9 @@ const app = (function () {
 
   // 一選擇學校就拉該學校資料
   function selectSchool(schoolId = 'all') {
+    // 確認學校選擇狀態
+    _checkSchoolValue();
+
     API.getDepartments(schoolId, 'bachelor').then(data => {
       // 留存學校資料
       schools = data;
@@ -158,6 +162,9 @@ const app = (function () {
 
   // 設定學校列表下拉選單
   function _setSchoolList(newSchoolList = []) {
+    // 重置選擇之學校
+    $schoolList.prop('selectedIndex', 0);
+
     // 重置選單內容
     $schoolList.html(`
       <option value="" disabled selected>請選擇學校 Select School PLZ</option>
@@ -177,6 +184,9 @@ const app = (function () {
       $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
       selectSchool(schoolId);
     }
+
+    // 確認學校選擇狀態
+    _checkSchoolValue();
   }
 
   // 設定學群列表下拉選單
@@ -189,6 +199,26 @@ const app = (function () {
     // 擺放學群列表
     for (let group of departmentGroups) {
       $departmentGroupList.append(`<option value="${group.id}">${group.title} ${group.eng_title}</option>`);
+    }
+  }
+
+  // 驗證學校選擇狀態
+  function _checkSchoolValue() {
+    // 選了學校，才給選其他過濾條件
+    if ($schoolList.val() !== null) {
+      $keyword.prop('disabled', false);
+      $departmentGroupList.prop('disabled', false);
+      $isGroup1.prop('disabled', false);
+      $isGroup2.prop('disabled', false);
+      $isGroup3.prop('disabled', false);
+      $filterAlert.hide();
+    } else {
+      $keyword.prop('disabled', true);
+      $departmentGroupList.prop('disabled', true);
+      $isGroup1.prop('disabled', true);
+      $isGroup2.prop('disabled', true);
+      $isGroup3.prop('disabled', true);
+      $filterAlert.show();
     }
   }
 

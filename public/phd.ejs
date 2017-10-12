@@ -76,18 +76,21 @@
 
   <div class="card mt-3">
     <div class="card-header">
-      選擇學校 <small class="text-muted">xuǎn zé xué xiào </small>
+      選擇過濾條件 <small class="text-muted">xuǎn zé guò lǜ tiáo jiàn</small>
     </div>
-    <div class="form-row card-body">
-      <div class="form-group col-md-6">
-        <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
-        <select class="form-control" id="department-group" onchange="app.filterDepartmentList()">
-          <option value="all" selected>所有學群 All xuequn</option>
-        </select>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword filter</small></label>
-        <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.filterDepartmentList()">
+    <div class="card-body">
+      <%- partial('componments/_filter-alert') %>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
+          <select class="form-control" id="department-group" onchange="app.filterDepartmentList()">
+            <option value="all" selected>所有學群 All xuequn</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword filter</small></label>
+          <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.filterDepartmentList()">
+        </div>
       </div>
     </div>
   </div>
