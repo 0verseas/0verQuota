@@ -46,6 +46,14 @@ const app = (function () {
   const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
   const $deptDescription = $('#dept-description');
   const $deptEngDescription = $('#dept-eng-description');
+  const $admissionSelectionQuota = $('#admission-selection-quota');
+  const $admissionPlacementQuota = $('#admission-placement-quota');
+  const $admissionPlacementStepQuotaBlock = $('#admission-placement-step-quota');
+  const $admissionPlacementStep1Quota = $('#admission-placement-step1-quota');
+  const $admissionPlacementStep2Quota = $('#admission-placement-step2-quota');
+  const $admissionPlacementStep3Quota = $('#admission-placement-step3-quota');
+  const $admissionPlacementStep4Quota = $('#admission-placement-step4-quota');
+  const $admissionPlacementStep5Quota = $('#admission-placement-step5-quota');
 
   // 審查項目 DOM
   const $shenchaItemDiv = $('#nav-shenchaItem');
@@ -152,6 +160,19 @@ const app = (function () {
     $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
+    $admissionSelectionQuota.html(department.admission_selection_quota);
+    $admissionPlacementQuota.html(department.admission_placement_quota);
+
+    // 設定各梯次聯合分發名額（有分梯次則填入各梯次名額）
+    if (department.admission_placement_step_quota !== null) {
+      $admissionPlacementStep1Quota.html(department.admission_placement_step_quota.s1);
+      $admissionPlacementStep2Quota.html(department.admission_placement_step_quota.s2);
+      $admissionPlacementStep3Quota.html(department.admission_placement_step_quota.s3);
+      $admissionPlacementStep4Quota.html(department.admission_placement_step_quota.s4);
+      $admissionPlacementStep5Quota.html(department.admission_placement_step_quota.s5);
+    } else {
+      $admissionPlacementStepQuotaBlock.html(`各梯次皆可選填至名額用完為止 <small class="text-muted">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ</small>`);
+    }
 
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';

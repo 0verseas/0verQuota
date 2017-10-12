@@ -45,6 +45,7 @@ const app = (function () {
   const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
   const $deptDescription = $('#dept-description');
   const $deptEngDescription = $('#dept-eng-description');
+  const $admissionSelectionQuota = $('#admission-selection-quota');
 
   // 審查項目 DOM
   const $shenchaItemDiv = $('#nav-shenchaItem');
@@ -149,6 +150,7 @@ const app = (function () {
     $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
+    $admissionSelectionQuota.html(department.admission_selection_quota);
 
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';
