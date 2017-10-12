@@ -1,0 +1,14 @@
+.detail-tab {
+  font-size: 0.8rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .detail-tab {
+    font-size: 1rem;
+  }
+}
+@include media-breakpoint-up(md) {
+
+}
+@include media-breakpoint-up(lg) {}
+@include media-breakpoint-up(xl) {}

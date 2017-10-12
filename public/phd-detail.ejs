@@ -7,13 +7,20 @@
     <p class="lead" id="dept-eng-title"></p>
   </div>
 
-  <nav class="nav nav-pills nav-fill mt-3" id="infoTab" role="tablist">
-    <a class="nav-item nav-link" id="nav-schoolInfo-tab" data-toggle="pill" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">學校資訊 <small>School Information</small></a>
-    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="pill" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">系所資訊 <small>Department Information</small></a>
-    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="pill" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem" aria-expanded="true" onclick="app.changeTab(this.hash)">審查項目 <small>ShenCa Item</small></a >
+  <nav class="nav nav-tabs nav-fill my-3 detail-tab" id="infoTab" role="tablist">
+    <a class="nav-item nav-link" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">學校資料</span>
+      <small>School</small>
+    </a>
+    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">系所資料</span>
+      <small>Department</small>
+    </a>
+    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">審查項目</span>
+      <small>ShenCa</small>
+    </a>
   </nav>
-
-  <hr>
 
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-schoolInfo" role="tabpanel" aria-labelledby="nav-schoolInfo-tab">
