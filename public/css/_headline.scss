@@ -1,9 +1,32 @@
 .headline {
   text-align: center;
-  padding: 2rem 1.3rem;
+  padding: 0.5rem 0;
+
+  &-title {
+    font-size: 1.2rem;
+    display: block;
+  }
+
+  &-eng-title {
+    font-size: 1rem;
+    display: block;
+  }
 }
 
-@include media-breakpoint-up(sm) {}
+@include media-breakpoint-up(sm) {
+  .headline {
+
+    &-title {
+      font-size: 1.5rem;
+      display: inline;
+    }
+
+    &-eng-title {
+      font-size: 1.25rem;
+      display: inline;
+    }
+  }
+}
 @include media-breakpoint-up(md) {}
 @include media-breakpoint-up(lg) {}
 @include media-breakpoint-up(xl) {}

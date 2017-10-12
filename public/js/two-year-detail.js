@@ -5,7 +5,9 @@ const app = (function () {
    */
 
   // 頁面 DOM
+  const $schoolTitle = $('#school-title');
   const $deptTitle = $('#dept-title');
+  const $schoolEngTitle = $('#school-eng-title');
   const $deptEngTitle = $('#dept-eng-title');
   const $navShenchaItemTab = $('#nav-shenchaItem-tab');
 
@@ -103,8 +105,11 @@ const app = (function () {
     const falseIconHtml = '<span class="oi oi-x"></sapn>';
 
     // 系所標題
-    $deptTitle.html(`${school.title} ${department.title} 香港二年學士班`);
-    $deptEngTitle.html(`${school.eng_title} ${department.eng_title} (Two Year)`);
+    $schoolTitle.html(`${school.title}`);
+    $deptTitle.html(`${department.title}（香港二年學士班）`);
+    $schoolEngTitle.html(`${school.eng_title}`);
+    $deptEngTitle.html(`${department.eng_title} (Two Year)`);
+
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);

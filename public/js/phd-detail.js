@@ -5,7 +5,9 @@ const app = (function () {
    */
 
   // 頁面 DOM
+  const $schoolTitle = $('#school-title');
   const $deptTitle = $('#dept-title');
+  const $schoolEngTitle = $('#school-eng-title');
   const $deptEngTitle = $('#dept-eng-title');
   const $navShenchaItemTab = $('#nav-shenchaItem-tab');
 
@@ -103,8 +105,11 @@ const app = (function () {
     const falseIconHtml = '<span class="oi oi-x"></sapn>';
 
     // 系所標題
-    $deptTitle.html(`${school.title} ${department.title} 博士班`);
-    $deptEngTitle.html(`${school.eng_title} ${department.eng_title} (PhD)`);
+    $schoolTitle.html(`${school.title}`);
+    $deptTitle.html(`${department.title}（博士班）`);
+    $schoolEngTitle.html(`${school.eng_title}`);
+    $deptEngTitle.html(`${department.eng_title} (PhD)`);
+
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);
