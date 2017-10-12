@@ -212,6 +212,24 @@ const app = (function () {
         const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
         const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
 
+        // 設定各梯次聯合分發名額
+        let admissionPlacmentStepQuota = `
+          <td colspan="5">
+            <span class="td-br">各梯次皆可選填至名額用完為止</span>
+            <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
+          </td>
+        `;
+        // 有分梯次則填入各梯次名額
+        if (department.admission_placement_step_quota !== null) {
+          admissionPlacmentStepQuota = `
+            <td>${department.admission_placement_step_quota.s1}</td>
+            <td>${department.admission_placement_step_quota.s2}</td>
+            <td>${department.admission_placement_step_quota.s3}</td>
+            <td>${department.admission_placement_step_quota.s4}</td>
+            <td>${department.admission_placement_step_quota.s5}</td>
+          `;
+        }
+
         // 擺放各系所資料
         $resultBody.append(`
           <tr>
@@ -243,11 +261,8 @@ const app = (function () {
             </td>
 
             <td>${department.admission_placement_quota}</td>
-            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
-            <td><img src="https://yuer.tw/sunnyworm.png" style="height:auto; width:20px;"></td>
+
+            ${admissionPlacmentStepQuota}
           </tr>
         `);
       }
