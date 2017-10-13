@@ -281,7 +281,7 @@ const app = (function () {
 
             <td>${department.group_code}</td>
 
-            <td>${department.admission_selection_quota}</td>
+            <td>${department.admission_selection_ratify_quota}</td>
 
             <td>
               <a href="${shenchaItemURL}" target="_blank">
@@ -290,7 +290,7 @@ const app = (function () {
               </a>
             </td>
 
-            <td>${department.admission_placement_quota}</td>
+            <td>${department.admission_placement_ratify_quota}</td>
 
             ${admissionPlacmentStepQuota}
           </tr>

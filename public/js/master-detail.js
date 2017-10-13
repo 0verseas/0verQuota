@@ -153,7 +153,7 @@ const app = (function () {
     $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
-    $admissionSelectionQuota.html(department.admission_selection_quota);
+    $admissionSelectionQuota.html(department.admission_selection_ratify_quota);
 
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';

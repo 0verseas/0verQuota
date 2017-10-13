@@ -235,7 +235,7 @@ const app = (function () {
               </a>
             </td>
 
-            <td>${department.admission_selection_quota}</td>
+            <td>${department.admission_selection_ratify_quota}</td>
 
             <td>
               <a href="${shenchaItemURL}" target="_blank">

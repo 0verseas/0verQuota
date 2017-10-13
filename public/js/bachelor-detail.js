@@ -164,8 +164,8 @@ const app = (function () {
     $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
-    $admissionSelectionQuota.html(department.admission_selection_quota);
-    $admissionPlacementQuota.html(department.admission_placement_quota);
+    $admissionSelectionQuota.html(department.admission_selection_ratify_quota);
+    $admissionPlacementQuota.html(department.admission_placement_ratify_quota);
 
     // 設定各梯次聯合分發名額（有分梯次則填入各梯次名額）
     if (department.admission_placement_step_quota !== null) {
