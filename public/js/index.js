@@ -242,22 +242,57 @@ const app = (function () {
         const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
         const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
 
-        // 設定各梯次聯合分發名額
-        let admissionPlacmentStepQuota = `
-          <td colspan="5">
-            <span class="td-br">各梯次皆可選填至名額用完為止</span>
-            <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
+        // 設定個人申請名額
+        // 名額為零則不顯示
+        let admissionSelectionQuota = `
+          <td colspan="2">
+            <span class="td-br">僅限聯合分發</span>
+            <span class="td-br">jǐn xiàn lián hé fèn fā </span>
           </td>
         `;
-        // 有分梯次則填入各梯次名額
-        if (department.admission_placement_step_quota !== null) {
-          admissionPlacmentStepQuota = `
-            <td>${department.admission_placement_step_quota.s1}</td>
-            <td>${department.admission_placement_step_quota.s2}</td>
-            <td>${department.admission_placement_step_quota.s3}</td>
-            <td>${department.admission_placement_step_quota.s4}</td>
-            <td>${department.admission_placement_step_quota.s5}</td>
+        // 有名額要連審查項目一起顯示
+        if (department.admission_selection_ratify_quota > 0) {
+          admissionSelectionQuota = `
+          <td>${department.admission_selection_ratify_quota}</td>
+          <td>
+            <a href="${shenchaItemURL}" target="_blank">
+              <span class="td-br">審查項目</span>
+              <span class="td-br">ShenCha Item</span>
+            </a>
+          </td>
           `;
+        }
+
+        // 設定聯合分發名額
+        // 名額為零則不顯示
+        let admissionPlacementQuota = `
+          <td colspan="6">
+            <span class="td-br">僅限個人申請</span>
+            <span class="td-br">jǐn xiàn gè rén shēn qǐng </span>
+          </td>
+        `;
+
+        if (department.admission_placement_ratify_quota > 0) {
+          admissionPlacementQuota = `<td>${department.admission_placement_ratify_quota}</td>`;
+
+          // 設定聯合分發各梯次名額
+          // 有分梯次則填入各梯次名額
+          if (department.admission_placement_step_quota !== null) {
+            admissionPlacementQuota += `
+              <td>${department.admission_placement_step_quota.s1}</td>
+              <td>${department.admission_placement_step_quota.s2}</td>
+              <td>${department.admission_placement_step_quota.s3}</td>
+              <td>${department.admission_placement_step_quota.s4}</td>
+              <td>${department.admission_placement_step_quota.s5}</td>
+            `;
+          } else {
+            admissionPlacementQuota += `
+              <td colspan="5">
+                <span class="td-br">各梯次皆可選填至名額用完為止</span>
+                <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
+              </td>
+            `;
+          }
         }
 
         // 擺放各系所資料
@@ -281,18 +316,9 @@ const app = (function () {
 
             <td>${department.group_code}</td>
 
-            <td>${department.admission_selection_ratify_quota}</td>
+            ${admissionSelectionQuota}
 
-            <td>
-              <a href="${shenchaItemURL}" target="_blank">
-                <span class="td-br">審查項目</span>
-                <span class="td-br">ShenCha Item</span>
-              </a>
-            </td>
-
-            <td>${department.admission_placement_ratify_quota}</td>
-
-            ${admissionPlacmentStepQuota}
+            ${admissionPlacementQuota}
           </tr>
         `);
       }
