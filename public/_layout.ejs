@@ -52,7 +52,7 @@
 
   <script src="js/browser-detect.js"></script>
   <script>
-    if (Browser.checkBrowserSupport()) {
+    if (!Browser.checkBrowserSupport()) {
       alert('請使用 Chrome、Firefox、Safari、Edge 或 IE 版本 >= 10 的瀏覽器。');
     };
   </script>
