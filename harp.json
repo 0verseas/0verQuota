@@ -3,12 +3,16 @@
 		"meta": {
 			"siteName": "臺灣海外聯合招生委員會",
 			"title": "臺灣海外聯招會・僑生及港澳生招生名額查詢系統",
-			"description": "",
-			"keywords": [],
+			"description": "提供查詢臺灣各大學系所僑生及港澳生招生資訊、名額資訊，以及審查項目說明。",
+			"keywords": [
+				"臺灣海外聯招會",
+				"海聯",
+				"僑生及港澳生招生名額查詢系統"
+			],
 			"author": "臺灣海外聯合招募委員會 University Entrance Committee For Overseas Chinese Students",
 			"copyright": "©20017 University Entrance Committee For Overseas Chinese Students. All rights reserved.",
-			"imageUrl": "https://student.overseas.ncnu.edu.tw:8443/quota/test.png",
-			"imageAlt": "",
+			"imageUrl": "https://student.overseas.ncnu.edu.tw/quota/card.png",
+			"imageAlt": "臺灣海外聯合招募委員會形象圖卡",
 			"url": "https://student.overseas.ncnu.edu.tw/quota/"
 		},
 		"title": "僑生及港澳生招生名額查詢系統｜臺灣海外聯招會",
