@@ -35,6 +35,13 @@ const app = (function () {
 
   // 過濾學校列表
   function filterSchoolList(keyword = '') {
+    // 重置查訊結果
+    _setDepartmentList();
+    // 重置網址參數
+    const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+    // 更新網址
+    window.history.replaceState({path: newurl}, null, newurl);
+
     // 取得以關鍵字過濾中英文名稱的學校列表
     const newSchoolList =  allSchools.filter(school => {
       return school.eng_title.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || school.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1;

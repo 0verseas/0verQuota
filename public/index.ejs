@@ -63,17 +63,17 @@
         選擇學校 <small class="text-muted">xuǎn zé xué xiào </small>
       </div>
       <div class="form-row card-body">
-        <div class="form-group col-lg-6">
+        <form class="form-group col-lg-6" onsubmit="event.preventDefault(); app.filterSchoolList(this.elements.namedItem('keyword').value)">
           <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Filter the school list by keyword</small></label>
           <div class="input-group">
-            <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.filterSchoolList(this.value)">
+            <input type="text" name="keyword" class="form-control" id="school-keyword" placeholder="暨南">
             <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button">
+              <button class="btn btn-secondary" type="submit">
                 <span class="oi oi-magnifying-glass"></span>
               </button>
             </span>
           </div>
-        </div>
+        </form>
 
         <div class="form-group col-lg-6">
           <label for="schoolList" class="form-control-label">選擇學校* <small class="text-muted">Select School*</small></label>
