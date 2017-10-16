@@ -90,24 +90,24 @@
       </div>
       <div class="card-body">
         <%- partial('componments/_filter-alert') %>
-        <div class="form-row">
+        <form class="form-row" onsubmit="event.preventDefault(); app.filterDepartmentList()">
           <div class="form-group col-md-6">
             <label class="form-control-label">選擇類組* <small class="text-muted">Group*</small></label>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" id="isGroup1" type="checkbox" value="" onchange="app.filterDepartmentList()" disabled>
+                <input class="form-check-input" id="isGroup1" type="checkbox" value="" disabled>
                 第一類組 <small class="text-muted">First Group</small>
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" id="isGroup2" type="checkbox" value="" onchange="app.filterDepartmentList()" disabled>
+                <input class="form-check-input" id="isGroup2" type="checkbox" value="" disabled>
                 第二類組 <small class="text-muted">Second Group</small>
               </label>
             </div>
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" id="isGroup3" type="checkbox" value="" onchange="app.filterDepartmentList()" disabled>
+                <input class="form-check-input" id="isGroup3" type="checkbox" value="" disabled>
                 第三類組 <small class="text-muted">Third Group</small>
               </label>
             </div>
@@ -116,23 +116,25 @@
           <div class="form-row col-md-6">
             <div class="form-group col-12">
               <label for="xuequn" class="form-control-label">選擇學群* <small class="text-muted">xuǎn zé xué qún*</small></label>
-              <select class="form-control" id="department-group" onchange="app.filterDepartmentList()" disabled>
+              <select class="form-control" id="department-group" disabled>
                 <option value="all" selected>所有學群 All xuequn</option>
               </select>
             </div>
             <div class="form-group col-12">
               <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword filter</small></label>
-              <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.filterDepartmentList()" disabled>
+              <input type="text" class="form-control" id="keyword" placeholder="資訊管理" disabled>
             </div>
 
           </div>
-        </div>
+
+          <button class="btn btn-primary mx-auto" id="filter-button" type="submit" >送出查詢</button>
+        </form>
 
       </div>
     </div>
   </div>
 
-  <hr>
+  <hr id="result">
 
   <h3>查詢結果 <small class="text-muted">xì suǒ chá xún </small></h3>
   <table class="table table-sm table-striped table-bordered table-responsive">

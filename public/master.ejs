@@ -53,20 +53,20 @@
       選擇學校 <small class="text-muted">xuǎn zé xué xiào </small>
     </div>
     <div class="form-row card-body">
-      <div class="form-group col-lg-6">
+      <form class="form-group col-lg-6" onsubmit="event.preventDefault(); app.filterSchoolList(this.elements.namedItem('keyword').value)">
         <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Filter the school list by keyword</small></label>
         <div class="input-group">
-          <input type="text" class="form-control" id="school-keyword" placeholder="暨南" onchange="app.filterSchoolList(this.value)">
+          <input type="text" name="keyword" class="form-control" id="school-keyword" placeholder="暨南">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button">
+            <button class="btn btn-secondary" type="submit">
               <span class="oi oi-magnifying-glass"></span>
             </button>
           </span>
         </div>
-      </div>
+      </form>
       <div class="form-group col-lg-6">
         <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">School</small></label>
-        <select class="form-control" id="school-list" onchange="app.selectSchool(this.options[this.selectedIndex].value)">
+        <select class="form-control" id="school-list">
           <option value="" disabled selected>請選擇學校 Select School PLZ</option>
         </select>
       </div>
@@ -79,22 +79,24 @@
     </div>
     <div class="card-body">
       <%- partial('componments/_filter-alert') %>
-      <div class="form-row">
+       <form class="form-row" onsubmit="event.preventDefault(); app.filterDepartmentList()">
         <div class="form-group col-md-6">
           <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
-          <select class="form-control" id="department-group" onchange="app.filterDepartmentList()">
+          <select class="form-control" id="department-group">
             <option value="all" selected>所有學群 All xuequn</option>
           </select>
         </div>
         <div class="form-group col-md-6">
           <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword filter</small></label>
-          <input type="text" class="form-control" id="keyword" placeholder="資訊管理" onchange="app.filterDepartmentList()">
+          <input type="text" class="form-control" id="keyword" placeholder="資訊管理">
         </div>
-      </div>
+
+        <button class="btn btn-primary mx-auto" id="filter-button" type="submit" >送出查詢</button>
+      </form>
     </div>
   </div>
 
-  <hr>
+  <hr id="result">
 
   <h3>查詢結果 <small class="text-muted">xì suǒ chá xún </small></h3>
   <table class="table table-sm table-striped table-bordered table-responsive">

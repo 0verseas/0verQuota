@@ -9,6 +9,7 @@ const app = (function () {
   const $resultBody = $('#result-body');
   const $schoolKeyword = $('#school-keyword');
   const $keyword = $('#keyword');
+  const $filterButton = $('#filter-button');
   const $filterAlert = $('#filter-alert');
 
   /**
@@ -32,6 +33,15 @@ const app = (function () {
 
   // 過濾學校列表
   function filterSchoolList(keyword = '') {
+    // 重置所選學校資料
+    schools = [];
+    // 重置查訊結果
+    _setDepartmentList();
+    // 重置網址參數
+    const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+    // 更新網址
+    window.history.replaceState({path: newurl}, null, newurl);
+
     // 取得以關鍵字過濾中英文名稱的學校列表
     const newSchoolList =  allSchools.filter(school => {
       return school.eng_title.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || school.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
@@ -87,11 +97,9 @@ const app = (function () {
     API.getDepartments(schoolId, 'phd').then(data => {
       // 留存學校資料
       schools = data;
-      // 過濾系所列表
-      filterDepartmentList();
     }).catch(error => {
       // 清空系所列表
-      _setDepartmentList();
+      _setDepartmentList(schools = []);
       console.error(error);
     });
   }
@@ -189,19 +197,30 @@ const app = (function () {
     if ($schoolList.val() !== null) {
       $keyword.prop('disabled', false);
       $departmentGroupList.prop('disabled', false);
+      $filterButton.prop('disabled', false);
       $filterAlert.hide();
     } else {
       $keyword.prop('disabled', true);
       $departmentGroupList.prop('disabled', true);
+      $filterButton.prop('disabled', true);
       $filterAlert.show();
     }
   }
 
   // 設定系所列表
-  function _setDepartmentList(schoolData = []) {
+  function _setDepartmentList(schoolData = null) {
     // 重置系所表格
     $resultBody.html(``);
 
+    // 若是無資料，則顯示提示
+    if (schoolData === null) {
+      $resultBody.append(`
+        <tr><td colspan=12>請選擇過濾條件</td></tr>
+      `);
+
+      // 無資料，直接挑出
+      return;
+    }
 
     // 設立是否有系所資料之旗
     let hasDepartment = false;
@@ -254,6 +273,13 @@ const app = (function () {
         <tr><td colspan=12>無符合條件的系所</td></tr>
       `);
     }
+
+    // 暫存去除 hash 的網址
+    const url = window.location.href;
+    // 前往 #result
+    window.location.href = "#result";
+    // 改變網址
+    window.history.replaceState(null, null, url);
   }
 
   return {
