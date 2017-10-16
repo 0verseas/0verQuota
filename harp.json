@@ -1,6 +1,17 @@
 {
 	"globals": {
-		"title": "海外聯招會系所名額查詢系統",
+		"meta": {
+			"siteName": "臺灣海外聯合招生委員會",
+			"title": "臺灣海外聯招會・僑生及港澳生招生名額查詢系統",
+			"description": "",
+			"keywords": [],
+			"author": "臺灣海外聯合招募委員會 University Entrance Committee For Overseas Chinese Students",
+			"copyright": "©20017 University Entrance Committee For Overseas Chinese Students. All rights reserved.",
+			"imageUrl": "https://student.overseas.ncnu.edu.tw:8443/quota/test.png",
+			"imageAlt": "",
+			"url": "https://student.overseas.ncnu.edu.tw/quota/"
+		},
+		"title": "僑生及港澳生招生名額查詢系統｜臺灣海外聯招會",
 		"headline": "僑生及港澳生招生名額查詢系統",
 		"subline": "2018 年秋季入學",
 		"systems": [

@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant" prefix='og: http://ogp.me/ns#'>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><%= title %></title>
+
+  <title><%= meta.title %></title>
+
+  <meta name="image" content="<%= meta.imageUrl %>">
+  <meta name="description" content="<%= meta.description %>">
+  <meta name="keywords" content="<%= meta.keywords.join(',') %>">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="60">
+  <meta name="author" content="<%= meta.author %>">
+  <meta name="copyright" content="<%= meta.copyright %>">
+
+  <!-- Schema.org markup for Google -->
+  <meta itemprop="name" content="<%= meta.title %>">
+  <meta itemprop="description" content="<%= meta.description %>">
+  <meta itemprop="image" content="<%= meta.imageUrl %>">
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="<%= meta.title %>">
+  <meta property="og:description" content="<%= meta.description %>">
+  <meta property="og:image" content="<%= meta.imageUrl %>">
+  <meta property="og:image:alt" content="<%= meta.imageAlt %>">
+  <meta property="og:url" content="<%= meta.url %>">
+  <meta property="og:site_name" content="<%= meta.siteName %>">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:locale:alternate" content="zh_HK">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:type" content="website">
+
   <!-- favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://api.overseas.ncnu.edu.tw/0verseas-favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://api.overseas.ncnu.edu.tw/0verseas-favicons/favicon-32x32.png">
