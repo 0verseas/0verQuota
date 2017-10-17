@@ -63,9 +63,9 @@ const app = (function () {
     const schoolId = $schoolList.val();
     const departmentGroupId = $departmentGroupList.val();
     const keyword = $keyword.val();
-    const group1 = $isGroup1.prop("checked") ? '1' : '0';
-    const group2 = $isGroup2.prop("checked") ? '2' : '0';
-    const group3 = $isGroup3.prop("checked") ? '3' : '0';
+    const group1 = $isGroup1.prop('checked') ? '1' : '0';
+    const group2 = $isGroup2.prop('checked') ? '2' : '0';
+    const group3 = $isGroup3.prop('checked') ? '3' : '0';
 
     // 準備網址參數
     const paramsStr = jQuery.param({
