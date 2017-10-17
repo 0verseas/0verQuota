@@ -238,7 +238,6 @@ const app = (function () {
             </dd>
           </dl>
         </div>
-        <hr>
       `;
 
       // 置放審查項目資料
