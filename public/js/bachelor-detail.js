@@ -109,8 +109,8 @@ const app = (function () {
   // render 所有資料
   function renderData(school, system, department) {
     // 設定 boolean 顯示字串
-    const trueIconHtml = '<span class="oi oi-check"></sapn>';
-    const falseIconHtml = '<span class="oi oi-x"></sapn>';
+    const trueIconHtml = '有 Yes';
+    const falseIconHtml = '無 No';
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
@@ -216,7 +216,7 @@ const app = (function () {
           <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
           <dl class="row">
             <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
-            <dd class="col-4 col-md-8">${doc.required ? trueIconHtml : falseIconHtml}</dd>
+            <dd class="col-4 col-md-8">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
       `;
 
       // 判斷是不是師長推薦函
