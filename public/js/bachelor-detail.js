@@ -115,16 +115,16 @@ const app = (function () {
     // 系所標題
     $schoolTitle.html(`${school.title}`);
     $deptTitle.html(`${department.title}（學士班）`);
-    $schoolEngTitle.html(`${school.eng_title}`);
-    $deptEngTitle.html(`${department.eng_title} (Bachelor)`);
+    $schoolEngTitle.html(_isProvide(school.eng_title) ? `${school.eng_title}` : `不提供 Doesn't Provide`);
+    $deptEngTitle.html(_isProvide(department.eng_title) ? `${department.eng_title} (Bachelor)` : `不提供 Doesn't Provide`);
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);
     $schoolFax.html(school.phone);
     $schoolAddress.html(school.address);
-    $schoolEngAddress.html(school.eng_address);
+    $schoolEngAddress.html(_isProvide(school.eng_address) ? school.eng_address : `不提供 Doesn't Provide`);
     $schoolUrl.html(`<a href="${school.url}" target="_blank">${school.url}</a>`);
-    $schoolEngUrl.html(`<a href="${school.eng_url}" target="_blank">${school.eng_url}</a>`);
+    $schoolEngUrl.html(_isProvide(school.eng_url) ? `<a href="${school.eng_url}" target="_blank">${school.eng_url}</a>` : `不提供 Doesn't Provide`);
     $hasFiveYearStudentAllowed.html(school.has_five_year_student_allowed ? trueIconHtml : falseIconHtml);
     // $hasSelfEnrollment.html(school.has_self_enrollment ? trueIconHtml : falseIconHtml);
 
@@ -133,7 +133,7 @@ const app = (function () {
     // 有提供則顯示說明
     if (school.has_dorm) {
       $dormInfoText.html(school.dorm_info);
-      $dormInfoEngText.html(school.eng_dorm_info);
+      $dormInfoEngText.html(_isProvide(school.eng_dorm_info) ? school.eng_dorm_info : ``);
     } else {
       $dormInfo.remove();
     }
@@ -143,27 +143,27 @@ const app = (function () {
     // 有提供則顯示說明、負責單位
     if (school.has_scholarship) {
       $scholarshipUrl.html(`<a href="${school.scholarship_url}" target="_blank">${school.scholarship_url}</a>`);
-      $scholarshipEngUrl.html(`<a href="${school.scholarship_eng_url}" target="_blank">${school.scholarship_eng_url}</a>`);
+      $scholarshipEngUrl.html(_isProvide(school.scholarship_eng_url) ? `<a href="${school.scholarship_eng_url}" target="_blank">${school.scholarship_eng_url}</a>` : `不提供 Doesn't Provide`);
       $scholarshipDept.html(school.scholarship_dept);
-      $scholarshipEngDept.html(school.scholarship_eng_dept);
+      $scholarshipEngDept.html(_isProvide(school.scholarship_eng_dept) ? school.scholarship_eng_dept : ``);
     } else {
       $scholarshipInfo.remove();
     }
 
     // 學則資訊
     $systemDescription.html(system.description);
-    $systemEngDescription.html(system.eng_description);
+    $systemEngDescription.html(_isProvide(system.eng_description) ? system.eng_description : ``);
 
     // 系所基本資料
     $deptCardCode.html(department.card_code);
     $deptUrl.html(`<a href="${department.url}" target="_blank">${department.url}</a>`);
-    $deptEngUrl.html(`<a href="${department.eng_url}" target="_blank">${department.eng_url}</a>`);
+    $deptEngUrl.html(_isProvide(department.eng_url) ? `<a href="${department.eng_url}" target="_blank">${department.eng_url}</a>` : `不提供 Doesn't Provide`);
     $groupCode.html(department.group_code);
     // $deptHasSelfEnrollment.html(department.has_self_enrollment ? trueIconHtml : falseIconHtml);
     // $deptHasSpecialClass.html(department.has_special_class ? trueIconHtml : falseIconHtml);
     // $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
-    $deptEngDescription.html(department.eng_description);
+    $deptEngDescription.html(_isProvide(department.eng_description) ? department.eng_description : `不提供 Doesn't Provide`);
     $admissionSelectionQuota.html(department.admission_selection_ratify_quota < 0 ? `${department.admission_selection_ratify_quota} 名` : `僅限聯合分發`);
     $admissionPlacementQuota.html(department.admission_placement_ratify_quota > 0 ? `${department.admission_placement_ratify_quota} 名` : `僅限個人申請`);
 
@@ -203,7 +203,7 @@ const app = (function () {
     // 有審查費用則顯示說明
     if (department.has_review_fee) {
       $reviewFeeDetail.html(department.review_fee_detail);
-      $reviewFeeEngDetail.html(department.review_fee_eng_detail);
+      $reviewFeeEngDetail.html(_isProvide(department.review_fee_eng_detail) ? department.review_fee_eng_detail : `不提供 Doesn't Provide`);
     } else {
       $reviewFeeInfo.remove();
     }
@@ -255,7 +255,7 @@ const app = (function () {
             <dt class="col-md-4">說明 <small class="text-muted">Description</small></dt>
             <dd class="col-md-8">
               <p>${doc.description}</p>
-              <p>${doc.eng_description}</p>
+              <p>${_isProvide(doc.eng_description) ? doc.eng_description : `不提供 Doesn't Provide`}</p>
             </dd>
           </dl>
         </div>
@@ -266,6 +266,11 @@ const app = (function () {
       $shenchaItemDiv.append(appendData);
     }
 
+  }
+
+  // 確認是否有提供資料
+  function _isProvide(data = null) {
+    return (data != null) && (data.replace(/^\s+|\s+$/g, '') != '');
   }
 
   // 頁面初始化
