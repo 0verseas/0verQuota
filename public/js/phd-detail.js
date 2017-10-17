@@ -20,7 +20,7 @@ const app = (function () {
   const $schoolUrl = $('#school-url');
   const $schoolEngUrl = $('#school-eng-url');
   const $hasFiveYearStudentAllowed = $('#has-five-year-student-allowed');
-  const $hasSelfEnrollment = $('#has-self-enrollment');
+  // const $hasSelfEnrollment = $('#has-self-enrollment');
   const $hasDorm = $('#has-dorm');
   const $dormDl = $('#dorm-dl');
   const $dormInfo = $('.dorm-info');
@@ -42,9 +42,9 @@ const app = (function () {
   const $genderLimit = $('#gender-limit');
   const $mainGroup = $('#main-group');
   const $subGroup = $('#sub-group');
-  const $deptHasSelfEnrollment = $('#dept-has-self-enrollment');
-  const $deptHasSpecialClass = $('#dept-has-special-class');
-  const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
+  // const $deptHasSelfEnrollment = $('#dept-has-self-enrollment');
+  // const $deptHasSpecialClass = $('#dept-has-special-class');
+  // const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
   const $deptDescription = $('#dept-description');
   const $deptEngDescription = $('#dept-eng-description');
   const $admissionSelectionQuota = $('#admission-selection-quota');
@@ -119,7 +119,7 @@ const app = (function () {
     $schoolUrl.html(`<a href="${school.url}" target="_blank">${school.url}</a>`);
     $schoolEngUrl.html(`<a href="${school.eng_url}" target="_blank">${school.eng_url}</a>`);
     $hasFiveYearStudentAllowed.html(school.has_five_year_student_allowed ? trueIconHtml : falseIconHtml);
-    $hasSelfEnrollment.html(school.has_self_enrollment ? trueIconHtml : falseIconHtml);
+    // $hasSelfEnrollment.html(school.has_self_enrollment ? trueIconHtml : falseIconHtml);
 
     // 學校住宿資訊
     $hasDorm.html(school.has_dorm ? trueIconHtml : falseIconHtml);
@@ -150,9 +150,9 @@ const app = (function () {
     // 系所基本資料
     $deptUrl.html(`<a href="${department.url}" target="_blank">${department.url}</a>`);
     $deptEngUrl.html(`<a href="${department.eng_url}" target="_blank">${department.eng_url}</a>`);
-    $deptHasSelfEnrollment.html(department.has_self_enrollment ? trueIconHtml : falseIconHtml);
-    $deptHasSpecialClass.html(department.has_special_class ? trueIconHtml : falseIconHtml);
-    $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
+    // $deptHasSelfEnrollment.html(department.has_self_enrollment ? trueIconHtml : falseIconHtml);
+    // $deptHasSpecialClass.html(department.has_special_class ? trueIconHtml : falseIconHtml);
+    // $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
     $admissionSelectionQuota.html(`${department.admission_selection_ratify_quota} 名`);
