@@ -71,7 +71,7 @@
       </form>
       <div class="form-group col-lg-6">
         <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">School</small></label>
-        <select class="form-control" id="school-list">
+        <select class="form-control" id="school-list" onchange="app.selectSchool(this.options[this.selectedIndex].value)">
           <option value="" disabled selected>請選擇學校 Select School PLZ</option>
         </select>
       </div>
