@@ -58,7 +58,7 @@
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" id="school-keyword" placeholder="暨南">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="submit">
+            <button class="btn btn-secondary" type="submit" onmousedown="event.preventDefault()">
               <span class="oi oi-magnifying-glass"></span>
             </button>
           </span>
@@ -91,7 +91,7 @@
           <input type="text" class="form-control" id="keyword" placeholder="資訊管理">
         </div>
 
-        <button class="btn btn-primary mx-auto" id="filter-button" type="submit" >送出查詢</button>
+        <button class="btn btn-primary mx-auto" id="filter-button" type="submit" onmousedown="event.preventDefault()">送出查詢</button>
       </form>
     </div>
   </div>
