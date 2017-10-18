@@ -1,3 +1,5 @@
+loading.start();
+
 const app = (function () {
 
   /**
@@ -282,6 +284,7 @@ const app = (function () {
 
       // 顯示參數設定的分頁
       changeTab(`#${tab}`);
+      loading.complete();
     }).catch(error => {
       console.error(error);
       alert(`Can't find the department, please try again.`);
