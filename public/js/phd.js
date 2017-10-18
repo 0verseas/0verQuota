@@ -88,7 +88,38 @@ const app = (function () {
     }
 
     // 重新擺放系所列表
-    _setDepartmentList(filterSchools);
+    let allDepartments = [];
+
+    for (let school of filterSchools) {
+      let schoolName = school.title;
+      let engSchoolName = school.eng_title;
+      for (let department of school.graduate_departments) {
+        department.school = schoolName;
+        department.eng_school = engSchoolName;
+        allDepartments.push(department);
+      }
+    }
+
+    // 重置系所表格
+    $resultBody.html('');
+
+    $('#pagination-container').pagination({
+      dataSource: allDepartments,
+      pageRange: 2,
+      showGoInput: true,
+      showGoButton: true,
+      formatGoInput: '<%= input %>',
+      callback: function(data, pagination) {
+        // template method of yourself
+        var html = _setDepartmentList(data);
+        $resultBody.html(html);
+      }
+    });
+
+    // 若無系所資料，顯示提示
+    if (allDepartments.length <= 0) {
+      $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+    }
   }
 
   // 一選擇學校就拉該學校資料
@@ -226,70 +257,53 @@ const app = (function () {
   }
 
   // 設定系所列表
-  function _setDepartmentList(schoolData = null) {
-    // 重置系所表格
-    $resultBody.html(``);
+  function _setDepartmentList(departments = null) {
+
+    let html = '';
 
     // 若是無資料，則顯示提示
-    if (schoolData === null) {
-      $resultBody.append(`
-        <tr><td colspan=12>請選擇過濾條件</td></tr>
-      `);
-
+    if (departments === null) {
       // 無資料，直接挑出
-      return;
+      html += `<tr><td colspan=12>請選擇過濾條件</td></tr>`;
+      return html;
     }
-
-    // 設立是否有系所資料之旗
-    let hasDepartment = false;
 
     // 擺放系所列表
     // 擺放各系所資料
-    for (let school of schoolData) {
-      for (let department of school.graduate_departments) {
-        // 有資料，澤改變旗幟狀態
-        hasDepartment = true;
+    for (let department of departments) {
 
-        // 設定簡便連結
-        const schoolURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
-        const detailURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
-        const shenchaItemURL = `phd-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
+      // 設定簡便連結
+      const schoolURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
+      const detailURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo'`;
+      const shenchaItemURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
-        // 擺放各系所資料
-        $resultBody.append(`
-          <tr>
-            <td>
-              <a href="${schoolURL}" target="_blank">
-                <span class="td-br">${school.title}</span>
-                <span class="td-br">${school.eng_title}</span>
-              </a>
-            </td>
+      // 擺放各系所資料
+      html += `
+        <tr>
+          <td>
+            <a href="${schoolURL}" target="_blank">
+              <span class="td-br">${department.school}</span>
+              <span class="td-br">${department.eng_school}</span>
+            </a>
+          </td>
 
-            <td>
-              <a href="${detailURL}" target="_blank">
-                <span class="td-br">${department.title}</span>
-                <span claｚss="td-br">${department.eng_title}</span>
-              </a>
-            </td>
+          <td>
+            <a href="${detailURL}" target="_blank">
+              <span class="td-br">${department.title}</span>
+              <span claｚss="td-br">${department.eng_title}</span>
+            </a>
+          </td>
 
-            <td>${department.admission_selection_ratify_quota}</td>
+          <td>${department.admission_selection_ratify_quota}</td>
 
-            <td>
-              <a href="${shenchaItemURL}" target="_blank">
-                <span class="td-br">審查項目</span>
-                <span class="td-br">ShenCha Item</span>
-              </a>
-            </td>
-          </tr>
-        `);
-      }
-    }
-
-    // 若無系所資料，顯示提示
-    if (!hasDepartment) {
-      $resultBody.append(`
-        <tr><td colspan=12>無符合條件的系所</td></tr>
-      `);
+          <td>
+            <a href="${shenchaItemURL}" target="_blank">
+              <span class="td-br">審查項目</span>
+              <span class="td-br">ShenCha Item</span>
+            </a>
+          </td>
+        </tr>
+      `;
     }
 
     // 暫存去除 hash 的網址
@@ -298,6 +312,7 @@ const app = (function () {
     window.location.href = "#result";
     // 改變網址
     window.history.replaceState(null, null, url);
+    return html;
   }
 
   return {

@@ -101,8 +101,40 @@ const app = (function () {
     }
 
     // 重新擺放系所列表
-    _setDepartmentList(filterSchools);
+    let allDepartments = [];
+
+    for (let school of filterSchools) {
+      let schoolName = school.title;
+      let engSchoolName = school.eng_title;
+      for (let department of school.departments) {
+        department.school = schoolName;
+        department.eng_school = engSchoolName;
+        allDepartments.push(department);
+      }
+    }
+
+    // 重置系所表格
+    $resultBody.html('');
+
+    $('#pagination-container').pagination({
+      dataSource: allDepartments,
+      pageRange: 2,
+      showGoInput: true,
+      showGoButton: true,
+      formatGoInput: '<%= input %>',
+      callback: function(data, pagination) {
+        // template method of yourself
+        var html = _setDepartmentList(data);
+        $resultBody.html(html);
+      }
+    });
+
+    // 若無系所資料，顯示提示
+    if (allDepartments.length <= 0) {
+      $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+    }
   }
+
 
   // 一選擇學校就拉該學校資料
   function selectSchool(schoolId = 'all') {
@@ -251,122 +283,105 @@ const app = (function () {
   }
 
   // 設定系所列表
-  function _setDepartmentList(schoolData = null) {
-    // 重置系所表格
-    $resultBody.html(``);
+  function _setDepartmentList(departments = null) {
+
+    let html = '';
 
     // 若是無資料，則顯示提示
-    if (schoolData === null) {
-      $resultBody.append(`
-        <tr><td colspan=12>請選擇過濾條件</td></tr>
-      `);
-
+    if (departments === null ){
       // 無資料，直接挑出
-      return;
+      html += `<tr><td colspan=12>請選擇過濾條件</td></tr>`;
+      return html;
     }
-
-    // 設立是否有系所資料之旗
-    let hasDepartment = false;
 
     // 擺放系所列表
     // 擺放各系所資料
-    for (let school of schoolData) {
-      for (let department of school.departments) {
-        // 有資料，澤改變旗幟狀態
-        hasDepartment = true;
+    for (let department of departments) {
 
-        // 設定簡便連結
-        const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-schoolInfo`;
-        const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-deptInfo'`;
-        const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${school.id}&tab=nav-shenchaItem`;
+      // 設定簡便連結
+      const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
+      const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo'`;
+      const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
-        // 設定個人申請名額
-        // 名額為零則不顯示
-        let admissionSelectionQuota = `
-          <td colspan="2">
-            <span class="td-br">僅限聯合分發</span>
-            <span class="td-br">jǐn xiàn lián hé fèn fā </span>
-          </td>
+      // 設定個人申請名額
+      // 名額為零則不顯示
+      let admissionSelectionQuota = `
+        <td colspan="2">
+          <span class="td-br">僅限聯合分發</span>
+          <span class="td-br">jǐn xiàn lián hé fèn fā </span>
+        </td>
+      `;
+      // 有名額要連審查項目一起顯示
+      if (department.admission_selection_ratify_quota > 0) {
+        admissionSelectionQuota = `
+        <td>${department.admission_selection_ratify_quota}</td>
+        <td>
+          <a href="${shenchaItemURL}" target="_blank">
+            <span class="td-br">審查項目</span>
+            <span class="td-br">ShenCha Item</span>
+          </a>
+        </td>
         `;
-        // 有名額要連審查項目一起顯示
-        if (department.admission_selection_ratify_quota > 0) {
-          admissionSelectionQuota = `
-          <td>${department.admission_selection_ratify_quota}</td>
-          <td>
-            <a href="${shenchaItemURL}" target="_blank">
-              <span class="td-br">審查項目</span>
-              <span class="td-br">ShenCha Item</span>
-            </a>
-          </td>
+      }
+
+      // 設定聯合分發名額
+      // 名額為零則不顯示
+      let admissionPlacementQuota = `
+        <td colspan="6">
+          <span class="td-br">僅限個人申請</span>
+          <span class="td-br">jǐn xiàn gè rén shēn qǐng </span>
+        </td>
+      `;
+
+      if (department.admission_placement_ratify_quota > 0) {
+        admissionPlacementQuota = `<td>${department.admission_placement_ratify_quota}</td>`;
+
+        // 設定聯合分發各梯次名額
+        // 有分梯次則填入各梯次名額
+        if (department.admission_placement_step_quota !== null) {
+          admissionPlacementQuota += `
+            <td>${department.admission_placement_step_quota.s1}</td>
+            <td>${department.admission_placement_step_quota.s2}</td>
+            <td>${department.admission_placement_step_quota.s3}</td>
+            <td>${department.admission_placement_step_quota.s4}</td>
+            <td>${department.admission_placement_step_quota.s5}</td>
+          `;
+        } else {
+          admissionPlacementQuota += `
+            <td colspan="5">
+              <span class="td-br">各梯次皆可選填至名額用完為止</span>
+              <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
+            </td>
           `;
         }
-
-        // 設定聯合分發名額
-        // 名額為零則不顯示
-        let admissionPlacementQuota = `
-          <td colspan="6">
-            <span class="td-br">僅限個人申請</span>
-            <span class="td-br">jǐn xiàn gè rén shēn qǐng </span>
-          </td>
-        `;
-
-        if (department.admission_placement_ratify_quota > 0) {
-          admissionPlacementQuota = `<td>${department.admission_placement_ratify_quota}</td>`;
-
-          // 設定聯合分發各梯次名額
-          // 有分梯次則填入各梯次名額
-          if (department.admission_placement_step_quota !== null) {
-            admissionPlacementQuota += `
-              <td>${department.admission_placement_step_quota.s1}</td>
-              <td>${department.admission_placement_step_quota.s2}</td>
-              <td>${department.admission_placement_step_quota.s3}</td>
-              <td>${department.admission_placement_step_quota.s4}</td>
-              <td>${department.admission_placement_step_quota.s5}</td>
-            `;
-          } else {
-            admissionPlacementQuota += `
-              <td colspan="5">
-                <span class="td-br">各梯次皆可選填至名額用完為止</span>
-                <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
-              </td>
-            `;
-          }
-        }
-
-        // 擺放各系所資料
-        $resultBody.append(`
-          <tr>
-            <td>${department.card_code}</td>
-
-            <td>
-              <a href="${schoolURL}" target="_blank">
-                <span class="td-br">${school.title}</span>
-                <span class="td-br">${school.eng_title}</span>
-              </a>
-            </td>
-
-            <td>
-              <a href="${detailURL}" target="_blank">
-                <span class="td-br">${department.title}</span>
-                <span class="td-br">${department.eng_title}</span>
-              </a>
-            </td>
-
-            <td>${department.group_code}</td>
-
-            ${admissionSelectionQuota}
-
-            ${admissionPlacementQuota}
-          </tr>
-        `);
       }
-    }
 
-    // 若無系所資料，顯示提示
-    if (!hasDepartment) {
-      $resultBody.append(`
-        <tr><td colspan=12>無符合條件的系所</td></tr>
-      `);
+      // 擺放各系所資料
+      html += `
+        <tr>
+          <td>${department.card_code}</td>
+
+          <td>
+            <a href="${schoolURL}" target="_blank">
+              <span class="td-br">${department.school}</span>
+              <span class="td-br">${department.eng_school}</span>
+            </a>
+          </td>
+
+          <td>
+            <a href="${detailURL}" target="_blank">
+              <span class="td-br">${department.title}</span>
+              <span class="td-br">${department.eng_title}</span>
+            </a>
+          </td>
+
+          <td>${department.group_code}</td>
+
+          ${admissionSelectionQuota}
+
+          ${admissionPlacementQuota}
+        </tr>
+      `;
     }
 
     // 暫存去除 hash 的網址
@@ -375,6 +390,7 @@ const app = (function () {
     window.location.href = "#result";
     // 改變網址
     window.history.replaceState(null, null, url);
+    return html;
   }
 
   return {
