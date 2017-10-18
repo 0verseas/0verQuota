@@ -1,3 +1,5 @@
+loading.start();
+
 const app = (function () {
 
   /**
@@ -91,15 +93,29 @@ const app = (function () {
 
   // 一選擇學校就拉該學校資料
   function selectSchool(schoolId = 'all') {
+    loading.start();
+
+    // 重置系所表格
+    $resultBody.html(`
+      <tr>
+        <td colspan="12">請選擇過濾條件</td>
+      </tr>
+    `);
+
     // 確認學校選擇狀態
     _checkSchoolValue();
 
     API.getDepartments(schoolId, 'twoYear').then(data => {
       // 留存學校資料
       schools = data;
+
+      loading.complete();
     }).catch(error => {
       // 清空系所列表
       _setDepartmentList(schools = []);
+
+      loading.complete();
+
       console.error(error);
     });
   }
@@ -142,6 +158,8 @@ const app = (function () {
       // 若參數有，則預選擇學校
       if (schoolId) {
         selectSchool(schoolId);
+      } else {
+        loading.complete();
       }
 
     }).catch(error => {
