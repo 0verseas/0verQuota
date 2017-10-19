@@ -356,6 +356,31 @@ const app = (function () {
         }
       }
 
+      // 設定類組
+      let groupHtml = '';
+      switch(department.group_code) {
+        case '1':
+          groupHtml = `
+            <span class="td-br">第一類組<span>
+            <span class="td-br">First Group</span>
+          `;
+          break;
+        case '2':
+          groupHtml = `
+          <span class="td-br">第二類組<span>
+          <span class="td-br">Second Group</span>
+          `;
+          break;
+        case '3':
+          groupHtml = `
+          <span class="td-br">第三類組<span>
+          <span class="td-br">Third Group</span>
+          `;
+          break;
+        default:
+          break;
+      }
+
       // 擺放各系所資料
       html += `
         <tr>
@@ -375,7 +400,7 @@ const app = (function () {
             </a>
           </td>
 
-          <td>${department.group_code}</td>
+          <td>${groupHtml}</td>
 
           ${admissionSelectionQuota}
 
