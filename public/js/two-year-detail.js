@@ -205,8 +205,8 @@ const app = (function () {
         let paper = doc.paper;
         if (paper !== null) {
           appendData += `
-            <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
-            <dd class="col-4 col-md-8"><span class="oi oi-check"></span></dd>
+            <dt class="col-8 col-md-4">是否需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+            <dd class="col-4 col-md-8">是 Yes</dd>
             <dd class="col-12">
               <dl class="row mb-0">
                 <dt class="col-sm-4 pl-4">收件人英文姓名 <small class="text-muted">Shōu jiàn rén yīngwén xìngmíng</small></dt>
