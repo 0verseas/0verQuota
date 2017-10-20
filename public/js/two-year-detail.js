@@ -161,7 +161,7 @@ const app = (function () {
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';
     if (department.gender_limit !== null) {
-      genderLimitString = department.gender_limit.toLowerCase() === 'm' ? '限男 xiàn nán xìng' : '限女 xiàn nǚ xìng ';
+      genderLimitString = department.gender_limit.toLowerCase() === 'm' ? '限男 male only' : '限女 female only ';
     }
     $genderLimit.html(genderLimitString);
 
@@ -195,7 +195,7 @@ const app = (function () {
         <div>
           <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
           <dl class="row">
-            <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+            <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Must be submitted: Yes/No</small></dt>
             <dd class="col-4 col-md-8">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
       `;
 
