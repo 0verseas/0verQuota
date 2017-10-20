@@ -13,15 +13,15 @@
   <nav class="nav nav-tabs nav-fill my-3 detail-tab" id="infoTab" role="tablist">
     <a class="nav-item nav-link" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
       <span class="d-block">學校資料</span>
-      <small>School</small>
+      <small>University information</small>
     </a>
     <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
       <span class="d-block">系所資料</span>
-      <small>Department</small>
+      <small>Departments and graduate schools information</small>
     </a>
     <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem" aria-expanded="true" onclick="app.changeTab(this.hash)">
       <span class="d-block">審查項目</span>
-      <small>ShenCa</small>
+      <small>Search items </small>
     </a>
   </nav>
 
@@ -48,7 +48,7 @@
           <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
           <dd class="col-sm-8 text-link" id="school-eng-url"></dd>
 
-          <dt class="col-8 col-md-4">招收中五生 <small class="text-muted">zhāo shōu zhōng wǔ shēng</small></dt>
+          <dt class="col-8 col-md-4">招收中五生(意旨招收中學11年級畢業生) <small class="text-muted">Recruitment of high school grade five students (=students that have finished grade 11) </small></dt>
           <dd class="col-4 col-md-8" id="has-five-year-student-allowed"></dd>
 
           <!--
@@ -61,11 +61,11 @@
       <hr>
 
       <div>
-        <h4>住宿資訊 <small class="text-muted">Dorm Information</small></h4>
+        <h4>住宿資訊 <small class="text-muted">Accommodation information </small></h4>
         <dl class="row" id="dorm-dl">
-          <dt class="col-8 col-md-4">提供宿舍 <small class="text-muted">tí gōng sù shè</small></dt>
+          <dt class="col-8 col-md-4">提供宿舍 <small class="text-muted">Dormitory provided</small></dt>
           <dd class="col-4 col-md-8" id="has-dorm"></dd>
-          <dt class="col-sm-4 dorm-info">說明 <small class="text-muted">Introuction</small></dt>
+          <dt class="col-sm-4 dorm-info">說明 <small class="text-muted">Description </small></dt>
           <dd class="col-sm-8 dorm-info">
             <p id="dorm-info-text"></p>
             <p id="dorm-info-eng-text"></p>
@@ -78,16 +78,16 @@
       <div>
         <h4>獎學金資訊 <small class="text-muted">jiǎng xué jīn zī xùn</small></h4>
         <dl class="row" id="scholarship-dl">
-          <dt class="col-8 col-md-4">提供獎學金 <small class="text-muted">tí gōng jiǎng xué jīn</small></dt>
+          <dt class="col-8 col-md-4">提供獎學金 <small class="text-muted">Scholarships available </small></dt>
           <dd class="col-4 col-md-8" id="has-scholarship"></dd>
 
-          <dt class="col-sm-4 scholarship-info">中文說明 <small class="text-muted">Chinese shuō míng</small></dt>
+          <dt class="col-sm-4 scholarship-info">中文說明 <small class="text-muted">Description in Chinese</small></dt>
           <dd class="col-sm-8 text-link scholarship-info" id="scholarship-url"></dd>
 
-          <dt class="col-sm-4 scholarship-info">英文說明 <small class="text-muted">English shuō mínge</small></dt>
+          <dt class="col-sm-4 scholarship-info">英文說明 <small class="text-muted">Description in English </small></dt>
           <dd class="col-sm-8 text-link scholarship-info" id="scholarship-eng-url"></dd>
 
-          <dt class="col-sm-4 scholarship-info">負責單位 <small class="text-muted">fù zé dān wèi</small></dt>
+          <dt class="col-sm-4 scholarship-info">負責單位 <small class="text-muted">Unit in charge </small></dt>
           <dd class="col-sm-8 scholarship-info">
             <p id="scholarship-dept"></p>
             <p id="scholarship-eng-dept"></p>
@@ -98,9 +98,9 @@
       <hr>
 
       <div>
-        <h4>學則資訊 <small class="text-muted">xué zé zī xùn</small></h4>
+        <h4>學則資訊 <small class="text-muted">Academic information </small></h4>
         <dl class="row ">
-          <dt class="col-md-4">備註 <small class="text-muted">bèi zhù</small></dt>
+          <dt class="col-md-4">備註 <small class="text-muted">Notes </small></dt>
           <dd class="col-md-8">
             <p id="system-description"></p>
             <p id="system-eng-description"></p>
@@ -122,13 +122,13 @@
           <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
           <dd class="col-sm-8 text-link" id="dept-eng-url"></dd>
 
-          <dt class="col-sm-4">性別招生限制 <small class="text-muted">Zhao Shou Xing Bie Xian Zhi </small></dt>
+          <dt class="col-sm-4">性別招生限制 <small class="text-muted">Recruitment limits by gender</small></dt>
           <dd class="col-sm-8" id="gender-limit"></dd>
 
-          <dt class="col-sm-4">主要學群 <small class="text-muted">Main Xiao Qun </small></dt>
+          <dt class="col-sm-4">主要學群 <small class="text-muted">Main disciplines</small></dt>
           <dd class="col-sm-8" id="main-group"></dd>
 
-          <dt class="col-sm-4">次要學群 <small class="text-muted">Second Xiao Qun </small></dt>
+          <dt class="col-sm-4">次要學群 <small class="text-muted">Additional disciplines </small></dt>
           <dd class="col-sm-8" id="sub-group"></dd>
 
           <!--
@@ -148,9 +148,9 @@
       <hr>
 
       <div>
-        <h4>學則資訊 <small class="text-muted">xué zé zī xùn</small></h4>
+        <h4>學則資訊 <small class="text-muted">Academic information </small></h4>
         <dl class="row ">
-          <dt class="col-md-4">備註 <small class="text-muted">bèi zhù</small></dt>
+          <dt class="col-md-4">備註 <small class="text-muted">Notes </small></dt>
           <dd class="col-md-8">
             <p id="dept-description"></p>
             <p id="dept-eng-description"></p>
@@ -161,9 +161,9 @@
       <hr>
 
       <div>
-        <h4>名額分配 <small class="text-muted">xué zé zī xùn</small></h4>
+        <h4>名額分配 <small class="text-muted">Quota break-down</small></h4>
         <dl class="row">
-          <dt class="col-sm-4">個人申請名額 <small class="text-muted">Ge Ren Shen Qing ming e</small></dt>
+          <dt class="col-sm-4">個人申請名額 <small class="text-muted">Quota break-downQuota of individual applications /small></dt>
           <dd class="col-sm-8" id="admission-selection-quota"></dd>
         </dl>
       </div>
@@ -174,9 +174,9 @@
 
     <div class="tab-pane fade" id="nav-shenchaItem" role="tabpanel" aria-labelledby="nav-shenchaItem-tab">
       <div id="review-fee">
-        <h4>審查費用 <small class="text-muted">Zuìgāo xuélì zhèngmíng</small></h4>
+        <h4>審查費用 <small class="text-muted">Application fee</small></h4>
         <dl class="row">
-          <dt class="col-8 col-md-4">是否有審查費用 <small class="text-muted">Bi Jiao Xiang Mu </small></dt>
+          <dt class="col-8 col-md-4">是否有審查費用 <small class="text-muted">Application fee applies: Yes/No</small></dt>
           <dd class="col-4 col-md-8" id="has-review-fee"></dd>
           <dt class="col-md-4 review-fee-info">說明 <small class="text-muted">Description</small></dt>
           <dd class="col-md-8 review-fee-info">
