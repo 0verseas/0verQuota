@@ -225,7 +225,7 @@ const app = (function () {
 
     // 重置選單內容
     $schoolList.html(`
-      <option value="" disabled selected>請選擇學校 Select School PLZ</option>
+      <option value="" disabled selected>請選擇學校 Select filter</option>
       <option value="all">所有學校 All Schools</option>
     `);
 
@@ -251,7 +251,7 @@ const app = (function () {
   function _setDepartmentGroupList(newDepartmentGtoups = []) {
     // 重置選單內容
     $departmentGroupList.html(`
-      <option value="all" selected>所有學群 All xuequn</option>
+      <option value="all" selected>所有學群 All disciplines</option>
     `);
 
     // 擺放學群列表
@@ -308,7 +308,7 @@ const app = (function () {
       let admissionSelectionQuota = `
         <td colspan="2">
           <span class="td-br">僅限聯合分發</span>
-          <span class="td-br">jǐn xiàn lián hé fèn fā </span>
+          <span class="td-br">Distributed allocation only</span>
         </td>
       `;
       // 有名額要連審查項目一起顯示
@@ -318,7 +318,7 @@ const app = (function () {
         <td>
           <a href="${shenchaItemURL}" target="_blank">
             <span class="td-br">審查項目</span>
-            <span class="td-br">ShenCha Item</span>
+            <span class="td-br">Check items</span>
           </a>
         </td>
         `;
@@ -329,7 +329,7 @@ const app = (function () {
       let admissionPlacementQuota = `
         <td colspan="6">
           <span class="td-br">僅限個人申請</span>
-          <span class="td-br">jǐn xiàn gè rén shēn qǐng </span>
+          <span class="td-br">Individual application only</span>
         </td>
       `;
 
@@ -350,7 +350,7 @@ const app = (function () {
           admissionPlacementQuota += `
             <td colspan="5">
               <span class="td-br">各梯次皆可選填至名額用完為止</span>
-              <span class="td-br">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ </span>
+              <span class="td-br">Quota can be selected as long as available (applies to all tiers)</span>
             </td>
           `;
         }

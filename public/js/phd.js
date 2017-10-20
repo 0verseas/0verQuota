@@ -205,7 +205,7 @@ const app = (function () {
 
     // 重置選單內容
     $schoolList.html(`
-      <option value="" disabled selected>請選擇學校 Select School PLZ</option>
+      <option value="" disabled selected>請選擇學校 Select filter</option>
       <option value="all">所有學校 All Schools</option>
     `);
 
@@ -231,7 +231,7 @@ const app = (function () {
   function _setDepartmentGroupList(newDepartmentGtoups = []) {
     // 重置選單內容
     $departmentGroupList.html(`
-      <option value="all" selected>所有學群 All xuequn</option>
+      <option value="all" selected>所有學群 All disciplines</option>
     `);
 
     // 擺放學群列表

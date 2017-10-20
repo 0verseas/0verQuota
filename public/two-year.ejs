@@ -6,7 +6,7 @@
     <h3>宣告 <small class="text-muted">Announcement</small></h3>
     <div class="announcement-item">
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="true" aria-controls="announcement1">
-        >招生名額依據 <small class="text-muted">zhāo shēng míng é yī jù</small>
+        >招生名額依據 <small class="text-muted">Source of student numbers</small>
       </a>
       <div id="announcement1" class="collapse show" role="tabpanel">
         <ol>
@@ -26,7 +26,7 @@
     </div>
     <div class="announcement-item">
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
-        >注意事項 <small class="text-muted">zhù yì shì xiàng </small>
+        >注意事項 <small class="text-muted">Points of Attention</small>
       </a>
       <div id="announcement3" class="collapse" role="tabpanel">
         <p>
@@ -47,14 +47,14 @@
 
   <hr>
 
-  <h3>系所查詢 <small class="text-muted">xì suǒ chá xún </small></h3>
+  <h3>系所查詢 <small class="text-muted">Department and graduate school search</small></h3>
   <div class="card mt-3">
     <div class="card-header">
-      選擇學校 <small class="text-muted">xuǎn zé xué xiào </small>
+      選擇學校 <small class="text-muted">Select university</small>
     </div>
     <div class="form-row card-body">
       <form class="form-group col-lg-6" onsubmit="event.preventDefault(); app.filterSchoolList(this.elements.namedItem('keyword').value)">
-        <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Filter the school list by keyword</small></label>
+        <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Enter university names to filter the list</small></label>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" id="school-keyword" placeholder="請輸入學校關鍵字">
           <span class="input-group-btn">
@@ -65,9 +65,9 @@
         </div>
       </form>
       <div class="form-group col-lg-6">
-        <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">School</small></label>
+        <label for="schoolList" class="form-control-label">選擇學校 <small class="text-muted">Select university</small></label>
         <select class="form-control" id="school-list" onchange="app.selectSchool(this.options[this.selectedIndex].value)">
-          <option value="" disabled selected>請選擇學校 Select School PLZ</option>
+          <option value="" disabled selected>請選擇學校 Select university</option>
         </select>
       </div>
     </div>
@@ -75,19 +75,19 @@
 
   <div class="card mt-3">
     <div class="card-header">
-      選擇過濾條件 <small class="text-muted">xuǎn zé guò lǜ tiáo jiàn</small>
+      選擇過濾條件 <small class="text-muted">Select filter</small>
     </div>
     <div class="card-body">
       <%- partial('componments/_filter-alert') %>
       <form class="form-row" onsubmit="event.preventDefault(); app.filterDepartmentList()">
         <div class="form-group col-md-6">
-          <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">xuǎn zé xué qún </small></label>
+          <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">Select discipline* </small></label>
           <select class="form-control" id="department-group">
-            <option value="all" selected>所有學群 All xuequn</option>
+            <option value="all" selected>所有學群 All disciplines</option>
           </select>
         </div>
         <div class="form-group col-md-6">
-          <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword filter</small></label>
+          <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword search</small></label>
           <input type="text" class="form-control" id="keyword" placeholder="請輸入系所關鍵字">
         </div>
 
@@ -98,14 +98,14 @@
 
   <hr id="result">
 
-  <h3>查詢結果 <small class="text-muted">xì suǒ chá xún </small></h3>
+  <h3>查詢結果 <small class="text-muted">Search results</small></h3>
   <table class="table table-sm table-striped table-bordered table-responsive">
     <thead>
       <tr>
-        <th>學校名稱</th>
-        <th>系組名稱</th>
-        <th>個人申請名額</th>
-        <th>審查項目</th>
+        <th><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University name</small></span></th>
+        <th><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department category</small></span></th>
+        <th><span class="td-br">個人申請名額</span><span class="td-br"><small class="text-muted">Individual application quita</small></span></th>
+        <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Check items</small></span></th>
       </tr>
     </thead>
     <tbody id="result-body">
