@@ -10,7 +10,7 @@ const API = (function () {
   }
 
   function getDepartments(schoolId = 'all', systemId = 'all') {
-    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments`, {
+    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=all&category=1,2,3`, {
       credentials: 'include'
     });
 
