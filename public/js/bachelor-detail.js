@@ -177,7 +177,7 @@ const app = (function () {
       $admissionPlacementStep4Quota.html(`${department.admission_placement_step_quota.s4} 名`);
       $admissionPlacementStep5Quota.html(`${department.admission_placement_step_quota.s5} 名`);
     } else {
-      $admissionPlacementStepQuotaBlock.html(`各梯次皆可選填至名額用完為止 <small class="text-muted">gè tī cì jiē kě xuǎn tián zhì míng é yòng wán wéi zhǐ</small>`);
+      $admissionPlacementStepQuotaBlock.html(`各梯次皆可選填至名額用完為止 <small class="text-muted">Quota can be selected as long as available (applies to all tiers)</small>`);
     }
 
     // 系所招收性別限制
@@ -227,15 +227,15 @@ const app = (function () {
         let paper = doc.paper;
         if (paper !== null) {
           appendData += `
-            <dt class="col-8 col-md-4">是否需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+            <dt class="col-8 col-md-4">是否需要紙本推薦函 <small class="text-muted">Must need paper of recommendation letters</small></dt>
             <dd class="col-4 col-md-8">是 Yes</dd>
             <dd class="col-12">
               <dl class="row mb-0">
-                <dt class="col-sm-4 pl-4">收件人英文姓名 <small class="text-muted">Shōu jiàn rén yīngwén xìngmíng</small></dt>
+                <dt class="col-sm-4 pl-4">收件人英文姓名 <small class="text-muted">recipient English Name</small></dt>
                 <dd class="col-sm-8">${paper.recipient}</dd>
-                <dt class="col-sm-4 pl-4">聯絡電話 <small class="text-muted">Liánluò diànhuà</small></dt>
+                <dt class="col-sm-4 pl-4">聯絡電話 <small class="text-muted">Phone</small></dt>
                 <dd class="col-sm-8">${paper.phone}</dd>
-                <dt class="col-sm-4 pl-4">英文收件地址 <small class="text-muted">Shōu jiàn dìzhǐ yīngwén</small></dt>
+                <dt class="col-sm-4 pl-4">英文收件地址 <small class="text-muted">English Address</small></dt>
                 <dd class="col-sm-8">${paper.address}</dd>
                 <dt class="col-sm-4 pl-4">電子郵件 <small class="text-muted">E-mail</small></dt>
                 <dd class="col-sm-8">${paper.email}</dd>
