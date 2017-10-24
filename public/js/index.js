@@ -318,7 +318,7 @@ const app = (function () {
         <td>
           <a href="${shenchaItemURL}" target="_blank">
             <span class="td-br">審查項目</span>
-            <span class="td-br">Check items</span>
+            <span class="td-br">Application documents</span>
           </a>
         </td>
         `;
