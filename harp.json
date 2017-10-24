@@ -13,7 +13,9 @@
 			"copyright": "©2017 University Entrance Committee For Overseas Chinese Students. All rights reserved.",
 			"imageUrl": "https://api.overseas.ncnu.edu.tw:8443/img/0verseas-card.png",
 			"imageAlt": "臺灣海外聯合招募委員會形象圖卡",
-			"url": "https://student.overseas.ncnu.edu.tw/quota/"
+			"url": "https://student.overseas.ncnu.edu.tw/quota/",
+			"googleAnalyticsTrackId": "UA-108527915-1",
+			"googleAnalyticsTrackIdTest": "UA-108527915-3"
 		},
 		"title": "僑生及港澳生招生名額查詢系統｜臺灣海外聯招會",
 		"headline": "僑生及港澳生招生名額查詢系統",

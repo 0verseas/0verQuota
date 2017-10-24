@@ -9,7 +9,8 @@
 		]
 	},
 	"scripts": {
-		"build": "harp compile . dist && babel dist/js -d dist/js",
+		"build": "NODE_ENV=production harp compile . dist && babel dist/js -d dist/js",
+		"test-build": "NODE_ENV=test harp compile . dist && babel dist/js -d dist/js",
 		"serve": "harp server"
 	},
 	"author": "",

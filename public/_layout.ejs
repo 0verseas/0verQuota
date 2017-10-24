@@ -2,6 +2,17 @@
 <html lang="zh-Hant" prefix='og: http://ogp.me/ns#'>
 
 <head>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= environment === 'production' ? meta.googleAnalyticsTrackId : meta.googleAnalyticsTrackIdTest %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '<%= environment === 'production' ? meta.googleAnalyticsTrackId : meta.googleAnalyticsTrackIdTest %>');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
