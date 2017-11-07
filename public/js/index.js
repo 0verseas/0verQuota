@@ -14,8 +14,6 @@ const app = (function () {
   const $isGroup1 = $('#isGroup1');
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
-  const $filterButton = $('#filter-button');
-  const $filterAlert = $('#filter-alert');
 
   /**
    * init
@@ -23,12 +21,6 @@ const app = (function () {
 
   // 所有學校
   let allSchools = [];
-  // 動態學校列表
-  let schoolList = [];
-  // 所有學群
-  let departmentGroups = [];
-  // 所選學校資料
-  let schools = [];
 
   _init();
 
@@ -38,10 +30,6 @@ const app = (function () {
 
   // 過濾學校列表
   function filterSchoolList(keyword = '') {
-    // 重置所選學校資料
-    schools = [];
-    // 重置查訊結果
-    _setDepartmentList();
     // 重置網址參數
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
     // 更新網址
@@ -53,180 +41,169 @@ const app = (function () {
     });
 
     // 重新擺放學校列表
-    _setSchoolList(schoolList = newSchoolList);
+    _setSchoolList(newSchoolList);
   }
 
   // 過濾系所列表
-  function filterDepartmentList() {
-    // 載入目前選擇的所有學校資料（clone array of object）
-    let filterSchools = JSON.parse(JSON.stringify(schools));
-
-    // 擷取過濾條件
-    const schoolId = $schoolList.val();
-    const departmentGroupId = $departmentGroupList.val();
-    const keyword = $keyword.val();
-    const group1 = $isGroup1.prop('checked') ? '1' : '0';
-    const group2 = $isGroup2.prop('checked') ? '2' : '0';
-    const group3 = $isGroup3.prop('checked') ? '3' : '0';
+  function filterDepartmentList(
+    schoolId = 'all',
+    systemId = 'bachelor',
+    keyword = '',
+    departmentGroupId = 'all',
+    includeFirstCategory = true,
+    includeSecondCategory = true,
+    includeThirdCategory = true
+  ) {
+    loading.start();
 
     // 準備網址參數
     const paramsStr = jQuery.param({
       school: schoolId,
       group: departmentGroupId,
       keyword,
-      'first-group': group1 != 0,
-      'second-group': group2 != 0,
-      'third-group': group3 != 0,
+      'first-group': includeFirstCategory,
+      'second-group': includeSecondCategory,
+      'third-group': includeThirdCategory,
     });
+
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
+
     // 更新網址
     window.history.replaceState({path: newurl}, null, newurl);
 
-    // 過濾每間學校資料
-    for (let school of filterSchools) {
-      // 取得以符合過濾條件的系所列表
-      school.departments = school.departments.filter(department => {
-        // 類組條件
-        if ((department.group_code !== group1) && (department.group_code !== group2) && (department.group_code !== group3)) {
-          return false;
+    // 過濾系所
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory).then(response => {
+      if (!response.ok) {
+        switch (response.statusCode) {
+          case 404:
+            $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+            break;
+          default:
+            alert(response.singleErrorMessage);
+            break;
         }
-        // 學群條件（主要、次要學群其一）
-        if ((departmentGroupId !== 'all') && (department.main_group != departmentGroupId) && (department.sub_group != departmentGroupId)) {
-          return false;
-        }
-        // 系所名稱中英文關鍵字過濾
-        return department.eng_title.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || department.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1;
+
+        loading.complete();
+
+        return;
+      }
+
+      // 取得過濾過的列表，並剔除無任何系所者
+      const filteredSchools = response.data.filter(school => {
+        return school.departments.length > 0;
       });
-    }
 
-    // 重新擺放系所列表
-    let allDepartments = [];
+      // 重新擺放系所列表
+      let allDepartments = [];
 
-    for (let school of filterSchools) {
-      let schoolName = school.title;
-      let engSchoolName = school.eng_title;
-      for (let department of school.departments) {
-        department.school = schoolName;
-        department.eng_school = engSchoolName;
-        allDepartments.push(department);
+      // 打平資料結構（學校層包進去系所層）
+      for (let school of filteredSchools) {
+        let schoolName = school.title;
+        let engSchoolName = school.eng_title;
+        for (let department of school.departments) {
+          department.school = schoolName;
+          department.eng_school = engSchoolName;
+          allDepartments.push(department);
+        }
       }
-    }
 
-    // 重置系所表格
-    $resultBody.html('');
+      // 有資料放資料，無資料放提示
+      if (allDepartments.length > 0) {
+        // 重置系所表格
+        $resultBody.html('');
 
-    $('#pagination-container').pagination({
-      dataSource: allDepartments,
-      pageRange: 2,
-      showGoInput: true,
-      showGoButton: true,
-      formatGoInput: '<%= input %>',
-      callback: function(data, pagination) {
-        // template method of yourself
-        var html = _setDepartmentList(data);
-        $resultBody.html(html);
+      } else {
+        $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
       }
-    });
 
-    // 若無系所資料，顯示提示
-    if (allDepartments.length <= 0) {
-      $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
-    }
-  }
-
-
-  // 一選擇學校就拉該學校資料
-  function selectSchool(schoolId = 'all') {
-    loading.start();
-
-    // 重置系所表格
-    $resultBody.html(`
-      <tr>
-        <td colspan="12">請選擇過濾條件</td>
-      </tr>
-    `);
-
-    // 確認學校選擇狀態
-    _checkSchoolValue();
-
-    API.getDepartments(schoolId, 'bachelor').then(data => {
-      // 留存學校資料
-      schools = data;
+      // 設定分頁、置放資料
+      $('#pagination-container').pagination({
+        dataSource: allDepartments,
+        pageRange: 2,
+        showGoInput: true,
+        showGoButton: true,
+        formatGoInput: '<%= input %>',
+        callback: (data, pagination) => {
+          _setDepartmentList(data);
+        }
+      });
 
       loading.complete();
     }).catch(error => {
-      // 清空系所列表
-      _setDepartmentList(schools = []);
-
+      console.log(error);
       loading.complete();
-
-      console.error(error);
     });
   }
 
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools().then(data => {
-      // 留存所有學校列表
-      allSchools = data;
+    return API.getSchools().then(response => {
+      if (!response.ok) {
+        throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
+      }
+
+      return response.data;
     });
   }
 
   // 擷取學群資料
   function _getDepartmentGroups() {
-    return API.getDepartmentGroups().then(data => {
-      // 留存學群資料
-      departmentGroups = data;
+    return API.getDepartmentGroups().then(response => {
+      if (!response.ok) {
+        throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
+      }
+
+      return response.data;
     });
   }
 
   function _init() {
     // 擷取網址參數
     const params = new URLSearchParams(document.location.search.substring(1));
-    const schoolId = params.get('school');
-    const groupId = params.get('group');
-    const keyword = params.get('keyword');
-    const isGroup1 = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
-    const isGroup2 = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
-    const isGroup3 = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
+    const schoolId = params.get('school') && params.get('school').length !== 0 ? params.get('school') : null;
+    const departmentGroupId = params.get('group') && params.get('group').length !== 0 ? params.get('group') : 'all';
+    const keyword = params.get('keyword') ? params.get('keyword') : '';
+    const includeFirstCategory = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
+    const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
+    const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
 
     // 擷取所有資料並擺放
-    Promise.all([_getSchools(), _getDepartmentGroups()]).then(() => {
+    Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
-      _setSchoolList(schoolList = allSchools);
+      _setSchoolList(allSchools = schools);
+
       // 擺放學群列表
       _setDepartmentGroupList(departmentGroups);
 
       // 同步過濾參數
       $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
-      $departmentGroupList.children(`[value=${groupId}]`).prop('selected', true);
+      $departmentGroupList.children(`[value=${departmentGroupId}]`).prop('selected', true);
       $keyword.prop('value', keyword);
-      $isGroup1.prop('checked', isGroup1);
-      $isGroup2.prop('checked', isGroup2);
-      $isGroup3.prop('checked', isGroup3);
+      $isGroup1.prop('checked', includeFirstCategory);
+      $isGroup2.prop('checked', includeSecondCategory);
+      $isGroup3.prop('checked', includeThirdCategory);
 
-      // 若參數有，則預選擇學校
+      // 有設定學校 ID，就直接拉資料
       if (schoolId) {
-        selectSchool(schoolId);
+        filterDepartmentList(
+          schoolId, 'bachelor', keyword, departmentGroupId,
+          includeFirstCategory, includeSecondCategory, includeThirdCategory
+        );
       } else {
         loading.complete();
       }
-
     }).catch(error => {
       console.log(error)
+      alert(error);
     });
   }
 
   // 設定學校列表下拉選單
   function _setSchoolList(newSchoolList = []) {
-    // 重置選擇之學校
-    $schoolList.prop('selectedIndex', 0);
-
     // 重置選單內容
     $schoolList.html(`
-      <option value="" disabled selected>請選擇學校 Select filter</option>
-      <option value="all">所有學校 All Schools</option>
+      <option value="all" selected>所有學校 All Schools</option>
     `);
 
     // 擺放學校列表
@@ -240,15 +217,11 @@ const app = (function () {
       const schoolId = newSchoolList[0].id;
       // 幫使用者選定
       $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
-      selectSchool(schoolId);
     }
-
-    // 確認學校選擇狀態
-    _checkSchoolValue();
   }
 
   // 設定學群列表下拉選單
-  function _setDepartmentGroupList(newDepartmentGtoups = []) {
+  function _setDepartmentGroupList(departmentGroups = []) {
     // 重置選單內容
     $departmentGroupList.html(`
       <option value="all" selected>所有學群 All disciplines</option>
@@ -257,28 +230,6 @@ const app = (function () {
     // 擺放學群列表
     for (let group of departmentGroups) {
       $departmentGroupList.append(`<option value="${group.id}">${group.title} ${group.eng_title}</option>`);
-    }
-  }
-
-  // 驗證學校選擇狀態
-  function _checkSchoolValue() {
-    // 選了學校，才給選其他過濾條件
-    if ($schoolList.val() !== null) {
-      $keyword.prop('disabled', false);
-      $departmentGroupList.prop('disabled', false);
-      $isGroup1.prop('disabled', false);
-      $isGroup2.prop('disabled', false);
-      $isGroup3.prop('disabled', false);
-      $filterButton.prop('disabled', false);
-      $filterAlert.hide();
-    } else {
-      $keyword.prop('disabled', true);
-      $departmentGroupList.prop('disabled', true);
-      $isGroup1.prop('disabled', true);
-      $isGroup2.prop('disabled', true);
-      $isGroup3.prop('disabled', true);
-      $filterButton.prop('disabled', true);
-      $filterAlert.show();
     }
   }
 
@@ -297,10 +248,9 @@ const app = (function () {
     // 擺放系所列表
     // 擺放各系所資料
     for (let department of departments) {
-
       // 設定簡便連結
       const schoolURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
-      const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo'`;
+      const detailURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
       const shenchaItemURL = `bachelor-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
       // 設定個人申請名額
@@ -415,12 +365,13 @@ const app = (function () {
     window.location.href = "#result";
     // 改變網址
     window.history.replaceState(null, null, url);
-    return html;
+
+    // 擺上結果
+    $resultBody.html(html);
   }
 
   return {
     filterSchoolList,
-    selectSchool,
     filterDepartmentList
   }
 

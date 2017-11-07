@@ -278,9 +278,19 @@ const app = (function () {
   // 頁面初始化
   function _init() {
     // 拿資料
-    API.getDepartmentDetail('bachelor', schoolId, id).then(data => {
+    API.getDepartmentDetail(schoolId, 'bachelor', id).then(response => {
+      if (!response.ok) {
+        switch (response.statusCode) {
+          default:
+            console.log(response.errorMessages);
+            alert(response.singleErrorMessage);
+            window.location.href = 'bachelor.html';
+        }
+        return;
+      }
+
       // 放資料
-      const {school, system, department} = data;
+      const {school, system, department} = response.data;
       renderData(school, system, department);
 
       // 顯示參數設定的分頁
@@ -288,8 +298,6 @@ const app = (function () {
       loading.complete();
     }).catch(error => {
       console.error(error);
-      alert(`Can't find the department, please try again.`);
-      window.location.replace('index.html');
     });
   }
 
