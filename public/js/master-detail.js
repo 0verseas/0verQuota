@@ -181,7 +181,7 @@ const app = (function () {
     // 有審查費用則顯示說明
     if (department.has_review_fee) {
       $reviewFeeDetail.html(department.review_fee_detail);
-      $reviewFeeEngDetail.html(department.review_fee_eng_detail);
+      $reviewFeeEngDetail.html(department.eng_review_fee_detail);
     } else {
       $reviewFeeInfo.remove();
     }
