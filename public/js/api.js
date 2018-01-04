@@ -46,7 +46,7 @@ const API = (function () {
       let systemPropertyName = 'departments';
       if ((systemId === 'master') || (systemId === 'phd')) {
         systemPropertyName = 'graduate_departments';
-      } else if (systemId === 'two-year') {
+      } else if (systemId === 'twoYear') {
         systemPropertyName = 'two_year_tech_departments';
       }
 
