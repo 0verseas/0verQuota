@@ -188,33 +188,35 @@
   <hr id="result">
 
   <h3>查詢結果 <small class="text-muted">Search results</small></h3>
-  <table class="table table-sm table-striped table-bordered table-responsive">
-    <thead>
-      <tr>
-        <th rowspan="2"><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">Optional code</small></span></th>
-        <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University name</small></span></th>
-        <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department category</small></span></th>
-        <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
-        <th colspan="2"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual application </small></span></th>
-        <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">Joint distribution quota</small></span></th>
-      </tr>
-      <tr>
-        <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
-        <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Application documents</small></span></th>
-        <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
-        <th>s1</th>
-        <th>s2</th>
-        <th>s3</th>
-        <th>s4</th>
-        <th>s5</th>
-      </tr>
-    </thead>
-    <tbody id="result-body">
-      <tr>
-        <td colspan="12">請選擇過濾條件</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2"><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">Optional code</small></span></th>
+          <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University name</small></span></th>
+          <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department category</small></span></th>
+          <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
+          <th colspan="2"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual application </small></span></th>
+          <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">Joint distribution quota</small></span></th>
+        </tr>
+        <tr>
+          <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
+          <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Application documents</small></span></th>
+          <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
+          <th>s1</th>
+          <th>s2</th>
+          <th>s3</th>
+          <th>s4</th>
+          <th>s5</th>
+        </tr>
+      </thead>
+      <tbody id="result-body">
+        <tr>
+          <td colspan="12">請選擇過濾條件</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="row">
     <div class="mx-auto" id="pagination-container"></div>
