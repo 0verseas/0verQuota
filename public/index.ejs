@@ -109,7 +109,7 @@
         <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Enter university names to filter the list</small></label>
         <div class="input-group">
           <input type="text" class="form-control" id="school-keyword" name="school-keyword" placeholder="請輸入學校關鍵字">
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" onclick="event.preventDefault(); app.filterSchoolList(document.getElementById('school-keyword').value)" onmousedown="event.preventDefault()">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
@@ -147,20 +147,20 @@
         <div class="form-group col-md-6">
           <label class="form-control-label">選擇類組* <small class="text-muted">Select category*</small></label>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup1" name="first-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup1" name="first-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第一類組 <small class="text-muted">First category</small>
             </label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup2" name="second-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup2" name="second-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第二類組 <small class="text-muted">Second category</small>
             </label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup3" name="third-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup3" name="third-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第三類組 <small class="text-muted">Third category</small>
             </label>
           </div>

@@ -82,7 +82,7 @@
         <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Enter university names to filter the list</small></label>
         <div class="input-group">
           <input type="text" class="form-control" id="school-keyword" name="school-keyword" placeholder="請輸入學校關鍵字">
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" onclick="event.preventDefault(); app.filterSchoolList(document.getElementById('school-keyword').value)" onmousedown="event.preventDefault()">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
