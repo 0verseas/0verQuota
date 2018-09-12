@@ -75,7 +75,7 @@
       <div id="announcement3" class="collapse" role="tabpanel">
         <p>
           <ol>
-            <li>學校名稱、系所名稱接提供中英文查詢。</li>
+            <li>學校名稱、系所名稱皆提供中 / 英文查詢。</li>
             <li>修業年限除各校於學士班系所分則欄有特別規定外，皆為四年。</li>
             <li>所謂「依一般限制」，係指患有精神病、活動性肺結核、惡性傳染病及重症慢性疾病等情形者，均不得申請。</li>
             <li>身心障礙學生如欲申請赴臺升學，應先了解並自行評估各校系能否依不同需求類別及程度，提供學習輔具資源及生活照輔措施，以作為選填志願之參考，以免造成無法順利就學之困擾。</li>
@@ -109,7 +109,7 @@
         <label for="schoolKeywords" class="form-control-label">輸入學校名稱過濾列表 <small class="text-muted">Enter university names to filter the list</small></label>
         <div class="input-group">
           <input type="text" class="form-control" id="school-keyword" name="school-keyword" placeholder="請輸入學校關鍵字">
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" onclick="event.preventDefault(); app.filterSchoolList(document.getElementById('school-keyword').value)" onmousedown="event.preventDefault()">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
@@ -147,20 +147,20 @@
         <div class="form-group col-md-6">
           <label class="form-control-label">選擇類組* <small class="text-muted">Select category*</small></label>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup1" name="first-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup1" name="first-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第一類組 <small class="text-muted">First category</small>
             </label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup2" name="second-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup2" name="second-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第二類組 <small class="text-muted">Second category</small>
             </label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="isGroup3" name="third-category" type="checkbox" value="">
+            <input class="form-check-input" id="isGroup3" name="third-category" type="checkbox" value="">
+            <label class="form-check-label" for="defaultCheck1">
               第三類組 <small class="text-muted">Third category</small>
             </label>
           </div>
@@ -188,33 +188,35 @@
   <hr id="result">
 
   <h3>查詢結果 <small class="text-muted">Search results</small></h3>
-  <table class="table table-sm table-striped table-bordered table-responsive">
-    <thead>
-      <tr>
-        <th rowspan="2"><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">Optional code</small></span></th>
-        <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University name</small></span></th>
-        <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department category</small></span></th>
-        <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
-        <th colspan="2"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual application </small></span></th>
-        <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">Joint distribution quota</small></span></th>
-      </tr>
-      <tr>
-        <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
-        <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Application documents</small></span></th>
-        <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
-        <th>s1</th>
-        <th>s2</th>
-        <th>s3</th>
-        <th>s4</th>
-        <th>s5</th>
-      </tr>
-    </thead>
-    <tbody id="result-body">
-      <tr>
-        <td colspan="12">請選擇過濾條件</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead>
+        <tr>
+          <th rowspan="2"><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">Optional code</small></span></th>
+          <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University name</small></span></th>
+          <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department category</small></span></th>
+          <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
+          <th colspan="2"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual application </small></span></th>
+          <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">Joint distribution quota</small></span></th>
+        </tr>
+        <tr>
+          <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
+          <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Application documents</small></span></th>
+          <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
+          <th>s1</th>
+          <th>s2</th>
+          <th>s3</th>
+          <th>s4</th>
+          <th>s5</th>
+        </tr>
+      </thead>
+      <tbody id="result-body">
+        <tr>
+          <td colspan="12">請選擇過濾條件</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="row">
     <div class="mx-auto" id="pagination-container"></div>
