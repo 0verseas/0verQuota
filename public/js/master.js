@@ -240,14 +240,34 @@ const app = (function () {
               <span class="td-br">${department.eng_school}</span>
             </a>
           </td>
+          `;
 
-          <td>
-            <a href="${detailURL}" target="_blank">
-              <span class="td-br">${department.title}</span>
-              <span claｚss="td-br">${department.eng_title}</span>
-            </a>
-          </td>
+      if(department.ioh == null)
+        html += `
+            <td>
+              <a href="${detailURL}" target="_blank">
+                <span class="td-br">${department.title}</span>
+                <span class="td-br">${department.eng_title}</span>
+              </a>
+            </td>
+            `;
+      else
+        html += `
+              <td>
+                <a href="${detailURL}" target="_blank">
+                  <span>${department.title}</span>
+                </a>
+                <a href="${department.ioh.url}" target="_blank">
+                  <img src="https://storage.googleapis.com/ioh-assets/uploads/production/static/default/ioh_dept.png" width="60" height:"25" />
+                </a>
+                <a href="${detailURL}" target="_blank">
+                  <span class="td-br">${department.eng_title}</span>
+                </a>
+              </td>
+              `;
 
+
+      html += `
           <td>${department.admission_selection_ratify_quota}</td>
 
           <td>
