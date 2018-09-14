@@ -258,7 +258,7 @@ const app = (function () {
                   <span>${department.title}</span>
                 </a>
                 <a href="${department.ioh.url}" target="_blank">
-                  <img src="https://storage.googleapis.com/ioh-assets/uploads/production/static/default/ioh_dept.png" width="60" height:"25" />
+                  <img src="https://storage.googleapis.com/ioh-assets/uploads/production/static/default/ioh_dept.png" width="40" />
                 </a>
                 <a href="${detailURL}" target="_blank">
                   <span class="td-br">${department.eng_title}</span>
