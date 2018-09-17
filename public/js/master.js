@@ -163,6 +163,9 @@ const app = (function () {
       $departmentGroupList.children(`[value=${departmentGroupId}]`).prop('selected', true);
       $keyword.prop('value', keyword);
 
+      $schoolList.selectpicker();
+      $departmentGroupList.selectpicker();
+
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
@@ -172,7 +175,7 @@ const app = (function () {
         loading.complete();
       }
     }).catch(error => {
-      console.log(error)
+      console.log(error);
       alert(error);
     });
   }

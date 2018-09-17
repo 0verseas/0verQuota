@@ -184,6 +184,9 @@ const app = (function () {
       $isGroup2.prop('checked', includeSecondCategory);
       $isGroup3.prop('checked', includeThirdCategory);
 
+      $schoolList.selectpicker();
+      $departmentGroupList.selectpicker();
+
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
@@ -194,7 +197,7 @@ const app = (function () {
         loading.complete();
       }
     }).catch(error => {
-      console.log(error)
+      console.log(error);
       alert(error);
     });
   }
