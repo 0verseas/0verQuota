@@ -280,18 +280,19 @@ const app = (function () {
         </td>
         `;
         // 有個人申請顯示是否餘額留用
-        if (department.admission_quota_pass == true)
+        if (!!department.admission_quota_pass === true) {
           admissionSelectionQuota += `
               <td>
                   <span class="td-br">是</span>
                   <span class="td-br">Yes</span>
               </td> `;
-        else
+        } else {
           admissionSelectionQuota += `
               <td>
                   <span class="td-br">否</span>
                   <span class="td-br">No</span>
               </td> `;
+        }
       }
 
       // 設定聯合分發名額
