@@ -298,9 +298,9 @@ const app = (function () {
       // 設定聯合分發名額
       // 名額為零則不顯示
       let admissionPlacementQuota = `
-        <td colspan="6">
-          <span class="td-br">僅限個人申請</span>
-          <span class="td-br">Individual application only</span>
+        <td> 0 </td>
+        <td colspan="5">
+          <span class="td-br"><br/>-</span>
         </td>
       `;
 
