@@ -147,8 +147,6 @@ const app = (function () {
   }
 
   function _init() {
-    alert("尚未開放查詢，即將返回上一頁！");
-    history.go(-1);
     // 擷取網址參數
     const params = new URLSearchParams(document.location.search.substring(1));
     const schoolId = params.get('school') && params.get('school').length !== 0 ? params.get('school') : null;
