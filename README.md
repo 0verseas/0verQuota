@@ -3,8 +3,15 @@
 ## Contributing
 ### Install Dependencies
 ```
-$ npm install && npm run build
+git clone https://github.com/0verseas/0verQuota.git
+cd 0verQuota
+npm install
 ```
+### Setup
+```
+cp public/js/env.js.example public/js/env.js
+```
+edit the config file in `public/js/env.js`
 
 ### Testing
 ```
