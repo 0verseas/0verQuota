@@ -264,7 +264,7 @@ const app = (function () {
                 <span >${department.title}</span>
               </a>
               <a href="${department.ioh.url}" target="_blank">
-                <img src="../img/IOH_logo.png" width="80" />
+                <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
               </a>
               <a href="${detailURL}" target="_blank">
                 <span class="td-br">${department.eng_title}</span>
