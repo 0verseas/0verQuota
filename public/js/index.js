@@ -267,6 +267,7 @@ const app = (function () {
           <span class="td-br">Distributed allocation only</span>
         </td>        
         <td> - </td> 
+        <td> - </td> 
       `;
       // 有名額要連審查項目一起顯示
       if (department.admission_selection_ratify_quota > 0) {
@@ -279,6 +280,20 @@ const app = (function () {
           </a>
         </td>
         `;
+        // 顯示是否為緬甸師培志願
+        if(!!department.myanmar_teacher_education === true ){
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+        } else{
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">No</span>
+              </td> `;
+        }
         // 有個人申請顯示是否餘額留用
         if (!!department.admission_quota_pass === true) {
           admissionSelectionQuota += `
