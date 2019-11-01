@@ -14,6 +14,7 @@ const app = (function () {
   const $isGroup1 = $('#isGroup1');
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
+  const $showMyanmar = $('#showMyanmar');
 
   /**
    * init
@@ -54,7 +55,8 @@ const app = (function () {
     departmentGroupId = 'all',
     includeFirstCategory = true,
     includeSecondCategory = true,
-    includeThirdCategory = true
+    includeThirdCategory = true,
+    showMyanmarProject= false,
   ) {
     loading.start();
 
@@ -66,6 +68,7 @@ const app = (function () {
       'first-group': includeFirstCategory,
       'second-group': includeSecondCategory,
       'third-group': includeThirdCategory,
+      'myanmar': showMyanmarProject,
     });
 
     // 準備新網址
@@ -75,7 +78,7 @@ const app = (function () {
     window.history.replaceState({path: newurl}, null, newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -169,6 +172,7 @@ const app = (function () {
     const includeFirstCategory = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
     const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
     const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
+    const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -185,6 +189,7 @@ const app = (function () {
       $isGroup1.prop('checked', includeFirstCategory);
       $isGroup2.prop('checked', includeSecondCategory);
       $isGroup3.prop('checked', includeThirdCategory);
+      $showMyanmar.prop('checked', showMyanmarProject);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -193,7 +198,8 @@ const app = (function () {
       if (schoolId) {
         filterDepartmentList(
           schoolId, 'bachelor', keyword, departmentGroupId,
-          includeFirstCategory, includeSecondCategory, includeThirdCategory
+          includeFirstCategory, includeSecondCategory, includeThirdCategory,
+          showMyanmarProject
         );
       } else {
         loading.complete();
@@ -267,6 +273,7 @@ const app = (function () {
           <span class="td-br">Distributed allocation only</span>
         </td>        
         <td> - </td> 
+        <td> - </td> 
       `;
       // 有名額要連審查項目一起顯示
       if (department.admission_selection_ratify_quota > 0) {
@@ -279,6 +286,20 @@ const app = (function () {
           </a>
         </td>
         `;
+        // 顯示是否為緬甸師培志願
+        if(department.myanmar_teacher_education ){
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+        } else{
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">No</span>
+              </td> `;
+        }
         // 有個人申請顯示是否餘額留用
         if (!!department.admission_quota_pass === true) {
           admissionSelectionQuota += `

@@ -9,7 +9,7 @@ const API = (function () {
     return _requestHandle(request);
   }
 
-  function getDepartments(schoolId = 'all', systemId = 'all', departmentGroupId = 'all', keyword = '', includeFirstCategory = true, includeSecondCategory = true, includeThirdCategory = true) {
+  function getDepartments(schoolId = 'all', systemId = 'all', departmentGroupId = 'all', keyword = '', includeFirstCategory = true, includeSecondCategory = true, includeThirdCategory = true, showMyanmarProject = false) {
     // 整理類組成 array（有才加進去）
     let category = [];
 
@@ -25,7 +25,7 @@ const API = (function () {
       category.push(3);
     }
 
-    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=${departmentGroupId}&category=${category.toString()}&keyword=${keyword}`, {
+    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=${departmentGroupId}&category=${category.toString()}&myanmar=${showMyanmarProject}&keyword=${keyword}`, {
       credentials: 'include'
     });
 
