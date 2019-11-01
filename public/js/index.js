@@ -82,7 +82,7 @@ const app = (function () {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
-            $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+            $resultBody.html(`<tr><td colspan=14>無符合條件的系所</td></tr>`);
             break;
           default:
             alert(response.singleErrorMessage);
@@ -119,7 +119,7 @@ const app = (function () {
         $resultBody.html('');
 
       } else {
-        $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+        $resultBody.html(`<tr><td colspan=14>無符合條件的系所</td></tr>`);
       }
 
       // 設定分頁、置放資料
