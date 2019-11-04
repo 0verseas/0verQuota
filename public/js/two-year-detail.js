@@ -114,7 +114,7 @@ const app = (function () {
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);
-    $schoolFax.html(school.phone);
+    $schoolFax.html(school.fax);
     $schoolAddress.html(school.address);
     $schoolEngAddress.html(school.eng_address);
     $schoolUrl.html(`<a href="${school.url}" target="_blank">${school.url}</a>`);
