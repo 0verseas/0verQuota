@@ -15,6 +15,13 @@ const app = (function () {
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
   const $showMyanmar = $('#showMyanmar');
+  const $systemList = $('#system-list');  // 選擇學制的選單
+
+  /**
+   * bind event
+   */
+
+  $systemList.on('change', handleSelectSystem);
 
   /**
    * init
@@ -271,9 +278,9 @@ const app = (function () {
         <td colspan="2">
           <span class="td-br">僅限聯合分發</span>
           <span class="td-br">Distributed allocation only</span>
-        </td>        
-        <td> - </td> 
-        <td> - </td> 
+        </td>
+        <td> - </td>
+        <td> - </td>
       `;
       // 有名額要連審查項目一起顯示
       if (department.admission_selection_ratify_quota > 0) {
@@ -394,7 +401,7 @@ const app = (function () {
               </span>
               <span class="td-br">${department.eng_title}</span>
               <a/>
-          </td>         
+          </td>
           `;
       else
         html += `
@@ -432,6 +439,24 @@ const app = (function () {
 
     // 擺上結果
     $resultBody.html(html);
+  }
+
+  // 下拉學制選單改變
+  function handleSelectSystem() {
+    switch ($systemList.val()) {
+      case 'two-year-tech':
+        location.assign('two-year.html');
+        break;
+      case 'master':
+        location.assign('master.html');
+        break;
+      case 'phd':
+        location.assign('phd.html');
+        break;
+      default:
+        // 通通去 index
+        location.reload();
+    }
   }
 
   return {
