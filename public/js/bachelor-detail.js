@@ -193,7 +193,7 @@ const app = (function () {
     }
 
     //是否為全英語授課
-    let englishTaughtString = (department.has_eng_taught) ?'是':'否';
+    let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
     $englishTaught.html(`${englishTaughtString}`);
 
     // 審查項目有才顯示
