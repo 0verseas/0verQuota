@@ -170,14 +170,14 @@ const app = (function () {
       $subGroup.html(`無 None`);
     }
 
+    //是否為全英語授課
+    let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
+    $englishTaught.html(`${englishTaughtString}`);
+
      // 審查項目有才顯示
     if (!Array.isArray(department.application_docs) || !department.application_docs.length) {
       $navShenchaItemTab.remove();
     }
-
-    //是否為全英語授課
-    let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
-    $englishTaught.html(`${englishTaughtString}`);
 
     // 審查項目們
     for (let doc of department.application_docs) {
@@ -236,7 +236,7 @@ const app = (function () {
       $shenchaItemDiv.append(appendData);
     }
 
-
+    
   }
 
   // 確認是否有提供資料
