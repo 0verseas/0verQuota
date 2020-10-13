@@ -45,6 +45,7 @@ const app = (function () {
   const $genderLimit = $('#gender-limit');
   const $mainGroup = $('#main-group');
   const $subGroup = $('#sub-group');
+  const $englishTaught = $('#english-taught');
   // const $deptHasSelfEnrollment = $('#dept-has-self-enrollment');
   // const $deptHasSpecialClass = $('#dept-has-special-class');
   // const $deptHasForeignSpecialClass = $('#dept-has-foreign-special-class');
@@ -61,11 +62,6 @@ const app = (function () {
 
   // 審查項目 DOM
   const $shenchaItemDiv = $('#nav-shenchaItem');
-  const $reviewFee = $('#review-review-fee-detail');
-  const $hasReviewFee = $('#has-review-fee');
-  const $reviewFeeInfo = $('.review-fee-info');
-  const $reviewFeeDetail = $('#review-fee-detail');
-  const $reviewFeeEngDetail = $('#review-fee-eng-detail');
 
   /**
    * init
@@ -196,19 +192,13 @@ const app = (function () {
       $subGroup.html(`無 None`);
     }
 
+    //是否為全英語授課
+    let englishTaughtString = (department.has_eng_taught) ?'是':'否';
+    $englishTaught.html(`${englishTaughtString}`);
+
     // 審查項目有才顯示
     if (!Array.isArray(department.application_docs) || !department.application_docs.length) {
       $navShenchaItemTab.remove();
-    }
-
-    // 審查費用
-    $hasReviewFee.html(department.has_review_fee ? trueIconHtml : falseIconHtml);
-    // 有審查費用則顯示說明
-    if (department.has_review_fee) {
-      $reviewFeeDetail.html(department.review_fee_detail);
-      $reviewFeeEngDetail.html(department.eng_review_fee_detail);
-    } else {
-      $reviewFeeInfo.remove();
     }
 
     // 審查項目們
