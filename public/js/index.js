@@ -113,9 +113,11 @@ const app = (function () {
       for (let school of filteredSchools) {
         let schoolName = school.title;
         let engSchoolName = school.eng_title;
+        let allowSchoolFive = school.has_five_year_student_allowed;
         for (let department of school.departments) {
           department.school = schoolName;
           department.eng_school = engSchoolName;
+          department.allow_school_five = allowSchoolFive;
           allDepartments.push(department);
         }
       }
@@ -355,6 +357,38 @@ const app = (function () {
         }
       }
 
+      //全英語授課
+      let engTaughtHtml;
+      if(department.has_eng_taught){
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
+      //中五制學生
+      let schoolFiveHtml;
+      if(department.allow_school_five){
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
       // 設定類組
       let groupHtml = '';
       switch(department.group_code) {
@@ -426,6 +460,10 @@ const app = (function () {
           ${admissionSelectionQuota}
 
           ${admissionPlacementQuota}
+
+          ${engTaughtHtml}
+
+          ${schoolFiveHtml}
         </tr>
       `;
     }

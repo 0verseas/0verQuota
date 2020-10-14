@@ -234,6 +234,22 @@ const app = (function () {
       const detailURL = `master-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
       const shenchaItemURL = `master-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
+      //全英語授課
+      let engTaughtHtml;
+      if(department.has_eng_taught){
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
       // 擺放各系所資料
       html += `
         <tr>
@@ -279,6 +295,8 @@ const app = (function () {
               <span class="td-br">Application documents</span>
             </a>
           </td>
+
+          ${engTaughtHtml}
         </tr>
       `;
     }
