@@ -16,6 +16,7 @@ const app = (function () {
   const $isGroup3 = $('#isGroup3');
   const $showMyanmar = $('#showMyanmar');
   const $showEnglishTaught = $('#showEnglishTaught');
+  const $showSchoolFive = $('#showSchoolFive');
   const $systemList = $('#system-list');  // 選擇學制的選單
 
   /**
@@ -66,6 +67,7 @@ const app = (function () {
     includeThirdCategory = true,
     showMyanmarProject = false,
     showEnglishTaughtClass = false,
+    showSchoolFiveGraduate = false,
   ) {
     loading.start();
 
@@ -79,6 +81,7 @@ const app = (function () {
       'third-group': includeThirdCategory,
       'myanmar': showMyanmarProject,
       'eng-taught': showEnglishTaughtClass,
+      'school5': showSchoolFiveGraduate,
     });
 
     // 準備新網址
@@ -88,7 +91,7 @@ const app = (function () {
     window.history.replaceState({path: newurl}, null, newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -186,6 +189,7 @@ const app = (function () {
     const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
     const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
+    const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -204,6 +208,7 @@ const app = (function () {
       $isGroup3.prop('checked', includeThirdCategory);
       $showMyanmar.prop('checked', showMyanmarProject);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
+      $showSchoolFive.prop('checked', showSchoolFiveGraduate);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -213,7 +218,7 @@ const app = (function () {
         filterDepartmentList(
           schoolId, 'bachelor', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
-          showMyanmarProject, showEnglishTaughtClass,
+          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
         );
       } else {
         loading.complete();

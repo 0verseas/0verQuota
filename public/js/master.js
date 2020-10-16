@@ -64,7 +64,7 @@ const app = (function () {
     // 更新網址
     window.history.replaceState({path: newurl}, '', newurl);
 
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
