@@ -99,7 +99,8 @@
           document.getElementById('school-list').options[document.getElementById('school-list').selectedIndex].value,
           'twoYear',
           this.elements.namedItem('keyword').value,
-          this.elements.namedItem('department-group').value
+          this.elements.namedItem('department-group').value,
+          this.elements.namedItem('english-instructed-program').checked,
         );
       ">
         <div class="form-group col-md-6">
@@ -107,6 +108,13 @@
           <select id="department-group" name="department-group" data-live-search="true" data-width="auto">
             <option value="all" selected>所有學群 All disciplines</option>
           </select>
+          <label class="form-control-label"><br/>篩選條件* <small class="text-muted">Select option*</small></label>
+          <div class="form-check">
+            <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
+            <label class="form-check-label" >
+              全英語授課志願* <small class="text-muted"><br/>Only show english-instructed program</small>
+            </label>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword search</small></label>
@@ -129,7 +137,7 @@
           <th><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department</small></span></th>
           <th><span class="td-br">個人申請名額</span><span class="td-br"><small class="text-muted">Individual application quota</small></span></th>
           <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Required documents</small></span></th>
-          <th><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English instructed taught (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English instructed taught</small></span></th>
+          <th><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English-instructed Program (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English-instructed Program</small></span></th>
         </tr>
       </thead>
       <tbody id="result-body">

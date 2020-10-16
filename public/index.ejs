@@ -144,6 +144,7 @@
           this.elements.namedItem('second-category').checked,
           this.elements.namedItem('third-category').checked,
           this.elements.namedItem('myanmar-teacher-education').checked,
+          this.elements.namedItem('english-instructed-program').checked,
         );
       ">
         <div class="form-group col-md-6">
@@ -166,10 +167,18 @@
               第三類組 <small class="text-muted">Third category</small>
             </label>
           </div>
+          <br/>
+          <label class="form-control-label">篩選條件* <small class="text-muted">Select option*</small></label>
           <div class="form-check">
             <input class="form-check-input" id="showMyanmar" name="myanmar-teacher-education" type="checkbox" value="">
             <label class="form-check-label" >
-              不分類組單獨顯示緬甸師資培育計畫志願* <small class="text-muted"><br/>Unclassified category only show Myanmar teacher education project</small>
+              緬甸師資培育計畫志願* <small class="text-muted"><br/>Only show Myanmar teacher education project</small>
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
+            <label class="form-check-label" >
+              全英語授課志願* <small class="text-muted"><br/>Only show english-instructed program</small>
             </label>
           </div>
         </div>
@@ -206,8 +215,8 @@
           <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
           <th colspan="4"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual Application</small></span></th>
           <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">United Distribution (Quota)</small></span></th>
-          <th rowspan="2"><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English instructed taught (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English instructed taught</small></span></th>
-          <th rowspan="2"><span class="td-br">中五生</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否招收中五學制學生  Allow school five year student (Yes/ No)"></i><span class="td-br"><small class="text-muted">Allow school five year student </small></span></th>
+          <th rowspan="2"><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English-instructed Program (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English-instructed Program</small></span></th>
+          <th rowspan="2"><span class="td-br">是否招收中五學制畢業生</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否招收中五學制畢業生  Allow school five year student (Yes/ No)"></i><span class="td-br"><small class="text-muted">Allow school five year student </small></span></th>
         </tr>
         <tr>
           <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
