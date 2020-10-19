@@ -11,6 +11,7 @@ const app = (function () {
   const $resultBody = $('#result-body');
   const $schoolKeyword = $('#school-keyword');
   const $keyword = $('#keyword');
+  const $showEnglishTaught = $('#showEnglishTaught');
 
   /**
    * init
@@ -47,6 +48,7 @@ const app = (function () {
     systemId = 'twoYear',
     keyword = '',
     departmentGroupId = 'all',
+    showEnglishTaughtClass = false,
   ) {
     loading.start();
 
@@ -54,7 +56,8 @@ const app = (function () {
     const paramsStr = jQuery.param({
       school: schoolId,
       group: departmentGroupId,
-      keyword
+      keyword,
+      'eng-taught': showEnglishTaughtClass,
     });
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
@@ -62,7 +65,7 @@ const app = (function () {
     window.history.replaceState({path: newurl}, '', newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -152,6 +155,7 @@ const app = (function () {
     const schoolId = params.get('school') && params.get('school').length !== 0 ? params.get('school') : null;
     const departmentGroupId = params.get('group') && params.get('group').length !== 0 ? params.get('group') : 'all';
     const keyword = params.get('keyword') ? params.get('keyword') : '';
+    const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -164,6 +168,7 @@ const app = (function () {
       $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
       $departmentGroupList.children(`[value=${departmentGroupId}]`).prop('selected', true);
       $keyword.prop('value', keyword);
+      $showEnglishTaught.prop('checked', showEnglishTaughtClass);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -171,7 +176,7 @@ const app = (function () {
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
-          schoolId, 'twoYear', keyword, departmentGroupId
+          schoolId, 'twoYear', keyword, departmentGroupId, showEnglishTaughtClass,
         );
       } else {
         loading.complete();
@@ -236,6 +241,22 @@ const app = (function () {
       const detailURL = `two-year-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
       const shenchaItemURL = `two-year-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
+      //全英語授課
+      let engTaughtHtml;
+      if(department.has_eng_taught){
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
       // 擺放各系所資料
       html += `
         <tr>
@@ -280,6 +301,8 @@ const app = (function () {
               <span class="td-br">Application documents</span>
             </a>
           </td>
+
+          ${engTaughtHtml}
         </tr>
       `;
     }

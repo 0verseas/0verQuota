@@ -15,6 +15,8 @@ const app = (function () {
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
   const $showMyanmar = $('#showMyanmar');
+  const $showEnglishTaught = $('#showEnglishTaught');
+  const $showSchoolFive = $('#showSchoolFive');
   const $systemList = $('#system-list');  // 選擇學制的選單
 
   /**
@@ -63,7 +65,9 @@ const app = (function () {
     includeFirstCategory = true,
     includeSecondCategory = true,
     includeThirdCategory = true,
-    showMyanmarProject= false,
+    showMyanmarProject = false,
+    showEnglishTaughtClass = false,
+    showSchoolFiveGraduate = false,
   ) {
     loading.start();
 
@@ -76,6 +80,8 @@ const app = (function () {
       'second-group': includeSecondCategory,
       'third-group': includeThirdCategory,
       'myanmar': showMyanmarProject,
+      'eng-taught': showEnglishTaughtClass,
+      'school5': showSchoolFiveGraduate,
     });
 
     // 準備新網址
@@ -85,11 +91,11 @@ const app = (function () {
     window.history.replaceState({path: newurl}, null, newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
-            $resultBody.html(`<tr><td colspan=14>無符合條件的系所</td></tr>`);
+            $resultBody.html(`<tr><td colspan=16>無符合條件的系所</td></tr>`);
             break;
           default:
             alert(response.singleErrorMessage);
@@ -113,9 +119,11 @@ const app = (function () {
       for (let school of filteredSchools) {
         let schoolName = school.title;
         let engSchoolName = school.eng_title;
+        let allowSchoolFive = school.has_five_year_student_allowed;
         for (let department of school.departments) {
           department.school = schoolName;
           department.eng_school = engSchoolName;
+          department.allow_school_five = allowSchoolFive;
           allDepartments.push(department);
         }
       }
@@ -126,7 +134,7 @@ const app = (function () {
         $resultBody.html('');
 
       } else {
-        $resultBody.html(`<tr><td colspan=14>無符合條件的系所</td></tr>`);
+        $resultBody.html(`<tr><td colspan=16>無符合條件的系所</td></tr>`);
       }
 
       // 設定分頁、置放資料
@@ -180,6 +188,8 @@ const app = (function () {
     const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
     const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
     const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
+    const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
+    const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -197,6 +207,8 @@ const app = (function () {
       $isGroup2.prop('checked', includeSecondCategory);
       $isGroup3.prop('checked', includeThirdCategory);
       $showMyanmar.prop('checked', showMyanmarProject);
+      $showEnglishTaught.prop('checked', showEnglishTaughtClass);
+      $showSchoolFive.prop('checked', showSchoolFiveGraduate);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -206,7 +218,7 @@ const app = (function () {
         filterDepartmentList(
           schoolId, 'bachelor', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
-          showMyanmarProject
+          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
         );
       } else {
         loading.complete();
@@ -355,6 +367,38 @@ const app = (function () {
         }
       }
 
+      //全英語授課
+      let engTaughtHtml;
+      if(department.has_eng_taught){
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        engTaughtHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
+      //中五制學生
+      let schoolFiveHtml;
+      if(department.allow_school_five){
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
       // 設定類組
       let groupHtml = '';
       switch(department.group_code) {
@@ -426,6 +470,10 @@ const app = (function () {
           ${admissionSelectionQuota}
 
           ${admissionPlacementQuota}
+
+          ${engTaughtHtml}
+
+          ${schoolFiveHtml}
         </tr>
       `;
     }
