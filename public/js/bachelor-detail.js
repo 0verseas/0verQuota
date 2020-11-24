@@ -43,6 +43,7 @@ const app = (function () {
   const $deptEngUrl = $('#dept-eng-url');
   const $groupCode = $('#group-code');
   const $genderLimit = $('#gender-limit');
+  const $birthLimit = $('#birth-limit');
   const $mainGroup = $('#main-group');
   const $subGroup = $('#sub-group');
   const $englishTaught = $('#english-taught');
@@ -184,6 +185,21 @@ const app = (function () {
     }
     $genderLimit.html(genderLimitString);
 
+    // 系所招收年齡限制
+    let birthLimitString = '無限制 Unlimited';
+    if (department.has_birth_limit) {
+      let birthAfter = department.birth_limit_after;
+      let birthBefore = department.birth_limit_before;
+      if(birthAfter !== null && birthBefore !== null){
+        birthLimitString = '需在 '+birthAfter+' ～ '+birthBefore+'之間  Between '+birthAfter + ' and '+birthBefore;
+      } else if(birthAfter !== null) {
+        birthLimitString = '需在 '+birthAfter+' 之後 After '+birthAfter;
+      } else {
+        birthLimitString = '需在 '+birthBefore+' 之前 Before '+birthBefore;
+      }
+    }
+    $birthLimit.html(birthLimitString);
+
     // 學群（次要學群可能不存在）
     $mainGroup.html(`${department.main_group_data.title} ${department.main_group_data.eng_title}`);
     if (department.sub_group != null) {
@@ -278,7 +294,7 @@ const app = (function () {
         }
         return;
       }
-
+      console.log(response.data);
       // 放資料
       const {school, system, department} = response.data;
       renderData(school, system, department);
