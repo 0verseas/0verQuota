@@ -294,7 +294,7 @@ const app = (function () {
         }
         return;
       }
-      console.log(response.data);
+
       // 放資料
       const {school, system, department} = response.data;
       renderData(school, system, department);
