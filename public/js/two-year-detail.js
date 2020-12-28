@@ -104,7 +104,7 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`${department.title}（香港二年學士班）`);
+    $deptTitle.html(`${department.title}（香港二年制學士班）`);
     $schoolEngTitle.html(`${school.eng_title}`);
     $deptEngTitle.html(`${department.eng_title} (Two Year)`);
 
@@ -184,7 +184,7 @@ const app = (function () {
     } else {
       $subGroup.html(`無 None`);
     }
-    
+
     //是否為全英語授課
     let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
     $englishTaught.html(`${englishTaughtString}`);
