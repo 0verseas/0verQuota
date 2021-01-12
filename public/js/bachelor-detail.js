@@ -16,6 +16,7 @@ const app = (function () {
   // 學校資訊 DOM
   const $schoolPhone = $('#school-phone');
   const $schoolFax = $('#school-fax');
+  const $schoolEmail = $('#school-email');
   const $schoolAddress = $('#school-address');
   const $schoolEngAddress = $('#school-eng-address');
   const $schoolUrl = $('#school-url');
@@ -121,6 +122,7 @@ const app = (function () {
     // 學校基本資訊
     $schoolPhone.html(school.phone);
     $schoolFax.html(school.fax);
+    $schoolEmail.html(`<a href=mailto:${school.editor_data.user.email}>${school.editor_data.user.email}</a>`);
     $schoolAddress.html(school.address);
     $schoolEngAddress.html(school.eng_address);
     $schoolUrl.html(`<a href="${school.url}" target="_blank">${school.url}</a>`);
