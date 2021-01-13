@@ -15,6 +15,7 @@ const app = (function () {
   // 學校資訊 DOM
   const $schoolPhone = $('#school-phone');
   const $schoolFax = $('#school-fax');
+  const $schoolEmail = $('#school-email');
   const $schoolAddress = $('#school-address');
   const $schoolEngAddress = $('#school-eng-address');
   const $schoolUrl = $('#school-url');
@@ -104,7 +105,7 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`${department.title}（香港二年學士班）`);
+    $deptTitle.html(`${department.title}（香港二年制學士班）`);
     $schoolEngTitle.html(`${school.eng_title}`);
     $deptEngTitle.html(`${department.eng_title} (Two Year)`);
 
@@ -112,6 +113,7 @@ const app = (function () {
     // 學校基本資訊
     $schoolPhone.html(school.phone);
     $schoolFax.html(school.fax);
+    $schoolEmail.html(`<a href=mailto:${school.editor_data.user.email}>${school.editor_data.user.email}</a>`);
     $schoolAddress.html(school.address);
     $schoolEngAddress.html(school.eng_address);
     $schoolUrl.html(`<a href="${school.url}" target="_blank">${school.url}</a>`);
@@ -184,7 +186,7 @@ const app = (function () {
     } else {
       $subGroup.html(`無 None`);
     }
-    
+
     //是否為全英語授課
     let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
     $englishTaught.html(`${englishTaughtString}`);
