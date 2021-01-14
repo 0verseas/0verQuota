@@ -1,0 +1,11 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: 0verQuota
+        restart: unless-stopped
+        tty: true
+        environment:
+            - TZ=Asia/Taipei
+        volumes:
+            - ./app/dist/:/usr/share/nginx/html/quota/
