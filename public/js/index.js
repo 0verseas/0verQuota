@@ -365,7 +365,15 @@ const app = (function () {
             </td>
           `;
         }
-      }
+      } else if(department.admission_selection_ratify_quota > 0 && department.admission_quota_pass == 1){
+        admissionPlacementQuota = `<td>${department.admission_placement_ratify_quota}</td>`;
+        admissionPlacementQuota += `
+            <td colspan="5">
+              <span class="td-br">「個人申請」分發後未用完餘額得流用至「聯合分發」</span>
+              <span class="td-br">After the admission of Individual Application, the remaining quota can be transferred and added to the quota of United Distribution.</span>
+            </td>
+          `;
+      };
 
       //全英語授課
       let engTaughtHtml;
