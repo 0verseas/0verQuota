@@ -29,3 +29,10 @@ $ npm run build
 2. `cp docker/.env.example docker/.env` and edit it (if you need).
 3. If static file doesn't yet be built, you should build it before running docker.
 3. `cd docker && docker-compose up -d`
+
+
+## Permission denied SOP
+1. use ll check owner group and mode
+2. check group with command `groups`
+3. if you can not see the owner group and mode switch to super user mode
+4. change Permission denied file mode to 664 and directories to 775  Ex:`find . -type d -exec chmod 0775 {} \;`
