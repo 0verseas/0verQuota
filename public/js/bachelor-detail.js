@@ -254,9 +254,22 @@ const app = (function () {
             </dd>
           `;
         } else {
+          let uploadFunctionHtml = '';
+          switch(department.recommendation_letter_upload_method){
+            case 1:
+              uploadFunctionHtml = `「自行上傳」師長推薦函。<br/>Students upload file by themself`;
+              break;
+            case 2:
+              uploadFunctionHtml = `透過電子郵件「邀請師長上傳」推薦函。<br/>Students invite teachers upload with email`;
+              break;
+            default:
+              uploadFunctionHtml = `師長推薦函可依「自行上傳」或「邀請師長上傳」二擇一或併行。<br/>Students upload file by themself or invite teachers upload with email`;
+          }
           appendData += `
             <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
             <dd class="col-4 col-md-8">${falseIconHtml}</dd>
+            <dt class="col-8 col-md-4">師長推薦函上傳方式 <small class="text-muted">How to uploaded</small></dt>
+            <dd class="col-4 col-md-8">${uploadFunctionHtml}</dd>
           `;
         }
       }
