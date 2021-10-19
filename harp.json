@@ -19,7 +19,7 @@
 		},
 		"title": "僑生及港澳生招生名額查詢系統｜臺灣海外聯招會",
 		"headline": "僑生及港澳生招生名額查詢系統",
-		"subline": "2021 年秋季入學",
+		"subline": "2022 年秋季入學",
 		"systems": [
 			{
 				"title": "學士班",
@@ -27,12 +27,7 @@
 				"link": "index",
 				"system": "bachelor"
 			},
-			{
-				"title": "香港二年制學士班",
-				"headline": "香港二年制學士班名額查詢",
-				"link": "two-year",
-				"system": "twoYear"
-			},
+			
 			{
 				"title": "碩士班",
 				"headline": "碩士班名額查詢",
