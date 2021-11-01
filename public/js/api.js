@@ -24,7 +24,6 @@ const API = (function () {
     if (includeThirdCategory) {
       category.push(3);
     }
-    console.log(showEnglishTaughtClass);
     const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=${departmentGroupId}&category=${category.toString()}&myanmar=${showMyanmarProject}&eng-taught=${showEnglishTaughtClass}&school5=${showSchoolFiveGraduate}&keyword=${keyword}`, {
       credentials: 'include'
     });
