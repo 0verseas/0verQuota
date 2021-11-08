@@ -241,7 +241,7 @@ const app = (function () {
               uploadFunctionHtml = `師長推薦函可依「自行上傳」或「邀請師長上傳」二擇一或併行。<br/>Students upload file by themself or invite teachers upload with email`;
           }
           appendData += `
-            <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Xūyào zhǐ běn tuījiàn hán </small></dt>
+            <dt class="col-8 col-md-4">需要紙本推薦函 <small class="text-muted">Paper recommendation letters are required</small></dt>
             <dd class="col-4 col-md-8">${falseIconHtml}</dd>
             <dt class="col-8 col-md-4">師長推薦函上傳方式 <small class="text-muted">How to uploaded</small></dt>
             <dd class="col-4 col-md-8">${uploadFunctionHtml}</dd>
