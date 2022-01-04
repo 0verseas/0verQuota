@@ -27,7 +27,12 @@
 				"link": "index",
 				"system": "bachelor"
 			},
-			
+			{
+				"title": "香港二年制學士班",
+				"headline": "香港二年制學士班名額查詢",
+				"link": "two-year",
+				"system": "twoYear"
+			},
 			{
 				"title": "碩士班",
 				"headline": "碩士班名額查詢",
