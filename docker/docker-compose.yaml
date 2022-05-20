@@ -1,11 +1,24 @@
-version: '3'
+version: '3.7'
+
+networks:
+  bridge:
+    external:
+      name: ${NETWORKS}
+
 services:
-    nginx:
-        image: nginx:alpine
-        container_name: 0verQuota
-        restart: unless-stopped
-        tty: true
-        environment:
-            - TZ=Asia/Taipei
-        volumes:
-            - ./app/dist/:/usr/share/nginx/html/quota/
+  quota:
+    image: nginx:alpine
+    container_name: 0verQuota
+    restart: unless-stopped
+    tty: true
+    environment:
+      - TZ=Asia/Taipei
+    volumes:
+      - ./app/dist/:/usr/share/nginx/html/quota/
+    networks:
+      - bridge
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.quota.entrypoints=websecure"
+      - "traefik.http.routers.quota.tls.certresolver=lets-encr"
+      - "traefik.http.routers.quota.rule=Host(``)"
