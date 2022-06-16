@@ -268,29 +268,51 @@ const app = (function () {
           </td>
           `;
 
-      if(department.ioh == null)
+      if(department.ioh == null && department.collego == null) {
         html += `
-            <td>
-              <a href="${detailURL}" target="_blank">
-                <span class="td-br">${department.title}</span>
-                <span class="td-br">${department.eng_title}</span>
-              </a>
-            </td>
-            `;
-      else
+          <td>
+            <a href="${detailURL}" target="_blank">
+              <span >
+                ${department.title}
+              </span>
+              <span class="td-br">${department.eng_title}</span>
+              <a/>
+          </td>
+          `;
+      }else {
+        iohHtml = ``;
+        collegoHtml = ``;
+        if (department.ioh != null) {
+          iohHtml = `
+            <a href="${department.ioh.url}" target="_blank">
+              <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
+            </a>
+          `;
+        }
+          
+        if (department.collego != null) {
+          collegoHtml = `
+            <a href="${department.collego.url}" target="_blank">
+              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
+            </a>
+          `;
+        }
+          
         html += `
-            <td>
-              <a href="${detailURL}" target="_blank">
-                <span >${department.title}</span>
-              </a>
-              <a href="${department.ioh.url}" target="_blank">
-                <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
-              </a>
-              <a href="${detailURL}" target="_blank">
-                <span class="td-br">${department.eng_title}</span>
-              </a>
-            </td>
-            `;
+          <td>
+            <a href="${detailURL}" target="_blank">
+              <span >
+                ${department.title}
+              </span>
+            </a>
+            ${iohHtml}
+            <a href="${detailURL}" target="_blank">
+              <span class="td-br">${department.eng_title}</span>
+            </a>
+            ${collegoHtml}
+          </td>
+          `;
+      }
 
       html += `
           <td>${department.admission_selection_ratify_quota}</td>
