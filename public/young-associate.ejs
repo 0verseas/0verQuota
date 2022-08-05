@@ -1,4 +1,5 @@
-<%- partial('partials/_nav', { system: 'master' }) %>
+<%- partial('partials/_nav', { system: 'youngAssociate' }) %>
+
 <div class="container">
 
   <div class="announcement" id="announcement" data-children=".announcement-item">
@@ -48,12 +49,13 @@
       <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
         >注意事項 <small class="text-muted">Points of Attention</small>
       </a>
-      <div id="announcement3" class="collapse px-1" role="tabpanel">
+      <div id="announcement3" class="collapse" role="tabpanel">
         <p>
           <ol>
             <li>學校名稱、系所名稱皆提供中英文查詢。</li>
-            <li>申請人應依就讀校系意願由高至低填寫至多 4 個校系志願。</li>
-            <li>申請者需依簡章規定繳交「基本資料表」及「系所申請表」、大學（研究所）畢業證書、成績單、碩士論文（限申請博士班者繳交）及各校系應繳資料。 </li>
+            <li>適用於在香港取得全日制副學士學位（Associate Degree）或高級文憑（Higher Diploma）者來臺升讀技術校院，修業年限以二年為原則，修業期滿經考核成績及格者，由就讀學校授予學位，發給學士學位證書。</li>
+            <li>申請人應依就讀校系意願由高至低填寫至多 5 個校系志願。</li>
+            <li>申請者需依簡章規定繳交畢業證書、成績單及各校系應繳資料。</li>
             <li>本會依據申請人所填志願，將申請表件分轉各校審查，按教育部核定各校系招生名額、各校審查結果及僑生選填志願序進行統一分發。各校系得不足額錄取。資格不符及未通過志願學校審核者不予分發。</li>
             <li>所謂「依一般限制」，係指患有精神病、活動性肺結核、惡性傳染病及重症慢性疾病等情形者，均不得申請。</li>
             <li>身心障礙學生如欲申請赴臺升學，應先了解並自行評估各校系能否依不同需求類別及程度，提供學習輔具資源及生活照輔措施，以作為選填志願之參考，以免造成無法順利就學之困擾。</li>
@@ -62,8 +64,9 @@
         <p>
           <ol>
             <li>For Chinese/English search, click Search to see all the departments and graduate schools per category.</li>
-            <li>Please indicate your top four university graduate schools in descending order of preference.</li>
-            <li>Please submit your Personal information form, Department/graduate school application form, University (graduate school) graduation certificate, transcript, Master thesis (only for applications for doctoral programs), and other documents as required by the university graduate school, in accordance with their regulations.  </li>
+            <li>Applies to students from Hong Kong with an Associate Degree from a full-time day program or a Higher Diploma that wish to pursue further studies at vocational colleges in Taiwan. In principle, their study time is limited to two years, after which review of their final results determines whether they are awarded a degree and certificate by their college.</li>
+            <li>Please indicate your top five university departments in descending order of preference. </li>
+            <li>Please submit your graduation certificate, transcript, and other documents as required by the university department, in accordance with their regulations.  </li>
             <li>Our committee will forward your submitted application to your selected university graduate schools for review. Every graduate school will review the applications it receives. The distributed allocation is then carried out on the basis of the reviews of the university graduate schools and the preference rankings of the applicants. Every graduate schools may accept students as long as they have a quota remaining. Applicants that do not meet the criteria of their preferred graduate schools are not allocated a student spot.</li>
             <li>“General limitations” refers to persons suffering mental illness, active tuberculosis, malignant infectious diseases, and severe chronic diseases. They are barred from applying. </li>
             <li>Students with mental or physical needs must, prior to their application, assess whether their university departments of choice offer the support facilities and services needed for their type and degree of needs to enable smooth studies and living. </li>
@@ -98,23 +101,24 @@
         event.preventDefault();
         app.filterDepartmentList(
           document.getElementById('school-list').options[document.getElementById('school-list').selectedIndex].value,
-          'master',
+          'youngAssociate',
           this.elements.namedItem('keyword').value,
-          this.elements.namedItem('department-group').value,
-          this.elements.namedItem('english-instructed-program').checked,
+          this.elements.namedItem('department-main-group').value,
+          this.elements.namedItem('department-sub-group').value,
         );
       ">
         <div class="form-group col-md-6">
-          <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">Select discipline* </small></label>
-          <select id="department-group" name="department-group" data-live-search="true" data-width="auto">
-            <option value="all" selected>所有學群 All disciplines</option>
-          </select>
-          <label class="form-control-label"><br/>篩選條件* <small class="text-muted">Select option*</small></label>
-          <div class="form-check">
-            <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
-            <label class="form-check-label" for="showEnglishTaught">
-              全英語授課學系* <small class="text-muted"><br/>English-instructed program departments</small>
-            </label>
+          <label for="leike" class="form-control-label">選擇主類科 <small class="text-muted">Select main discipline* </small></label>
+          <div class="col-md-6">
+            <select id="department-main-group" name="department-main-group" data-live-search="true" data-width="auto">
+              <option value="all" selected>主類科 main disciplines</option>
+            </select>
+          </div>
+          <label for="leike" class="form-control-label">選擇副類科 <small class="text-muted">Select sub discipline* </small></label>
+          <div class="col-md-6">
+            <select id="department-sub-group" name="department-sub-group" data-live-search="true" data-width="auto">
+              <option value="all" selected>副類科 sub disciplines</option>
+            </select>
           </div>
         </div>
         <div class="form-group col-md-6">
@@ -137,13 +141,13 @@
           <th><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University</small></span></th>
           <th><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department</small></span></th>
           <th><span class="td-br">個人申請名額</span><span class="td-br"><small class="text-muted">Individual application quota</small></span></th>
-          <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Required documents</small></span></th>
+          
           <th><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English-instructed Program (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English-instructed Program</small></span></th>
         </tr>
       </thead>
       <tbody id="result-body">
         <tr>
-          <td colspan="5">請選擇過濾條件</td>
+          <td colspan="4">請選擇過濾條件</td>
         </tr>
       </tbody>
     </table>

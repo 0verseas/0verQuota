@@ -31,6 +31,14 @@ const API = (function () {
     return _requestHandle(request);
   }
 
+  function getYoungAssociateDepartments(schoolId = 'all', systemId = 'all', departmentMainGroupId = 'all', departmentSubGroupId = 'all', keyword = '') {
+    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?main_discipline=${departmentMainGroupId}&sub_discipline=${departmentSubGroupId}&keyword=${keyword}`, {
+      credentials: 'include'
+    });
+
+    return _requestHandle(request);
+  }
+
   function getDepartmentDetail(schoolId, systemId, departmentId) {
     const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments/${departmentId}`, {
       credentials: 'include'
@@ -47,6 +55,8 @@ const API = (function () {
         systemPropertyName = 'graduate_departments';
       } else if (systemId === 'twoYear') {
         systemPropertyName = 'two_year_tech_departments';
+      } else if (systemId === 'youngAssociate') {
+        systemPropertyName = 'young_associate_departments';
       }
 
       // 暫存拉到的資料
@@ -69,6 +79,22 @@ const API = (function () {
 
   function getDepartmentGroups() {
     const request =  fetch(`${baseUrl}/department-groups`, {
+      credentials: 'include'
+    });
+
+    return _requestHandle(request);
+  }
+
+  function getDepartmentMainGroups() {
+    const request =  fetch(`${baseUrl}/young-associate-department-main-groups`, {
+      credentials: 'include'
+    });
+
+    return _requestHandle(request);
+  }
+
+  function getDepartmentSubGroups() {
+    const request =  fetch(`${baseUrl}/young-associate-department-sub-groups`, {
       credentials: 'include'
     });
 
@@ -104,7 +130,10 @@ const API = (function () {
   return {
     getSchools,
     getDepartments,
+    getYoungAssociateDepartments,
     getDepartmentDetail,
     getDepartmentGroups,
+    getDepartmentMainGroups,
+    getDepartmentSubGroups,
   }
 })();

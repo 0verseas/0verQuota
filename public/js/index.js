@@ -527,6 +527,9 @@ const app = (function () {
       case 'phd':
         location.assign('phd.html');
         break;
+      case 'young-associate':
+        location.assign('young-associate.html');
+        break;
       default:
         // 通通去 index
         location.reload();

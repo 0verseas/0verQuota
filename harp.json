@@ -44,6 +44,12 @@
 				"headline": "博士班名額查詢",
 				"link": "phd",
 				"system": "phd"
+			},
+			{
+				"title": "海青班",
+				"headline": "海青班名額查詢",
+				"link": "young-associate",
+				"system": "youngAssociate"
 			}
 		]
 	}
