@@ -303,9 +303,11 @@ const app = (function () {
       if (!response.ok) {
         switch (response.statusCode) {
           default:
-            console.log(response.errorMessages);
-            alert(response.singleErrorMessage);
-            window.location.href = 'bachelor.html';
+            // console.log(response.errorMessages);
+            swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false})
+            .then(()=>{
+              window.location.href = 'bachelor.html';
+            })
         }
         return;
       }
@@ -318,7 +320,7 @@ const app = (function () {
       changeTab(`#${tab}`);
       loading.complete();
     }).catch(error => {
-      console.error(error);
+      // console.error(error);
     });
   }
 

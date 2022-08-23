@@ -1,4 +1,4 @@
-<%- partial('partials/_nav', { system: 'bachelor' }) %>
+<%- partial('partials/_nav', { system: 'proTrain' }) %>
 
 <div class="container">
 
@@ -47,34 +47,15 @@
     </div>
     <div class="announcement-item">
       <a class="announcement-title show" data-toggle="collapse" data-parent="#announcement" href="#announcement2" aria-expanded="true" aria-controls="announcement2">
-        招生管道 <small class="text-muted">Recruitment channel</small>
+        招生管道<small class="text-muted">Recruitment channel</small>
       </a>
       <div id="announcement2" class="collapse show" role="tabpanel" style="padding: 0 1rem">
         <h6 class="mb-3">個人申請制</h6>
         <p>除國立臺灣師範大學僑生先修部馬來西亞春季班結業生外，其餘地區僑生（含港澳生）皆可申請。</p>
-        <h6>聯合分發制</h6>
-        <p>
-          <ul>
-            <li>第一梯次（s1）：馬來西亞（持華文獨中統考文憑）</li>
-            <li>第二梯次（s2）：一般地區（歐洲、美洲、非洲、大洋洲及其他免試地區）。</li>
-            <li>第三梯次（s3）：海外測驗（日本、韓國、新加坡、泰北、緬甸、海外臺灣學校高中畢業生及澳門）。</li>
-            <li>第四梯次（s4）：國立臺灣師範大學僑生先修部結業生。</li>
-            <li>第五梯次（s5）：印尼輔訓班結業生、香港（DSE/CEE/ALE）、馬來西亞（STPM / A-LEVEL / O-LEVEL / SPM）。</li>
-          </ul>
-        <small style="color:#2a88bd">註：因COVID-19疫情影響，2022年馬來西亞（STPM / A-LEVEL / O-LEVEL / SPM）自第二梯次（s2）改併入第五梯次（s5）辦理。</small>
-        </p>
+
         <h6 class="mb-3">Individual application channel</h6>
         <p>Overseas Chinese students (including from Hong Kong and Macao) can apply, except for Malaysian students that have finished their Spring semester at NTNU.  </p>
-        <h6>Distributed allocation channel</h6>
-        <p>
-          <ul>
-            <li>Tier 1 (s1): Malaysia (holding Unified Examination Certificate (UEC) for Mandarin)</li>
-            <li>Tier 2 (s2): Regular area (Europe, America, Africa, Oceania, and other test-exempt areas). </li>
-            <li>Tier 3 (s3): Tested overseas (Japan, Korea, Singapore, Northern Thailand, Myanmar, Macao, and students graduated from overseas Taiwanese senior high schools)</li>
-            <li>Tier 4 (s4): Overseas Chinese students that have finished their preparatory classes at NTNU</li>
-            <li>Tier 5 (s5): Indonesian students that have finished their supplementary classes at yin fu ban, Hong Kong (DSE/CEE/ALE), Malaysia (STPM/A-LEVEL/O-LEVEL/SPM)</li>
-          </ul>
-        </p>
+
       </div>
     </div>
     <div class="announcement-item">
@@ -106,21 +87,6 @@
 
   <h3>系所查詢 <small class="text-muted">Department and graduate school search</small></h3>
 
-  <div class="card mb-4">
-    <div class="card-header">
-      選擇學制 <small class="text-muted">Select system</small>
-    </div>
-    <div class="form-row card-body">
-      <select id="system-list" name="system" class="custom-select" data-live-search="true" data-width="auto">
-        <option value="bachelor" selected>學士班 Bachelor</option>
-        <option value="two-year-tech">香港二年制學士班 Bachelor (For Hong Kong student who has a Higher Diploma or Associate Degree)</option>
-        <option value="master">碩士班 Master</option>
-        <option value="phd">博士班 Phd</option>
-        <option value="young-associate">海青副學士班 OYVTP Two year Associate Degree</option>
-      </select>
-    </div>
-  </div>
-
   <div class="card">
     <div class="card-header">
       選擇學校 <small class="text-muted">Select university</small>
@@ -151,7 +117,6 @@
           this.elements.namedItem('myanmar-teacher-education').checked,
           this.elements.namedItem('english-instructed-program').checked,
           this.elements.namedItem('school-five-graduate').checked,
-          this.elements.namedItem('key-industries').checked,
         );
       ">
         <div class="form-group col-md-6">
@@ -194,12 +159,6 @@
               招收中五學制畢業生學系* <small class="text-muted"><br/>Department(s) recruiting Form 5 graduates</small>
             </label>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" id="showKeyIndustries" name="key-industries" type="checkbox" value="">
-            <label class="form-check-label" for="showKeyIndustries">
-              重點產業系所* <small class="text-muted"><br/>Key industry departments</small>
-            </label>
-          </div>
         </div>
 
         <div class="form-row col-md-6">
@@ -232,8 +191,7 @@
           <th rowspan="2"><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University</small></span></th>
           <th rowspan="2"><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department</small></span></th>
           <th rowspan="2"><span class="td-br">隸屬類組</span><span class="td-br"><small class="text-muted">Category</small></span></th>
-          <th colspan="4"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual Application</small></span></th>
-          <th colspan="6"><span class="td-br">聯合分發名額</span><span class="td-br"><small class="text-muted">United Distribution (Quota)</small></span></th>
+          <th colspan="3"><span class="td-br">個人申請</span><span class="td-br"><small class="text-muted">Individual Application</small></span></th>
           <th rowspan="2"><span class="td-br">全英語授課</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為全英語授課  English-instructed Program (Yes/ Not)"></i><span class="td-br"><small class="text-muted">English-instructed Program</small></span></th>
           <th rowspan="2"><span class="td-br">是否招收中五學制畢業生</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否招收中五學制畢業生  From 5 graduate can apply (Yes/ No)"></i><span class="td-br"><small class="text-muted">From 5 graduate can apply </small></span></th>
         </tr>
@@ -241,13 +199,6 @@
           <th><span class="td-br">名額</span><span class="td-br"><small class="text-muted">Quota</small></span></th>
           <th><span class="td-br">審查項目</span><span class="td-br"><small class="text-muted">Required documents</small></span></th>
           <th><span class="td-br">緬甸師培</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="是否為緬甸師資培育專案志願  Myanmar Teacher Education Project (Yes/ No)"></i><span class="td-br"><small class="text-muted">Myanmar Teacher Education Project</small></span></th>
-          <th><span class="td-br">餘額流用</span><i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" data-animation="false" title="個人申請分發後之餘額是否流用至聯合分發  After the admission of Individual Application, can the remaining quota be transferred and added to the quota of United Distribution? (Yes/ No)"></i><span class="td-br"><small class="text-muted">Quota Transfer</small></span></th>
-          <th><span class="td-br">總額</span><span class="td-br"><small class="text-muted">Total</small></span></th>
-          <th>s1</th>
-          <th>s2</th>
-          <th>s3</th>
-          <th>s4</th>
-          <th>s5</th>
         </tr>
       </thead>
       <tbody id="result-body">

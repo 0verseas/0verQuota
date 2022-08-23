@@ -12,6 +12,7 @@ const app = (function () {
   const $schoolKeyword = $('#school-keyword');
   const $keyword = $('#keyword');
   const $showEnglishTaught = $('#showEnglishTaught');
+  const $showKeyIndustries = $('#showKeyIndustries');
 
   /**
    * init
@@ -25,6 +26,7 @@ const app = (function () {
   /**
    * functions
    */
+  $schoolList.on('change', _reRenderGroup);
 
   // 過濾學校列表
   function filterSchoolList(keyword = '') {
@@ -42,6 +44,19 @@ const app = (function () {
     _setSchoolList(newSchoolList);
   }
 
+  function _reRenderGroup() {
+    let currentGroupId = $departmentGroupList.find(':selected').val();
+    _getDepartmentGroups().then((departmentGroups) => {
+      _setDepartmentGroupList(departmentGroups);
+      // 檢查新選的學校是否有之前選的學群
+      if ($departmentGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
+        $departmentGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
+      }
+      // bootstrap需要刷新才會顯示新選項
+      $departmentGroupList.selectpicker('refresh');
+    });
+  }
+
   // 過濾系所列表
   function filterDepartmentList(
     schoolId = 'all',
@@ -49,6 +64,7 @@ const app = (function () {
     keyword = '',
     departmentGroupId = 'all',
     showEnglishTaughtClass = false,
+    showKeyIndustries = false,
   ) {
     loading.start();
 
@@ -58,20 +74,24 @@ const app = (function () {
       group: departmentGroupId,
       keyword,
       'eng-taught': showEnglishTaughtClass,
+      'key-industry': showKeyIndustries,
     });
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
     // 更新網址
     window.history.replaceState({path: newurl}, '', newurl);
 
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false).then(response => {
+    let isExtendedDepartment = [];
+    if(showKeyIndustries) isExtendedDepartment.push(1);
+
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
             $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
             break;
           default:
-            alert(response.singleErrorMessage);
+            swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
             break;
         }
 
@@ -121,14 +141,14 @@ const app = (function () {
 
       loading.complete();
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       loading.complete();
     });
   }
 
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools().then(response => {
+    return API.getSchools('master').then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -154,6 +174,7 @@ const app = (function () {
     const departmentGroupId = params.get('group') && params.get('group').length !== 0 ? params.get('group') : 'all';
     const keyword = params.get('keyword') ? params.get('keyword') : '';
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
+    const showKeyIndustries = params.has('key-industry')? JSON.parse(params.get('key-industry')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -167,6 +188,7 @@ const app = (function () {
       $departmentGroupList.children(`[value=${departmentGroupId}]`).prop('selected', true);
       $keyword.prop('value', keyword);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
+      $showKeyIndustries.prop('checked', showKeyIndustries);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -174,14 +196,14 @@ const app = (function () {
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
-          schoolId, 'master', keyword, departmentGroupId, showEnglishTaughtClass,
+          schoolId, 'master', keyword, departmentGroupId, showEnglishTaughtClass, showKeyIndustries,
         );
       } else {
         loading.complete();
       }
     }).catch(error => {
-      console.log(error);
-      alert(error);
+      // console.log(error);
+      swal({title: `Error`, text: error, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
     });
   }
 
@@ -258,60 +280,48 @@ const app = (function () {
       // 擺放各系所資料
       html += `
         <tr>
+
           <td>
             <a href="${schoolURL}" target="_blank">
               <span class="td-br">${department.school}</span>
               <span class="td-br">${department.eng_school}</span>
             </a>
           </td>
-          `;
-
-      if(department.ioh == null && department.collego == null) {
-        html += `
           <td>
+      `;
+
+      if (department.is_extended_department == '1') {
+        html += `
+        <span class="badge badge-warning"> 重點產業系所 </span>
+              <br />
+        `;
+      }
+
+      html += `
             <a href="${detailURL}" target="_blank">
               <span >
                 ${department.title}
               </span>
               <span class="td-br">${department.eng_title}</span>
-              <a/>
-          </td>
-          `;
-      }else {
-        iohHtml = ``;
-        collegoHtml = ``;
-        if (department.ioh != null) {
-          iohHtml = `
+            <a/>
+      `;
+      if (department.ioh != null)
+      {
+        html += `
             <a href="${department.ioh.url}" target="_blank">
               <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
             </a>
-          `;
-        }
+        `;
+      }
           
-        if (department.collego != null) {
-          collegoHtml = `
+      if (department.collego != null)
+      {
+        html += `
             <a href="${department.collego.url}" target="_blank">
               <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
             </a>
-          `;
-        }
-          
-        html += `
-          <td>
-            <a href="${detailURL}" target="_blank">
-              <span >
-                ${department.title}
-              </span>
-            </a>
-            ${iohHtml}
-            <a href="${detailURL}" target="_blank">
-              <span class="td-br">${department.eng_title}</span>
-            </a>
-            ${collegoHtml}
-          </td>
-          `;
+        `;
       }
-
 
       html += `
           <td>${department.admission_selection_ratify_quota}</td>

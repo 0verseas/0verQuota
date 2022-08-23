@@ -14,7 +14,7 @@
       <li class="nav-item">
         <a class="nav-link <%- system == item.system ? 'active' : '' %>" href="<%= item.link %><%= item.link.split(':')[0] == 'http' || item.link.split(':')[0] == 'https' ? '' : '.html' %>">
           <%= item.title %> <span class="sr-only">(current)</span>
-          <small><br/><%- item.system == 'twoYear' ? 'Two year bachelor for Hong Kong' : item.system.slice(0,1).toUpperCase()+item.system.slice(1) %></small>
+          <small><br/><%- item.system == 'twoYear' ? 'Two year bachelor for Hong Kong' : (item.system == 'youngAssociate' ? 'OYVTP Associate Degree' : (item.system == 'proTrain'? 'Professional training' : item.system.slice(0,1).toUpperCase()+item.system.slice(1))) %></small>
         </a>
       </li>
     <% } %>

@@ -9,10 +9,17 @@ const app = (function () {
   const $schoolList = $('#school-list');
   const $departmentGroupList = $('#department-group');
   const $resultBody = $('#result-body');
-  const $schoolKeyword = $('#school-keyword');
   const $keyword = $('#keyword');
+  const $isGroup1 = $('#isGroup1');
+  const $isGroup2 = $('#isGroup2');
+  const $isGroup3 = $('#isGroup3');
+  const $showMyanmar = $('#showMyanmar');
   const $showEnglishTaught = $('#showEnglishTaught');
-  const $showKeyIndustries = $('#showKeyIndustries');
+  const $showSchoolFive = $('#showSchoolFive');
+
+  /**
+   * bind event
+   */
 
   /**
    * init
@@ -20,6 +27,8 @@ const app = (function () {
 
   // 所有學校
   let allSchools = [];
+
+  $('.container').find('*[data-toggle=tooltip]').tooltip();
 
   _init();
 
@@ -44,27 +53,18 @@ const app = (function () {
     _setSchoolList(newSchoolList);
   }
 
-  function _reRenderGroup() {
-    let currentGroupId = $departmentGroupList.find(':selected').val();
-    _getDepartmentGroups().then((departmentGroups) => {
-      _setDepartmentGroupList(departmentGroups);
-      // 檢查新選的學校是否有之前選的學群
-      if ($departmentGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
-        $departmentGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
-      }
-      // bootstrap需要刷新才會顯示新選項
-      $departmentGroupList.selectpicker('refresh');
-    });
-  }
-
   // 過濾系所列表
   function filterDepartmentList(
     schoolId = 'all',
-    systemId = 'phd',
+    systemId = 'bachelor',
     keyword = '',
     departmentGroupId = 'all',
+    includeFirstCategory = true,
+    includeSecondCategory = true,
+    includeThirdCategory = true,
+    showMyanmarProject = false,
     showEnglishTaughtClass = false,
-    showKeyIndustries = false,
+    showSchoolFiveGraduate = false,
   ) {
     loading.start();
 
@@ -73,22 +73,26 @@ const app = (function () {
       school: schoolId,
       group: departmentGroupId,
       keyword,
+      'first-group': includeFirstCategory,
+      'second-group': includeSecondCategory,
+      'third-group': includeThirdCategory,
+      'myanmar': showMyanmarProject,
       'eng-taught': showEnglishTaughtClass,
-      'key-industry': showKeyIndustries,
+      'school5': showSchoolFiveGraduate
     });
+
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
-    // 更新網址
-    window.history.replaceState({path: newurl}, '', newurl);
 
-    let isExtendedDepartment = [];
-    if(showKeyIndustries) isExtendedDepartment.push(1);
+    // 更新網址
+    window.history.replaceState({path: newurl}, null, newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {      if (!response.ok) {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate, '2').then(response => {
+      if (!response.ok) {
         switch (response.statusCode) {
           case 404:
-            $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+            $resultBody.html(`<tr><td colspan=16>無符合條件的系所</td></tr>`);
             break;
           default:
             swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
@@ -99,10 +103,9 @@ const app = (function () {
 
         return;
       }
-
       // 取得過濾過的列表，並剔除無任何系所者
       const filteredSchools = response.data.filter(school => {
-        return school.graduate_departments.length > 0;
+        return school.departments.length > 0;
       });
 
       // 重新擺放系所列表
@@ -112,9 +115,11 @@ const app = (function () {
       for (let school of filteredSchools) {
         let schoolName = school.title;
         let engSchoolName = school.eng_title;
-        for (let department of school.graduate_departments) {
+        let allowSchoolFive = school.has_five_year_student_allowed;
+        for (let department of school.departments) {
           department.school = schoolName;
           department.eng_school = engSchoolName;
+          department.allow_school_five = allowSchoolFive;
           allDepartments.push(department);
         }
       }
@@ -123,8 +128,9 @@ const app = (function () {
       if (allDepartments.length > 0) {
         // 重置系所表格
         $resultBody.html('');
+
       } else {
-        $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
+        $resultBody.html(`<tr><td colspan=16>無符合條件的系所</td></tr>`);
       }
 
       // 設定分頁、置放資料
@@ -146,24 +152,36 @@ const app = (function () {
     });
   }
 
+  // 更改學校時僅顯示該校有的學群
+  function _reRenderGroup() {
+    let currentGroupId = $departmentGroupList.find(':selected').val();
+    _getDepartmentGroups().then((departmentGroups) => {
+      _setDepartmentGroupList(departmentGroups);
+      // 檢查新選的學校是否有之前選的學群
+      if ($departmentGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
+        $departmentGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
+      }
+      // bootstrap需要刷新才會顯示新選項
+      $departmentGroupList.selectpicker('refresh');
+    });
+  }
+
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools('phd').then(response => {
+    return API.getSchools('proTrain').then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
-
       return response.data;
     });
   }
 
   // 擷取學群資料
   function _getDepartmentGroups() {
-    return API.getDepartmentGroups().then(response => {
+    return API.getDepartmentGroups('proTrain', $schoolList.find(':selected').val()).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
-
       return response.data;
     });
   }
@@ -174,13 +192,18 @@ const app = (function () {
     const schoolId = params.get('school') && params.get('school').length !== 0 ? params.get('school') : null;
     const departmentGroupId = params.get('group') && params.get('group').length !== 0 ? params.get('group') : 'all';
     const keyword = params.get('keyword') ? params.get('keyword') : '';
+    const includeFirstCategory = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
+    const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
+    const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
+    const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
-    const showKeyIndustries = params.has('key-industry')? JSON.parse(params.get('key-industry')): false;
+    const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
       _setSchoolList(allSchools = schools);
+
       // 擺放學群列表
       _setDepartmentGroupList(departmentGroups);
 
@@ -188,22 +211,28 @@ const app = (function () {
       $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
       $departmentGroupList.children(`[value=${departmentGroupId}]`).prop('selected', true);
       $keyword.prop('value', keyword);
+      $isGroup1.prop('checked', includeFirstCategory);
+      $isGroup2.prop('checked', includeSecondCategory);
+      $isGroup3.prop('checked', includeThirdCategory);
+      $showMyanmar.prop('checked', showMyanmarProject);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
-      $showKeyIndustries.prop('checked', showKeyIndustries);
+      $showSchoolFive.prop('checked', showSchoolFiveGraduate);
 
-      $schoolList.selectpicker();
-      $departmentGroupList.selectpicker();
+      $schoolList.selectpicker('refresh');
+      $departmentGroupList.selectpicker('refresh');
 
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
-          schoolId, 'phd', keyword, departmentGroupId, showEnglishTaughtClass, showKeyIndustries,
+          schoolId, 'bachelor', keyword, departmentGroupId,
+          includeFirstCategory, includeSecondCategory, includeThirdCategory,
+          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
         );
       } else {
         loading.complete();
       }
     }).catch(error => {
-      // console.log(error)
+      // console.log(error);
       swal({title: `Error`, text: error, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
     });
   }
@@ -220,13 +249,6 @@ const app = (function () {
       $schoolList.append(`<option value="${school.id}">${school.title} ${school.eng_title}</option>`);
     }
 
-    // 若過濾結果為只有一個，直接幫使用者選定該校
-    if (newSchoolList.length === 1) {
-      // 提取該校 id
-      const schoolId = newSchoolList[0].id;
-      // 幫使用者選定
-      $schoolList.children(`[value=${schoolId}]`).prop('selected', true);
-    }
   }
 
   // 設定學群列表下拉選單
@@ -248,7 +270,7 @@ const app = (function () {
     let html = '';
 
     // 若是無資料，則顯示提示
-    if (departments === null) {
+    if (departments === null ){
       // 無資料，直接挑出
       html += `<tr><td colspan=12>請選擇過濾條件</td></tr>`;
       return html;
@@ -258,9 +280,47 @@ const app = (function () {
     // 擺放各系所資料
     for (let department of departments) {
       // 設定簡便連結
-      const schoolURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
-      const detailURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
-      const shenchaItemURL = `phd-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
+      const schoolURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
+      const detailURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
+      const shenchaItemURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
+
+      // 設定個人申請名額
+      // 名額為零則不顯示
+      // 無個人申請名額則餘額留用顯示-
+      let admissionSelectionQuota = `
+        <td colspan="2">
+          <span class="td-br">無名額</span>
+          <span class="td-br">Distributed allocation only</span>
+        </td>
+        <td> - </td>
+        <td> - </td>
+      `;
+      // 有名額要連審查項目一起顯示
+      if (department.admission_selection_ratify_quota > 0) {
+        admissionSelectionQuota = `
+        <td>${department.admission_selection_ratify_quota}</td>
+        <td>
+          <a href="${shenchaItemURL}" target="_blank">
+            <span class="td-br">審查項目</span>
+            <span class="td-br">Application documents</span>
+          </a>
+        </td>
+        `;
+        // 顯示是否為緬甸師培志願
+        if(department.myanmar_teacher_education ){
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+        } else{
+          admissionSelectionQuota += `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">No</span>
+              </td> `;
+        }
+      }
 
       //全英語授課
       let engTaughtHtml;
@@ -278,9 +338,51 @@ const app = (function () {
               </td> `;
       }
 
+      //中五制學生
+      let schoolFiveHtml;
+      if(department.allow_school_five){
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">是</span>
+                  <span class="td-br">Yes</span>
+              </td> `;
+      } else {
+        schoolFiveHtml= `
+              <td>
+                  <span class="td-br">否</span>
+                  <span class="td-br">Not</span>
+              </td> `;
+      }
+
+      // 設定類組
+      let groupHtml = '';
+      switch(department.group_code) {
+        case '1':
+          groupHtml = `
+            <span class="td-br">第一類組<span>
+            <span class="td-br">First Group</span>
+          `;
+          break;
+        case '2':
+          groupHtml = `
+          <span class="td-br">第二類組<span>
+          <span class="td-br">Second Group</span>
+          `;
+          break;
+        case '3':
+          groupHtml = `
+          <span class="td-br">第三類組<span>
+          <span class="td-br">Third Group</span>
+          `;
+          break;
+        default:
+          break;
+      }
+
       // 擺放各系所資料
       html += `
         <tr>
+          <td>${department.card_code}</td>
 
           <td>
             <a href="${schoolURL}" target="_blank">
@@ -290,13 +392,6 @@ const app = (function () {
           </td>
           <td>
       `;
-
-      if (department.is_extended_department == '1') {
-        html += `
-              <span class="badge badge-warning"> 重點產業系所 </span>
-              <br />
-        `;
-      }
 
       html += `
             <a href="${detailURL}" target="_blank">
@@ -314,7 +409,7 @@ const app = (function () {
             </a>
         `;
       }
-          
+
       if (department.collego != null)
       {
         html += `
@@ -324,17 +419,16 @@ const app = (function () {
         `;
       }
 
-      html += `
-          <td>${department.admission_selection_ratify_quota}</td>
-
-          <td>
-            <a href="${shenchaItemURL}" target="_blank">
-              <span class="td-br">審查項目</span>
-              <span class="td-br">Application documents</span>
-            </a>
+      html += ` 
           </td>
 
+          <td>${groupHtml}</td>
+
+          ${admissionSelectionQuota}
+
           ${engTaughtHtml}
+
+          ${schoolFiveHtml}
         </tr>
       `;
     }

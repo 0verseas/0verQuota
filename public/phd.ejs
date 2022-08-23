@@ -5,8 +5,8 @@
   <div class="announcement" id="announcement" data-children=".announcement-item">
     <h3>宣告 <small class="text-muted">Announcement</small></h3>
     <div class="announcement-item">
-      <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="false" aria-controls="announcement1">
-        >招生名額依據 <small class="text-muted">Source of student numbers</small>
+      <a class="announcement-title collapsed" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="false" aria-controls="announcement1">
+        招生名額依據 <small class="text-muted">Source of student numbers</small>
       </a>
       <div id="announcement1" class="collapse" role="tabpanel">
         <ol>
@@ -46,8 +46,8 @@
       </div>
     </div>
     <div class="announcement-item">
-      <a class="announcement-title" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
-        >注意事項 <small class="text-muted">Points of Attention</small>
+      <a class="announcement-title collapsed" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
+        注意事項 <small class="text-muted">Points of Attention</small>
       </a>
       <div id="announcement3" class="collapse px-1" role="tabpanel">
         <p>
@@ -103,6 +103,7 @@
           this.elements.namedItem('keyword').value,
           this.elements.namedItem('department-group').value,
           this.elements.namedItem('english-instructed-program').checked,
+          this.elements.namedItem('key-industries').checked,
         );
       ">
         <div class="form-group col-md-6">
@@ -115,6 +116,12 @@
             <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
             <label class="form-check-label" for="showEnglishTaught">
               全英語授課學系* <small class="text-muted"><br/>English-instructed program departments</small>
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="showKeyIndustries" name="key-industries" type="checkbox" value="">
+            <label class="form-check-label" for="showKeyIndustries">
+              重點產業系所* <small class="text-muted"><br/>Key industry departments</small>
             </label>
           </div>
         </div>

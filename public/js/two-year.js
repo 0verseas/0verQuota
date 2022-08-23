@@ -25,6 +25,7 @@ const app = (function () {
   /**
    * functions
    */
+  $schoolList.on('change', _reRenderGroup);
 
   // 過濾學校列表
   function filterSchoolList(keyword = '') {
@@ -40,6 +41,19 @@ const app = (function () {
 
     // 重新擺放學校列表
     _setSchoolList(newSchoolList);
+  }
+  
+  function _reRenderGroup() {
+    let currentGroupId = $departmentGroupList.find(':selected').val();
+    _getDepartmentGroups().then((departmentGroups) => {
+      _setDepartmentGroupList(departmentGroups);
+      // 檢查新選的學校是否有之前選的學群
+      if ($departmentGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
+        $departmentGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
+      }
+      // bootstrap需要刷新才會顯示新選項
+      $departmentGroupList.selectpicker('refresh');
+    });
   }
 
   // 過濾系所列表
@@ -72,7 +86,7 @@ const app = (function () {
             $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);
             break;
           default:
-            alert(response.singleErrorMessage);
+            swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
             break;
         }
 
@@ -122,14 +136,14 @@ const app = (function () {
 
       loading.complete();
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       loading.complete();
     });
   }
 
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools().then(response => {
+    return API.getSchools('twoYear').then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -140,7 +154,7 @@ const app = (function () {
 
   // 擷取學群資料
   function _getDepartmentGroups() {
-    return API.getDepartmentGroups().then(response => {
+    return API.getDepartmentGroups('twoYear',$schoolList.find(':selected').val()).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -182,8 +196,8 @@ const app = (function () {
         loading.complete();
       }
     }).catch(error => {
-      console.log(error)
-      alert(error);
+      // console.log(error)
+      swal({title: `Error`, text: error, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
     });
   }
 

@@ -14,7 +14,6 @@ const app = (function () {
   const $navShenchaItemTab = $('#nav-shenchaItem-tab');
 
   // 學校資訊 DOM
-
   const $schoolPhone = $('#school-phone');
   const $schoolFax = $('#school-fax');
   const $schoolEmail = $('#school-email');
@@ -25,7 +24,6 @@ const app = (function () {
   const $hasFiveYearStudentAllowed = $('#has-five-year-student-allowed');
   // const $hasSelfEnrollment = $('#has-self-enrollment');
   const $hasDorm = $('#has-dorm');
-  const $dormDl = $('#dorm-dl');
   const $dormInfo = $('.dorm-info');
   const $dormInfoText = $('#dorm-info-text');
   const $dormInfoEngText = $('#dorm-info-eng-text');
@@ -40,8 +38,10 @@ const app = (function () {
   const $systemEngDescription = $('#system-eng-description');
 
   // 系所資料 DOM
+  const $deptCardCode = $('#dept-card-code');
   const $deptUrl = $('#dept-url');
   const $deptEngUrl = $('#dept-eng-url');
+  const $groupCode = $('#group-code');
   const $genderLimit = $('#gender-limit');
   const $birthLimit = $('#birth-limit');
   const $mainGroup = $('#main-group');
@@ -100,16 +100,16 @@ const app = (function () {
 
   // render 所有資料
   function renderData(school, system, department) {
+
     // 設定 boolean 顯示字串
     const trueIconHtml = '有 Yes';
     const falseIconHtml = '無 No';
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`${department.title}（博士班）`);
+    $deptTitle.html(`${department.title}（學士班）`);
     $schoolEngTitle.html(`${school.eng_title}`);
-    $deptEngTitle.html(`${department.eng_title} (PhD)`);
-
+    $deptEngTitle.html(`${department.eng_title} (Bachelor)`);
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);
@@ -149,19 +149,21 @@ const app = (function () {
     $systemEngDescription.html(system.eng_description);
 
     // 系所基本資料
+    $deptCardCode.html(department.card_code);
     $deptUrl.html(`<a href="${department.url}" target="_blank">${department.url}</a>`);
     $deptEngUrl.html(_isProvide(department.eng_url) ? `<a href="${department.eng_url}" target="_blank">${department.eng_url}</a>` : '');
+    $groupCode.html(department.group_code);
     // $deptHasSelfEnrollment.html(department.has_self_enrollment ? trueIconHtml : falseIconHtml);
     // $deptHasSpecialClass.html(department.has_special_class ? trueIconHtml : falseIconHtml);
     // $deptHasForeignSpecialClass.html(department.has_foreign_special_class ? trueIconHtml : falseIconHtml);
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
-    $admissionSelectionQuota.html(`${department.admission_selection_ratify_quota} 名`);
-
+    $admissionSelectionQuota.html(department.admission_selection_ratify_quota > 0 ? `${department.admission_selection_ratify_quota} 名` : `僅限聯合分發`);
+    
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';
     if (department.gender_limit !== null) {
-      genderLimitString = department.gender_limit.toLowerCase() === 'm' ? '限男 Male only' : '限女 Female only ';
+      genderLimitString = department.gender_limit.toLowerCase() === 'm' ? '限男 male only' : '限女 female only ';
     }
     $genderLimit.html(genderLimitString);
 
@@ -192,7 +194,7 @@ const app = (function () {
     let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
     $englishTaught.html(`${englishTaughtString}`);
 
-     // 審查項目有才顯示
+    // 審查項目有才顯示
     if (!Array.isArray(department.application_docs) || !department.application_docs.length) {
       $navShenchaItemTab.remove();
     }
@@ -209,7 +211,7 @@ const app = (function () {
       `;
 
       // 判斷是不是師長推薦函
-      if(doc.type_id == 66) {
+      if(doc.type_id == 8) {
         // 需要紙本
         let paper = doc.paper;
         if (paper !== null) {
@@ -267,7 +269,6 @@ const app = (function () {
       $shenchaItemDiv.append(appendData);
     }
 
-
   }
 
   // 確認是否有提供資料
@@ -277,16 +278,15 @@ const app = (function () {
 
   // 頁面初始化
   function _init() {
-
     // 拿資料
-    API.getDepartmentDetail(schoolId, 'phd', id).then(response => {
+    API.getDepartmentDetail(schoolId, 'bachelor', id).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           default:
             // console.log(response.errorMessages);
             swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false})
             .then(()=>{
-              window.location.href = 'phd.html';
+              window.location.href = 'pro-train.html';
             })
         }
         return;
@@ -300,6 +300,7 @@ const app = (function () {
       changeTab(`#${tab}`);
       loading.complete();
     }).catch(error => {
+      swal({title: `Error`, text: error, type:"error", confirmButtonText: '確定', allowOutsideClick: false})
       // console.error(error);
     });
   }

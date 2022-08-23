@@ -1,0 +1,191 @@
+<%- partial('partials/_nav', { system: 'proTrain' }) %>
+
+<div class="container" style="max-width: 57rem;">
+
+  <div class="headline">
+    <span class="headline-title" id="school-title"></span>
+    <span class="headline-title" id="dept-title"></span>
+    <div class="w-100"></div>
+    <span class="headline-eng-title" id="school-eng-title"></span>
+    <span class="headline-eng-title" id="dept-eng-title"></span>
+  </div>
+
+  <nav class="nav nav-tabs nav-fill my-3 detail-tab" id="infoTab" role="tablist">
+    <a class="nav-item nav-link" id="nav-schoolInfo-tab" data-toggle="tab" href="#nav-schoolInfo" role="tab" aria-controls="nav-schoolInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">學校資料</span>
+      <small>University information</small>
+    </a>
+    <a class="nav-item nav-link" id="nav-deptInfo-tab" data-toggle="tab" href="#nav-deptInfo" role="tab" aria-controls="nav-deptInfo" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">系所資料</span>
+      <small>Departments and graduate schools information</small>
+    </a>
+    <a class="nav-item nav-link" id="nav-shenchaItem-tab" data-toggle="tab" href="#nav-shenchaItem" role="tab" aria-controls="nav-shenchaItem" aria-expanded="true" onclick="app.changeTab(this.hash)">
+      <span class="d-block">審查項目</span>
+      <small>Application documents </small>
+    </a>
+  </nav>
+
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade" id="nav-schoolInfo" role="tabpanel" aria-labelledby="nav-schoolInfo-tab">
+      <div>
+        <h4>基本資訊 <small class="text-muted">Basic Information</small></h4>
+        <dl class="row ">
+          <dt class="col-sm-4">電話號碼 <small class="text-muted">Phone</small></dt>
+          <dd class="col-sm-8" id="school-phone"></dd>
+
+          <dt class="col-sm-4">傳真號碼 <small class="text-muted">Fax</small></dt>
+          <dd class="col-sm-8" id="school-fax"></dd>
+
+          <dt class="col-sm-4">電子信箱 <small class="text-muted">Email</small></dt>
+          <dd class="col-sm-8" id="school-email"></dd>
+
+          <dt class="col-sm-4">地址 <small class="text-muted">Address</small></dt>
+          <dd class="col-sm-8">
+            <p id="school-address"></p>
+            <p id="school-eng-address"></p>
+          </dd>
+
+          <dt class="col-sm-4">中文網站 <small class="text-muted">Chinese Website</small></dt>
+          <dd class="col-sm-8 text-link" id="school-url"></dd>
+
+          <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
+          <dd class="col-sm-8 text-link" id="school-eng-url"></dd>
+
+          <dt class="col-8 col-md-4">招收中五生(中學11年級畢業生) <small class="text-muted">Recruitment of high school grade five students</small></dt>
+          <dd class="col-4 col-md-8" id="has-five-year-student-allowed"></dd>
+
+          <!--
+          <dt class="col-8 col-md-4">單獨招收僑生 <small class="text-muted">dān dú zhāo shōu qiáo shēng</small></dt>
+          <dd class="col-4 col-md-8" id="has-self-enrollment"></dd>
+          -->
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>住宿資訊 <small class="text-muted">Accommodation information </small></h4>
+        <dl class="row" id="dorm-dl">
+          <dt class="col-8 col-md-4">提供宿舍 <small class="text-muted">Dormitory provided</small></dt>
+          <dd class="col-4 col-md-8" id="has-dorm"></dd>
+          <dt class="col-sm-4 dorm-info">說明 <small class="text-muted">Description </small></dt>
+          <dd class="col-sm-8 dorm-info">
+            <p id="dorm-info-text"></p>
+            <p id="dorm-info-eng-text"></p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>獎學金資訊 <small class="text-muted">Scholarship information</small></h4>
+        <dl class="row" id="scholarship-dl">
+          <dt class="col-8 col-md-4">提供獎學金 <small class="text-muted">Scholarships available </small></dt>
+          <dd class="col-4 col-md-8" id="has-scholarship"></dd>
+
+          <dt class="col-sm-4 scholarship-info">中文說明 <small class="text-muted">Description in Chinese</small></dt>
+          <dd class="col-sm-8 text-link scholarship-info" id="scholarship-url"></dd>
+
+          <dt class="col-sm-4 scholarship-info">英文說明 <small class="text-muted">Description in English </small></dt>
+          <dd class="col-sm-8 text-link scholarship-info" id="scholarship-eng-url"></dd>
+
+          <dt class="col-sm-4 scholarship-info">負責單位 <small class="text-muted">Unit in charge </small></dt>
+          <dd class="col-sm-8 scholarship-info">
+            <p id="scholarship-dept"></p>
+            <p id="scholarship-eng-dept"></p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>學則資訊 <small class="text-muted">Academic information </small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">備註 <small class="text-muted">Notes </small></dt>
+          <dd class="col-md-8">
+            <p id="system-description"></p>
+            <p id="system-eng-description"></p>
+          </dd>
+        </dl>
+      </div>
+
+      <hr>
+
+    </div>
+
+    <div class="tab-pane fade" id="nav-deptInfo" role="tabpanel" aria-labelledby="nav-deptInfo-tab">
+      <div>
+        <h4>基本資訊 <small class="text-muted">Basic Information</small></h4>
+        <dl class="row ">
+          <dt class="col-sm-4">志願代碼 <small class="text-muted">Optional code</small></dt>
+          <dd class="col-sm-8" id="dept-card-code"></dd>
+
+          <dt class="col-sm-4">中文網站 <small class="text-muted">Chinese Website</small></dt>
+          <dd class="col-sm-8 text-link" id="dept-url"></dd>
+
+          <dt class="col-sm-4">英文網站 <small class="text-muted">English Website</small></dt>
+          <dd class="col-sm-8 text-link" id="dept-eng-url"></dd>
+
+          <dt class="col-sm-4">類組 <small class="text-muted">Category</small></dt>
+          <dd class="col-sm-8" id="group-code"></dd>
+
+          <dt class="col-sm-4">性別招生限制 <small class="text-muted">Recruitment limits by gender</small></dt>
+          <dd class="col-sm-8" id="gender-limit"></dd>
+
+          <dt class="col-sm-4">年齡招生限制 <small class="text-muted">Recruitment limits by birth</small></dt>
+          <dd class="col-sm-8" id="birth-limit"></dd>
+
+          <dt class="col-sm-4">主要學群 <small class="text-muted">Main disciplines</small></dt>
+          <dd class="col-sm-8" id="main-group"></dd>
+
+          <dt class="col-sm-4">次要學群 <small class="text-muted">Additional disciplines </small></dt>
+          <dd class="col-sm-8" id="sub-group"></dd>
+
+          <dt class="col-sm-4">是否為全英語授課 <small class="text-muted">English instructed taught </small></dt>
+          <dd class="col-sm-8" id="english-taught"></dd>
+
+          <!--
+          <dt class="col-8 col-md-4">單獨招收僑生 <small class="text-muted">dān dú zhāo shōu qiáo shēng</small></dt>
+          <dd class="col-4 col-md-8" id="dept-has-self-enrollment"></dd>
+
+          <dt class="col-8 col-md-4">開設僑生專班 <small class="text-muted">Kai She Qiao Sheng Zhuan Ban </small></dt>
+          <dd class="col-4 col-md-8" id="dept-has-special-class"></dd>
+
+          <dt class="col-8 col-md-4">招生外生專班 <small class="text-muted">Zhao Shou Wai Sheng Zhuan Ban</small></dt>
+          <dd class="col-4 col-md-8" id="dept-has-foreign-special-class"></dd>
+          -->
+
+        </dl>
+      </div>
+
+      <hr>
+
+      <div>
+        <h4>學則資訊 <small class="text-muted">Academic information </small></h4>
+        <dl class="row ">
+          <dt class="col-md-4">備註 <small class="text-muted">Notes </small></dt>
+          <dd class="col-md-8">
+            <p id="dept-description"></p>
+            <p id="dept-eng-description"></p>
+          </dd>
+        </dl>
+      </div>
+      <hr>
+      <div>
+        <h4>名額分配 <small class="text-muted">Quota break-down</small></h4>
+        <dl class="row">
+          <dt class="col-sm-4">個人申請名額 <small class="text-muted">Quota of individual applications </small></dt>
+          <dd class="col-sm-8" id="admission-selection-quota"></dd>
+        </dl>
+      </div>
+
+      <hr>
+
+    </div>
+
+    <div class="tab-pane fade" id="nav-shenchaItem" role="tabpanel" aria-labelledby="nav-shenchaItem-tab">
+    </div>
+  </div>
+</div>

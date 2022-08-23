@@ -1,15 +1,15 @@
 const API = (function () {
   const baseUrl = env.baseUrl;
 
-  function getSchools() {
-    const request = fetch(`${baseUrl}/schools`, {
+  function getSchools(systemId='') {
+    const request = fetch(`${baseUrl}/schools?systems=${systemId}`, {
       credentials: 'include'
     });
 
     return _requestHandle(request);
   }
 
-  function getDepartments(schoolId = 'all', systemId = 'all', departmentGroupId = 'all', keyword = '', includeFirstCategory = true, includeSecondCategory = true, includeThirdCategory = true, showMyanmarProject = false, showEnglishTaughtClass = false, showSchoolFiveGraduate = false) {
+  function getDepartments(schoolId = 'all', systemId = 'all', departmentGroupId = 'all', keyword = '', includeFirstCategory = true, includeSecondCategory = true, includeThirdCategory = true, showMyanmarProject = false, showEnglishTaughtClass = false, showSchoolFiveGraduate = false, isExtendedDepartment = '') {
     // 整理類組成 array（有才加進去）
     let category = [];
 
@@ -24,7 +24,7 @@ const API = (function () {
     if (includeThirdCategory) {
       category.push(3);
     }
-    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=${departmentGroupId}&category=${category.toString()}&myanmar=${showMyanmarProject}&eng-taught=${showEnglishTaughtClass}&school5=${showSchoolFiveGraduate}&keyword=${keyword}`, {
+    const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments?discipline=${departmentGroupId}&category=${category.toString()}&myanmar=${showMyanmarProject}&eng-taught=${showEnglishTaughtClass}&school5=${showSchoolFiveGraduate}&is-extended-department=${isExtendedDepartment}&keyword=${keyword}`, {
       credentials: 'include'
     });
 
@@ -35,7 +35,6 @@ const API = (function () {
     const request = fetch(`${baseUrl}/schools/${schoolId}/systems/${systemId}/departments/${departmentId}`, {
       credentials: 'include'
     });
-
     return _requestHandle(request).then(response => {
       if (!response.ok) {
         return response;
@@ -47,8 +46,9 @@ const API = (function () {
         systemPropertyName = 'graduate_departments';
       } else if (systemId === 'twoYear') {
         systemPropertyName = 'two_year_tech_departments';
+      } else if (systemId === 'youngAssociate') {
+        systemPropertyName = 'young_associate_departments';
       }
-
       // 暫存拉到的資料
       const data = response.data;
       // 整理資料
@@ -67,12 +67,36 @@ const API = (function () {
     });
   }
 
-  function getDepartmentGroups() {
-    const request =  fetch(`${baseUrl}/department-groups`, {
+  async function getDepartmentGroups(systemId='',schoolId='') {
+    const request =  fetch(`${baseUrl}/department-groups?system_id=${systemId}&school_id=${schoolId}`, {
       credentials: 'include'
     });
+    try {
+      if(systemId=='youngAssociate') {
+        const datas = await _requestHandle(request);
+        if(!datas.ok) {throw datas};
+        const json = await datas.data;
+        let group_to_values = await json.reduce(function (obj, item) {
+          obj[item.id + ',' + item.title + ',' + item.engTitle] = (obj[item.id + ',' + item.title + ',' + item.engTitle]) || [];
+          obj[item.id + ',' + item.title + ',' + item.engTitle].push({subId: item.subId, subTitle: item.subTitle, subEngTitle: item.subEngTitle});
+          return obj;
+        }, {});
+  
+        let groups = await Object.keys(group_to_values).map(function (key) {
+          key =  key.split(',');
+          return {id: key[0], title: key[1], engTitle: key[2], subTitle: group_to_values[key]};
+        });
+  
+        localStorage.groupList = JSON.stringify(groups);
+        return groups;
+      }
 
-    return _requestHandle(request);
+      return _requestHandle(request);
+
+    } catch (e) {
+      // console.log('Boooom!!');
+      // console.log(e);
+    }
   }
 
   // http request 的中介處理
