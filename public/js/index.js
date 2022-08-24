@@ -17,6 +17,7 @@ const app = (function () {
   const $showMyanmar = $('#showMyanmar');
   const $showEnglishTaught = $('#showEnglishTaught');
   const $showSchoolFive = $('#showSchoolFive');
+  const $showKeyIndustries = $('#showKeyIndustries');
   const $systemList = $('#system-list');  // 選擇學制的選單
 
   /**
@@ -24,6 +25,7 @@ const app = (function () {
    */
 
   $systemList.on('change', handleSelectSystem);
+  $schoolList.on('change', _reRenderGroup);
 
   /**
    * init
@@ -56,6 +58,19 @@ const app = (function () {
     _setSchoolList(newSchoolList);
   }
 
+  function _reRenderGroup() {
+    let currentGroupId = $departmentGroupList.find(':selected').val();
+    _getDepartmentGroups().then((departmentGroups) => {
+      _setDepartmentGroupList(departmentGroups);
+      // 檢查新選的學校是否有之前選的學群
+      if ($departmentGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
+        $departmentGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
+      }
+      // bootstrap需要刷新才會顯示新選項
+      $departmentGroupList.selectpicker('refresh');
+    });
+  }
+
   // 過濾系所列表
   function filterDepartmentList(
     schoolId = 'all',
@@ -68,6 +83,7 @@ const app = (function () {
     showMyanmarProject = false,
     showEnglishTaughtClass = false,
     showSchoolFiveGraduate = false,
+    showKeyIndustries = false
   ) {
     loading.start();
 
@@ -82,6 +98,7 @@ const app = (function () {
       'myanmar': showMyanmarProject,
       'eng-taught': showEnglishTaughtClass,
       'school5': showSchoolFiveGraduate,
+      'key-industry': showKeyIndustries,
     });
 
     // 準備新網址
@@ -90,15 +107,18 @@ const app = (function () {
     // 更新網址
     window.history.replaceState({path: newurl}, null, newurl);
 
+    let isExtendedDepartment = [];
+    if(showKeyIndustries) isExtendedDepartment.push(1);
+
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
             $resultBody.html(`<tr><td colspan=16>無符合條件的系所</td></tr>`);
             break;
           default:
-            alert(response.singleErrorMessage);
+            swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
             break;
         }
 
@@ -106,12 +126,10 @@ const app = (function () {
 
         return;
       }
-
       // 取得過濾過的列表，並剔除無任何系所者
       const filteredSchools = response.data.filter(school => {
         return school.departments.length > 0;
       });
-
       // 重新擺放系所列表
       let allDepartments = [];
 
@@ -151,18 +169,17 @@ const app = (function () {
 
       loading.complete();
     }).catch(error => {
-      console.log(error);
+      // console.log(error);
       loading.complete();
     });
   }
 
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools().then(response => {
+    return API.getSchools('bachelor').then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
-
       return response.data;
     });
   }
@@ -190,6 +207,7 @@ const app = (function () {
     const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
     const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
+    const showKeyIndustries = params.has('key-industry')? JSON.parse(params.get('key-industry')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
@@ -209,6 +227,7 @@ const app = (function () {
       $showMyanmar.prop('checked', showMyanmarProject);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
       $showSchoolFive.prop('checked', showSchoolFiveGraduate);
+      $showKeyIndustries.prop('checked', showKeyIndustries);
 
       $schoolList.selectpicker();
       $departmentGroupList.selectpicker();
@@ -218,14 +237,14 @@ const app = (function () {
         filterDepartmentList(
           schoolId, 'bachelor', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
-          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
+          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,showKeyIndustries
         );
       } else {
         loading.complete();
       }
     }).catch(error => {
-      console.log(error);
-      alert(error);
+      // console.log(error);
+      swal({title: `Error`, text: error, type:"error", confirmButtonText: '確定', allowOutsideClick: false});
     });
   }
 
@@ -443,54 +462,45 @@ const app = (function () {
               <span class="td-br">${department.eng_school}</span>
             </a>
           </td>
-          `;
-      if(department.ioh == null && department.collego == null) {
-        html += `
           <td>
-            <a href="${detailURL}" target="_blank">
-              <span >
-                ${department.title}
-              </span>
-              <span class="td-br">${department.eng_title}</span>
-              <a/>
-          </td>
-          `;
-      }else {
-        iohHtml = ``;
-        collegoHtml = ``;
-        if (department.ioh != null) {
-          iohHtml = `
-            <a href="${department.ioh.url}" target="_blank">
-              <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
-            </a>
-          `;
-        }
-          
-        if (department.collego != null) {
-          collegoHtml = `
-            <a href="${department.collego.url}" target="_blank">
-              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
-            </a>
-          `;
-        }
-          
+      `;
+
+      if (department.is_extended_department == '1') {
         html += `
-          <td>
-            <a href="${detailURL}" target="_blank">
-              <span >
-                ${department.title}
-              </span>
-            </a>
-            ${iohHtml}
-            <a href="${detailURL}" target="_blank">
-              <span class="td-br">${department.eng_title}</span>
-            </a>
-            ${collegoHtml}
-          </td>
-          `;
+          <span class="badge badge-warning"> 重點產業系所 </span>
+          <br />
+        `;
       }
 
       html += `
+            <a href="${detailURL}" target="_blank">
+              <span >
+                ${department.title}
+              </span>
+              <span class="td-br">${department.eng_title}</span>
+            <a/>
+      `;
+      if (department.ioh != null)
+      {
+        html += `
+            <a href="${department.ioh.url}" target="_blank">
+              <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
+            </a>
+        `;
+      }
+          
+      if (department.collego != null)
+      {
+        html += `
+            <a href="${department.collego.url}" target="_blank">
+              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
+            </a>
+        `;
+      }
+
+      html += `
+          </td>
+
           <td>${groupHtml}</td>
 
           ${admissionSelectionQuota}
@@ -526,6 +536,12 @@ const app = (function () {
         break;
       case 'phd':
         location.assign('phd.html');
+        break;
+      case 'young-associate':
+        location.assign('young-associate.html');
+        break;
+      case 'pro-train':
+        location.assign('pro-train.html');
         break;
       default:
         // 通通去 index

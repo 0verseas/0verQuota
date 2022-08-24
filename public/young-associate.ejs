@@ -1,0 +1,150 @@
+<%- partial('partials/_nav', { system: 'youngAssociate' }) %>
+
+<div class="container">
+
+  <div class="announcement" id="announcement" data-children=".announcement-item">
+    <h3>宣告 <small class="text-muted">Announcement</small></h3>
+    <div class="announcement-item">
+      <a class="announcement-title collapsed" data-toggle="collapse" data-parent="#announcement" href="#announcement1" aria-expanded="false" aria-controls="announcement1">
+        招生名額依據 <small class="text-muted">Source of student numbers</small>
+      </a>
+      <div id="announcement1" class="collapse" role="tabpanel">
+        <ol>
+          <li>
+            業經教育部
+            <ul>
+              <li>110 年 7 月 7 日臺教技（一）字第 1100090706 號</li>
+            </ul>
+              等函核定在案。
+          </li>
+          <li>各梯次名額係依本會 110 年 10 月 15 日第 1 次常務委員會決議事項辦理。</li>
+        </ol>
+        <ol>
+          <li>
+            Cases based on Circulars
+            <ul>
+              <li>No. Tai-Jiao-Ji-Tzi (1) 1100090706 of 7 July 2021</li>
+            </ul>
+              of the Ministry of Education.
+          </li>
+          <li>Each tier volume is handled in accordance with the rules adopted by our committee on 15 October 2021.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="announcement-item">
+      <a class="announcement-title collapsed" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
+        注意事項 <small class="text-muted">Points of Attention</small>
+      </a>
+      <div id="announcement3" class="collapse" role="tabpanel">
+        <p>
+          <ol>
+            <li>學校名稱、系所名稱接提供中英文查詢。</li>
+            <li>適用於在馬來西亞取得等同高中畢業之文憑（Higher Diploma）者來臺升讀技術校院，修業年限以二年為原則，修業期滿經考核成績及格者，由就讀學校授予副學士學位，發給副學士學位證書。</li>
+            <li>申請人應依就讀校系意願由高至低填寫至多 13 個校系志願。</li>
+            <li>申請者需依簡章規定繳交僑居地居留證件/中華民國護照及僑居身份加簽之影本、高級中等以上學校畢業證書/在學證明/同等學力證明書、最近3學年成績證明及切結書乙份。</li>
+            <li>本會依據申請人所填志願，將申請表件分轉各校審查，按教育部核定各校系招生名額、各校審查結果及僑生選填志願序進行統一分發。各校系得不足額錄取。資格不符及未通過志願學校審核者不予分發。</li>
+            <li>所謂「依一般限制」，係指患有精神病、活動性肺結核、惡性傳染病及重症慢性疾病等情形者，均不得申請。</li>
+            <li>身心障礙學生如欲申請赴臺升學，應先了解並自行評估各校系能否依不同需求類別及程度，提供學習輔具資源及生活照輔措施，以作為選填志願之參考，以免造成無法順利就學之困擾。</li>
+          </ol>
+        </p>
+        <p>
+          <ol>
+            <li>For Chinese/English search, click Search to see all the departments and graduate schools per category.</li>
+            <li>Applies to students from Hong Kong with an Associate Degree from a full-time day program or a Higher Diploma that wish to pursue further studies at vocational colleges in Taiwan. In principle, their study time is limited to two years, after which review of their final results determines whether they are awarded a degree and certificate by their college.</li>
+            <li>Please indicate your top five university departments in descending order of preference. </li>
+            <li>Please submit your graduation certificate, transcript, and other documents as required by the university department, in accordance with their regulations.  </li>
+            <li>Our committee will forward your submitted application to your selected university graduate schools for review. Every graduate school will review the applications it receives. The distributed allocation is then carried out on the basis of the reviews of the university graduate schools and the preference rankings of the applicants. Every graduate schools may accept students as long as they have a quota remaining. Applicants that do not meet the criteria of their preferred graduate schools are not allocated a student spot.</li>
+            <li>“General limitations” refers to persons suffering mental illness, active tuberculosis, malignant infectious diseases, and severe chronic diseases. They are barred from applying. </li>
+            <li>Students with mental or physical needs must, prior to their application, assess whether their university departments of choice offer the support facilities and services needed for their type and degree of needs to enable smooth studies and living. </li>
+          </ol>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>系所查詢 <small class="text-muted">Department and graduate school search</small></h3>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      選擇學校 <small class="text-muted">Select university</small>
+    </div>
+    <div class="form-row card-body">
+      <select id="school-list" name="school" data-live-search="true" data-width="auto">
+        <option value="all" selected>所有學校 All Schools</option>  
+      </select>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      選擇過濾條件 <small class="text-muted">Select filter</small>
+    </div>
+
+    <div class="card-body">
+      <form class="form-row" onsubmit="
+        event.preventDefault();
+        app.filterDepartmentList(
+          document.getElementById('school-list').options[document.getElementById('school-list').selectedIndex].value,
+          'youngAssociate',
+          this.elements.namedItem('keyword').value,
+          document.getElementById('main-group').options[document.getElementById('main-group').selectedIndex].value,
+          document.getElementById('sub-group').options[document.getElementById('sub-group').selectedIndex].value,
+        );
+      ">
+        <div class="form-group col-md-6">
+          <label for="xuequn" class="form-control-label">選擇學群 <small class="text-muted">Select discipline* </small></label>
+          <br />
+          <select id="main-group" name="main-group" data-live-search="true" data-width="90%">
+            <option value="all" data-id="-1" selected>所有主學群 All disciplines</option>
+          </select>
+          <br /><br />
+          <select id="sub-group" name="sub-group" data-live-search="true" data-width="90%">
+            <option value="all" selected>所有副學群 All sub disciplines</option>
+          </select>
+          <br />
+          <!-- <label class="form-control-label"><br/>篩選條件* <small class="text-muted">Select option*</small></label>
+          <div class="form-check">
+            <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
+            <label class="form-check-label" for="showEnglishTaught">
+              全英語授課學系* <small class="text-muted"><br/>English-instructed program departments</small>
+            </label>
+          </div> -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="keywords" class="form-control-label">關鍵字查詢 <small class="text-muted">Keyword search</small></label>
+          <input type="text" class="form-control" id="keyword" name="keyword" maxlength ="191" placeholder="請輸入系所關鍵字">
+        </div>
+
+        <button class="btn btn-primary mx-auto" id="filter-button" type="submit" onmousedown="event.preventDefault()">送出查詢</button>
+      </form>
+    </div>
+  </div>
+
+  <hr id="result">
+
+  <h3>查詢結果 <small class="text-muted">Search results</small></h3>
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead>
+        <tr>
+          <th><span class="td-br">志願代碼</span><span class="td-br"><small class="text-muted">code</small></span></th>
+          <th><span class="td-br">學校名稱</span><span class="td-br"><small class="text-muted">University</small></span></th>
+          <th><span class="td-br">系組名稱</span><span class="td-br"><small class="text-muted">Department</small></span></th>
+          <th><span class="td-br">招生名額</span><span class="td-br"><small class="text-muted">Admission quota</small></span></th>
+          <th><span class="td-br">檢核項目</span><span class="td-br"><small class="text-muted">Required documents</small></span></th>
+        </tr>
+      </thead>
+      <tbody id="result-body">
+        <tr>
+          <td colspan="5">請選擇過濾條件</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="mx-auto" id="pagination-container"></div>
+  </div>
+</div>
