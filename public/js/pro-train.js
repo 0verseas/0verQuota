@@ -177,8 +177,8 @@ const app = (function () {
   }
 
   // 擷取學群資料
-  function _getDepartmentGroups() {
-    return API.getDepartmentGroups('proTrain', $schoolList.find(':selected').val()).then(response => {
+  function _getDepartmentGroups(school_code = $schoolList.find(':selected').val()) {
+    return API.getDepartmentGroups('proTrain', school_code).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -200,7 +200,7 @@ const app = (function () {
     const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
 
     // 擷取所有資料並擺放
-    Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
+    Promise.all([_getSchools(), _getDepartmentGroups(schoolId)]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
       _setSchoolList(allSchools = schools);
 

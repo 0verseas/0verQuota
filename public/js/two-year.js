@@ -153,12 +153,11 @@ const app = (function () {
   }
 
   // 擷取學群資料
-  function _getDepartmentGroups() {
-    return API.getDepartmentGroups('twoYear',$schoolList.find(':selected').val()).then(response => {
+  function _getDepartmentGroups(school_code=$schoolList.find(':selected').val()) {
+    return API.getDepartmentGroups('twoYear',school_code).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
-
       return response.data;
     });
   }
@@ -172,7 +171,7 @@ const app = (function () {
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
 
     // 擷取所有資料並擺放
-    Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
+    Promise.all([_getSchools(), _getDepartmentGroups(schoolId)]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
       _setSchoolList(allSchools = schools);
       // 擺放學群列表

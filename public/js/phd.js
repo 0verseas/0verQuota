@@ -158,8 +158,8 @@ const app = (function () {
   }
 
   // 擷取學群資料
-  function _getDepartmentGroups() {
-    return API.getDepartmentGroups().then(response => {
+  function _getDepartmentGroups(school_code = $schoolList.find(':selected').val()) {
+    return API.getDepartmentGroups('phd', school_code).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -178,7 +178,7 @@ const app = (function () {
     const showKeyIndustries = params.has('key-industry')? JSON.parse(params.get('key-industry')): false;
 
     // 擷取所有資料並擺放
-    Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
+    Promise.all([_getSchools(), _getDepartmentGroups(schoolId)]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
       _setSchoolList(allSchools = schools);
       // 擺放學群列表

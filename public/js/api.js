@@ -2,7 +2,7 @@ const API = (function () {
   const baseUrl = env.baseUrl;
 
   function getSchools(systemId='') {
-    const request = fetch(`${baseUrl}/schools?systems=${systemId}`, {
+    const request = fetch(`${baseUrl}/schools?system_id=${systemId}`, {
       credentials: 'include'
     });
 
@@ -68,7 +68,8 @@ const API = (function () {
   }
 
   async function getDepartmentGroups(systemId='',schoolId='') {
-    const request =  fetch(`${baseUrl}/department-groups?system_id=${systemId}&school_id=${schoolId}`, {
+    if (!schoolId) schoolId='';
+    const request =  fetch(`${baseUrl}/department-groups?system_id=${systemId}&school_code=${schoolId}`, {
       credentials: 'include'
     });
     try {
