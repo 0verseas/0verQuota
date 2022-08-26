@@ -74,18 +74,18 @@ const API = (function () {
     });
     try {
       if(systemId=='youngAssociate') {
-        const datas = await _requestHandle(request);
+        let datas = await _requestHandle(request);
         if(!datas.ok) {throw datas};
-        const json = await datas.data;
-        let group_to_values = await json.reduce(function (obj, item) {
-          obj[item.id + ',' + item.title + ',' + item.engTitle] = (obj[item.id + ',' + item.title + ',' + item.engTitle]) || [];
-          obj[item.id + ',' + item.title + ',' + item.engTitle].push({subId: item.subId, subTitle: item.subTitle, subEngTitle: item.subEngTitle});
+        let json = datas.data;
+        let group_to_values = json.reduce(function (obj, item) {
+          obj[item.id + ',' + item.title] = (obj[item.id + ',' + item.title]) || [];
+          obj[item.id + ',' + item.title].push({subId: item.subId, subTitle: item.subTitle});
           return obj;
         }, {});
   
         let groups = await Object.keys(group_to_values).map(function (key) {
           key =  key.split(',');
-          return {id: key[0], title: key[1], engTitle: key[2], subTitle: group_to_values[key]};
+          return {id: key[0], title: key[1], subTitle: group_to_values[key]};
         });
   
         localStorage.groupList = JSON.stringify(groups);

@@ -35,7 +35,7 @@ const app = (function () {
     const departmentGroupId = params.get('group') ? params.get('group') : 'all, all';
     const keyword = params.get('keyword') ? params.get('keyword') : '';
     // 擷取所有資料並擺放
-    Promise.all([_getSchools(), _getDepartmentGroups()]).then(([schools, departmentGroups]) => {
+    Promise.all([_getSchools(), _getDepartmentGroups(schoolId)]).then(([schools, departmentGroups]) => {
       // 擺放學校列表
       _setSchoolList(allSchools = schools);
       // 擺放學群列表
@@ -180,8 +180,8 @@ const app = (function () {
   }
 
   // 擷取學群資料
-  function _getDepartmentGroups() {
-    return API.getDepartmentGroups('youngAssociate',$schoolList.find(':selected').val()).then(response => {
+  function _getDepartmentGroups(school_code=$schoolList.find(':selected').val()) {
+    return API.getDepartmentGroups('youngAssociate', school_code).then(response => {
       return response;
     });
   }
@@ -204,17 +204,17 @@ const app = (function () {
   // 更改主學群時變更副學群選項
   function _reRenderGroup() {
     const groupIndex = $departmentMainGroupList.find(':selected').data('id');
-    let currentGroupId = $departmentMainGroupList.find(':selected').val();
+    let currentGroupId = $departmentSubGroupList.find(':selected').val();
     $departmentSubGroupList.html(`
-      <option value="all" selected>所有副學群 All sub disciplines</option>
+      <option value="all" selected>所有副學群</option>
     `);
     if (groupIndex !== -1) {
       _groupList[groupIndex]['subTitle'].forEach((obj, index) => {
-        $departmentSubGroupList.append(`<option value="${obj.subId}">${obj.subTitle} ${obj.subEngTitle}</option>`);
+        $departmentSubGroupList.append(`<option value="${obj.subId}">${obj.subTitle}</option>`);
       });
     }
     // 檢查新選的主學群是否包含之前選的副學群
-    if ($departmentSubGroupList.find("option[value="+ currentGroupId +"]").text().trim() != '') {
+    if ($departmentSubGroupList.find(`option[value=${currentGroupId}]`).text().trim() != '') {
       $departmentSubGroupList.children(`[value=${currentGroupId}]`).prop('selected', true);
     }
     // bootstrap需要刷新才會顯示新選項
@@ -246,11 +246,11 @@ const app = (function () {
   function _setDepartmentGroupList(departmentGroups = []) {
     // 重置選單內容
     $departmentMainGroupList.html(`
-      <option value="all" data-id="-1" selected>所有主學群 All disciplines</option>
+      <option value="all" data-id="-1" selected>所有主學群</option>
     `);
     // 擺放學群列表
     departmentGroups.forEach((obj, index) => {
-      $departmentMainGroupList.append(`<option value="${obj.id}" data-id="${index}">${obj.title} ${obj.engTitle}</option>`);
+      $departmentMainGroupList.append(`<option value="${obj.id}" data-id="${index}">${obj.title}</option>`);
     })
   }
 
