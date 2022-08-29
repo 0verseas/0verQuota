@@ -46,6 +46,12 @@
 				"system": "phd"
 			},
 			{
+				"title": "海青副學士班",
+				"headline": "海青班名額查詢",
+				"link": "young-associate",
+				"system": "youngAssociate"
+			},
+			{
 				"title": "國際專修班",
 				"headline": "國際專修班名額查詢",
 				"link": "pro-train",
