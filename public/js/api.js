@@ -126,10 +126,15 @@ const API = (function () {
     })
   }
 
+  function checkKeyword(keyword) {
+    return keyword.replace(/[\s]/g, "\u0020").replace(/[^\u3400-\u9fff\u2027\u00b7A-Za-z0-9\u0020\u0027-\u0029.,-（）]/g, "");
+  }
+
   return {
     getSchools,
     getDepartments,
     getDepartmentDetail,
     getDepartmentGroups,
+    checkKeyword
   }
 })();

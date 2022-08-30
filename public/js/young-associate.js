@@ -94,6 +94,9 @@ const app = (function () {
   ) {
     loading.start();
 
+    keyword = API.checkKeyword(keyword);
+    $keyword.val(keyword);
+
     let departmentGroupId = departmentMainGroupId + ',' + departmentSubGroupId;
     // 準備網址參數
     const paramsStr = jQuery.param({

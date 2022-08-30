@@ -87,6 +87,9 @@ const app = (function () {
   ) {
     loading.start();
 
+    keyword = API.checkKeyword(keyword);
+    $keyword.val(keyword);
+
     // 準備網址參數
     const paramsStr = jQuery.param({
       school: schoolId,
