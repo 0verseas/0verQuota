@@ -487,15 +487,6 @@ const app = (function () {
             </a>
         `;
       }
-          
-      if (department.collego != null)
-      {
-        html += `
-            <a href="${department.collego.url}" target="_blank">
-              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
-            </a>
-        `;
-      }
 
       html += `
           </td>
@@ -535,9 +526,6 @@ const app = (function () {
         break;
       case 'phd':
         location.assign('phd.html');
-        break;
-      case 'young-associate':
-        location.assign('young-associate.html');
         break;
       case 'pro-train':
         location.assign('pro-train.html');

@@ -410,15 +410,6 @@ const app = (function () {
         `;
       }
 
-      if (department.collego != null)
-      {
-        html += `
-            <a href="${department.collego.url}" target="_blank">
-              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
-            </a>
-        `;
-      }
-
       html += ` 
           </td>
 

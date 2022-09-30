@@ -281,7 +281,7 @@ const app = (function () {
           </td>
           `;
 
-      if(department.ioh == null && department.collego == null) {
+      if(department.ioh == null) {
         html += `
           <td>
             <a href="${detailURL}" target="_blank">
@@ -294,7 +294,6 @@ const app = (function () {
           `;
       }else {
         iohHtml = ``;
-        collegoHtml = ``;
         if (department.ioh != null) {
           iohHtml = `
             <a href="${department.ioh.url}" target="_blank">
@@ -302,15 +301,7 @@ const app = (function () {
             </a>
           `;
         }
-          
-        if (department.collego != null) {
-          collegoHtml = `
-            <a href="${department.collego.url}" target="_blank">
-              <img src="https://collego.edu.tw/Content/img/Collego_C-450.png" width="80" />
-            </a>
-          `;
-        }
-          
+        
         html += `
           <td>
             <a href="${detailURL}" target="_blank">
@@ -322,7 +313,6 @@ const app = (function () {
             <a href="${detailURL}" target="_blank">
               <span class="td-br">${department.eng_title}</span>
             </a>
-            ${collegoHtml}
           </td>
           `;
       }
