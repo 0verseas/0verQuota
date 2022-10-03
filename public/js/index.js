@@ -107,8 +107,10 @@ const app = (function () {
     // 更新網址
     window.history.replaceState({path: newurl}, null, newurl);
 
+    // 排除國際專修部
     let isExtendedDepartment = [];
-    if(showKeyIndustries) isExtendedDepartment.push(1);
+    isExtendedDepartment.push(1);
+    if(!showKeyIndustries) isExtendedDepartment.push(0);
 
     // 過濾系所
     API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate, isExtendedDepartment.toString()).then(response => {
