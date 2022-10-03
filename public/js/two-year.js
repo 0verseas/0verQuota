@@ -9,7 +9,6 @@ const app = (function () {
   const $schoolList = $('#school-list');
   const $departmentGroupList = $('#department-group');
   const $resultBody = $('#result-body');
-  const $schoolKeyword = $('#school-keyword');
   const $keyword = $('#keyword');
   const $showEnglishTaught = $('#showEnglishTaught');
 
@@ -63,6 +62,7 @@ const app = (function () {
     keyword = '',
     departmentGroupId = 'all',
     showEnglishTaughtClass = false,
+    showIFP = false
   ) {
     loading.start();
 
@@ -72,14 +72,18 @@ const app = (function () {
       group: departmentGroupId,
       keyword,
       'eng-taught': showEnglishTaughtClass,
+      'IFP': showIFP
     });
     // 準備新網址
     const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${paramsStr}`;
     // 更新網址
     window.history.replaceState({path: newurl}, '', newurl);
 
+    let isExtendedDepartment = [];
+    if(showIFP) isExtendedDepartment.push(2);
+
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -279,54 +283,42 @@ const app = (function () {
               <span class="td-br">${department.eng_school}</span>
             </a>
           </td>
-          `;
+          <td>
+      `;
 
-      if(department.ioh == null) {
+      if (department.is_extended_department == '2') {
         html += `
-          <td>
-            <a href="${detailURL}" target="_blank">
-              <span >
-                ${department.title}
-              </span>
-              <span class="td-br">${department.eng_title}</span>
-              <a/>
-          </td>
-          `;
-      }else {
-        iohHtml = ``;
-        if (department.ioh != null) {
-          iohHtml = `
-            <a href="${department.ioh.url}" target="_blank">
-              <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
-            </a>
-          `;
-        }
-        
-        html += `
-          <td>
-            <a href="${detailURL}" target="_blank">
-              <span >
-                ${department.title}
-              </span>
-            </a>
-            ${iohHtml}
-            <a href="${detailURL}" target="_blank">
-              <span class="td-br">${department.eng_title}</span>
-            </a>
-          </td>
-          `;
+          <span class="badge badge-primary"> 國際專修部 </span>
+          <br />
+        `;
       }
 
       html += `
-          <td>${department.admission_selection_ratify_quota}</td>
+            <a href="${detailURL}" target="_blank">
+              <span>
+                ${department.title}
+              </span>
+              <span class="td-br">${department.eng_title}</span>
+            <a/>
+      `;
+      if (department.ioh != null)
+      {
+        html += `
+            <a href="${department.ioh.url}" target="_blank">
+              <img src="https://api.overseas.ncnu.edu.tw/img/IOH_logo.png" width="80" />
+            </a>
+        `;
+      }
 
+      html += `
+          </td>
+          <td>${department.admission_selection_ratify_quota}</td>
           <td>
             <a href="${shenchaItemURL}" target="_blank">
               <span class="td-br">審查項目</span>
               <span class="td-br">Application documents</span>
             </a>
           </td>
-
           ${engTaughtHtml}
         </tr>
       `;

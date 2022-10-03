@@ -105,6 +105,7 @@
           this.elements.namedItem('keyword').value,
           this.elements.namedItem('department-group').value,
           this.elements.namedItem('english-instructed-program').checked,
+          this.elements.namedItem('showIFP').checked
         );
       ">
         <div class="form-group col-md-6">
@@ -117,6 +118,12 @@
             <input class="form-check-input" id="showEnglishTaught" name="english-instructed-program" type="checkbox" value="">
             <label class="form-check-label" for="showEnglishTaught">
               全英語授課學系* <small class="text-muted"><br/>English-instructed program departments</small>
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" id="showIFP" name="key-industries" type="checkbox" value="">
+            <label class="form-check-label" for="showIFP">
+              國際專修部* <small class="text-muted"><br/>International Foundation Program</small>
             </label>
           </div>
         </div>
