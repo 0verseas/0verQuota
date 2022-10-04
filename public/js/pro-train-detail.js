@@ -107,7 +107,7 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`國際專修部 ${department.title}（學士班）`);
+    $deptTitle.html(`${department.title}（學士班）<span class="badge badge-primary"> 國際專修部 </span>`);
     $schoolEngTitle.html(`${school.eng_title}`);
     $deptEngTitle.html(`${department.eng_title} (Bachelor)`);
 

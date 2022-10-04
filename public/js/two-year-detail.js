@@ -105,7 +105,7 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    let dept_title = (department.is_extended_department == 2)? `國際專修部 ${department.title}（香港二年制學士班）`:`${department.title}（香港二年制學士班）`;
+    let dept_title = (department.is_extended_department == 2)? `${department.title}（香港二年制學士班）<span class="badge badge-primary"> 國際專修部 </span>`:`${department.title}（香港二年制學士班）`;
     $deptTitle.html(dept_title);
     $schoolEngTitle.html(`${school.eng_title}`);
     $deptEngTitle.html(`${department.eng_title} (Two Year)`);
