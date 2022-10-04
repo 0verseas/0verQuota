@@ -106,7 +106,8 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`${department.title}（博士班）`);
+    let dept_title = (department.is_extended_department==1)? `重點產業系所 ${department.title}（博士班）`:`${department.title}（博士班）`;
+    $deptTitle.html(dept_title);
     $schoolEngTitle.html(`${school.eng_title}`);
     $deptEngTitle.html(`${department.eng_title} (PhD)`);
 
