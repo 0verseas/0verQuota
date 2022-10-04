@@ -107,9 +107,9 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    $deptTitle.html(`國際專修部（${department.title}）<span class="badge badge-primary"> 國際專修部 </span>`);
+    $deptTitle.html(`國際專修部（${department.title}）<span class="badge table-primary"> 國際專修部 </span>`);
     $schoolEngTitle.html(`${school.eng_title}`);
-    $deptEngTitle.html(`${department.eng_title} (Bachelor)`);
+    $deptEngTitle.html(`${(department.eng_title)?'International Foundation Program<br/>（'+ department.eng_title +'）':''}`);
 
     // 學校基本資訊
     $schoolPhone.html(school.phone);

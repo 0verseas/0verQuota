@@ -394,11 +394,15 @@ const app = (function () {
       `;
 
       html += `
+            <span class="badge table-primary"> 國際專修部 </span>
+            <br />
             <a href="${detailURL}" target="_blank">
               <span >
-                ${department.title}
+                國際專修部（${department.title}）
               </span>
-              <span class="td-br">${department.eng_title}</span>
+              <span class="td-br">
+                ${(department.eng_title)? 'International Foundation Program<br/>（'+ department.eng_title +'）':''}
+              </span>
             <a/>
       `;
       if (department.ioh != null)
@@ -412,13 +416,9 @@ const app = (function () {
 
       html += ` 
           </td>
-
           <td>${groupHtml}</td>
-
           ${admissionSelectionQuota}
-
           ${engTaughtHtml}
-
           ${schoolFiveHtml}
         </tr>
       `;

@@ -105,10 +105,9 @@ const app = (function () {
 
     // 系所標題
     $schoolTitle.html(`${school.title}`);
-    let dept_title = (department.is_extended_department == 2)? `國際專修部（${department.title}）<span class="badge badge-primary"> 國際專修部 </span>`:`${department.title}（香港二年制學士班）`;
-    $deptTitle.html(dept_title);
+    $deptTitle.html((department.is_extended_department == 2)? `國際專修部（${department.title}）<span class="badge table-primary"> 國際專修部 </span>`:`${department.title}（香港二年制學士班）`);
     $schoolEngTitle.html(`${school.eng_title}`);
-    $deptEngTitle.html(`${department.eng_title} (Two Year)`);
+    $deptEngTitle.html(`${(department.eng_title)?((department.is_extended_department == 2)?'International Foundation Program<br/>（'+ department.eng_title +'）':department.eng_title+' (Two Year)'):''}`);
 
 
     // 學校基本資訊

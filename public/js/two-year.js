@@ -173,6 +173,7 @@ const app = (function () {
     const departmentGroupId = params.get('group') && params.get('group').length !== 0 ? params.get('group') : 'all';
     const keyword = params.get('keyword') ? params.get('keyword') : '';
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
+    const showIFP = params.has('IFP')? JSON.parse(params.get('IFP')): false;
 
     // 擷取所有資料並擺放
     Promise.all([_getSchools(), _getDepartmentGroups(schoolId)]).then(([schools, departmentGroups]) => {
@@ -193,7 +194,7 @@ const app = (function () {
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
-          schoolId, 'twoYear', keyword, departmentGroupId, showEnglishTaughtClass,
+          schoolId, 'twoYear', keyword, departmentGroupId, showEnglishTaughtClass, showIFP
         );
       } else {
         loading.complete();
@@ -288,19 +289,27 @@ const app = (function () {
 
       if (department.is_extended_department == '2') {
         html += `
-          <span class="badge badge-primary"> 國際專修部 </span>
+          <span class="badge table-primary"> 國際專修部 </span>
           <br />
+          <a href="${detailURL}" target="_blank">
+            <span>
+              國際專修部（${department.title}）
+            </span>
+            <span class="td-br">
+              ${(department.eng_title)? 'International Foundation Program<br/>（'+ department.eng_title +'）':''}
+            </span>
+          <a/>
+        `;
+      } else {
+        html += `
+          <a href="${detailURL}" target="_blank">
+            <span>
+              ${department.title}
+            </span>
+            <span class="td-br">${department.eng_title}</span>
+          <a/>
         `;
       }
-
-      html += `
-            <a href="${detailURL}" target="_blank">
-              <span>
-                ${department.title}
-              </span>
-              <span class="td-br">${department.eng_title}</span>
-            <a/>
-      `;
       if (department.ioh != null)
       {
         html += `
