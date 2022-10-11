@@ -31,6 +31,10 @@ td,th {
   word-break: break-all;
 }
 
+.li2nd li::marker {
+  content: "("counter(list-item) ") ";
+}
+
 @include media-breakpoint-up(sm) {
   .header h3 {
     font-size: $h3-font-size;
