@@ -168,7 +168,7 @@ const app = (function () {
 
   // 擷取學校資料
   function _getSchools() {
-    return API.getSchools('proTrain').then(response => {
+    return API.getSchools('IFP').then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -178,7 +178,7 @@ const app = (function () {
 
   // 擷取學群資料
   function _getDepartmentGroups(school_code = $schoolList.find(':selected').val()) {
-    return API.getDepartmentGroups('proTrain', school_code).then(response => {
+    return API.getDepartmentGroups('IFP', school_code).then(response => {
       if (!response.ok) {
         throw(new Error(`${response.statusCode} (${response.singleErrorMessage})`));
       }
@@ -280,9 +280,9 @@ const app = (function () {
     // 擺放各系所資料
     for (let department of departments) {
       // 設定簡便連結
-      const schoolURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
-      const detailURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
-      const shenchaItemURL = `pro-train-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
+      const schoolURL = `IFP-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-schoolInfo`;
+      const detailURL = `IFP-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-deptInfo`;
+      const shenchaItemURL = `IFP-detail.html?id=${department.id}&school-id=${department.school_code}&tab=nav-shenchaItem`;
 
       // 設定個人申請名額
       // 名額為零則不顯示

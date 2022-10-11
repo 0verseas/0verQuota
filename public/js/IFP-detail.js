@@ -286,7 +286,7 @@ const app = (function () {
             // console.log(response.errorMessages);
             swal({title: `Error`, text: response.singleErrorMessage, type:"error", confirmButtonText: '確定', allowOutsideClick: false})
             .then(()=>{
-              window.location.href = 'pro-train.html';
+              window.location.href = 'IFP.html';
             })
         }
         return;

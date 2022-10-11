@@ -529,8 +529,8 @@ const app = (function () {
       case 'phd':
         location.assign('phd.html');
         break;
-      case 'pro-train':
-        location.assign('pro-train.html');
+      case 'IFP':
+        location.assign('IFP.html');
         break;
       default:
         // 通通去 index
