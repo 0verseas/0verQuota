@@ -56,7 +56,7 @@ const app = (function () {
   // 過濾系所列表
   function filterDepartmentList(
     schoolId = 'all',
-    systemId = 'bachelor',
+    systemId = 'IFP',
     keyword = '',
     departmentGroupId = 'all',
     includeFirstCategory = true,
