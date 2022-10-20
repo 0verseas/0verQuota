@@ -224,7 +224,7 @@ const app = (function () {
       // 有設定學校 ID，就直接拉資料
       if (schoolId) {
         filterDepartmentList(
-          schoolId, 'bachelor', keyword, departmentGroupId,
+          schoolId, 'IFP', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
           showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
         );
