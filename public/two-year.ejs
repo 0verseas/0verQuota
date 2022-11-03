@@ -6,10 +6,10 @@
     <h3>宣告 <small class="text-muted">Announcement</small></h3>
     <%- include("components/_admission-basis") %>
     <div class="announcement-item">
-      <a class="announcement-title collapsed" data-toggle="collapse" data-parent="#announcement" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
+      <a class="announcement-title collapsed" data-toggle="collapse" data-target="#announcement3" href="#announcement3" aria-expanded="false" aria-controls="announcement3">
         注意事項 <small class="text-muted">Points of Attention</small>
       </a>
-      <div id="announcement3" class="collapse" role="tabpanel">
+      <div id="announcement3" class="collapse" role="tabpanel" data-parent="#announcement">
         <p>
           <ol>
             <li>學校名稱、系所名稱接提供中英文查詢。</li>
