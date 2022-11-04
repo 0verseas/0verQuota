@@ -201,6 +201,17 @@ const app = (function () {
 
     // 審查項目們
     for (let doc of department.application_docs) {
+      // 審查項目 上傳檔案限制
+      let upload_restrictions = 'pdf、png 或 jpg 檔，單一檔案大小不得超過 4 MB。'
+      if(doc.type.name === '作品集'){
+        upload_restrictions = 'pdf、png、jpg、mp3、mp4 或 avi 檔，單一檔案大小不得超過 8 MB。'
+      }
+      let upload_restrictions_html = `
+        <dt class="col-md-4">檔案上傳限制 <small class="text-muted">allowed file types</small></dt>
+        <dd class="col-md-8">
+          <p>${upload_restrictions}</p>
+        </dd>
+      `;
       // 審查項目頭段
       let appendData = `
         <div>
@@ -215,6 +226,7 @@ const app = (function () {
         // 需要紙本
         let paper = doc.paper;
         if (paper !== null) {
+          upload_restrictions_html=``;
           appendData += `
             <dt class="col-8 col-md-4">是否需要紙本推薦函 <small class="text-muted">Must need paper of recommendation letters</small></dt>
             <dd class="col-4 col-md-8">是 Yes</dd>
@@ -261,6 +273,7 @@ const app = (function () {
               <p>${doc.description}</p>
               <p>${doc.eng_description}</p>
             </dd>
+            ${upload_restrictions_html}
           </dl>
         </div>
       `;
