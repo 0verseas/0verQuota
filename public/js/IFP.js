@@ -290,7 +290,7 @@ const app = (function () {
       let admissionSelectionQuota = `
         <td colspan="2">
           <span class="td-br">無名額</span>
-          <span class="td-br">Distributed allocation only</span>
+          <span class="td-br">United Distribution only</span>
         </td>
         <td> - </td>
         <td> - </td>
