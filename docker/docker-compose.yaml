@@ -22,6 +22,6 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.quota.entrypoints=websecure"
       - "traefik.http.routers.quota.tls.certresolver=lets-encr"
-      - "traefik.http.routers.quota.rule=Host(``) && PathPrefix(`/quota`)"
+      - "traefik.http.routers.quota.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/quota`)"
       - "traefik.http.routers.quota.tls.options=default"
       - "traefik.http.routers.quota.middlewares=secure-headers@file"
