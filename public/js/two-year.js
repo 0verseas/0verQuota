@@ -41,7 +41,7 @@ const app = (function () {
     // 重新擺放學校列表
     _setSchoolList(newSchoolList);
   }
-  
+
   function _reRenderGroup() {
     let currentGroupId = $departmentGroupList.find(':selected').val();
     _getDepartmentGroups().then((departmentGroups) => {
@@ -66,6 +66,8 @@ const app = (function () {
   ) {
     loading.start();
 
+    const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+    keyword = converter(keyword);
     // 準備網址參數
     const paramsStr = jQuery.param({
       school: schoolId,
