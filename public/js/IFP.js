@@ -68,6 +68,8 @@ const app = (function () {
   ) {
     loading.start();
 
+    const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+    keyword = converter(keyword);
     // 準備網址參數
     const paramsStr = jQuery.param({
       school: schoolId,
@@ -414,7 +416,7 @@ const app = (function () {
         `;
       }
 
-      html += ` 
+      html += `
           </td>
           <td>${groupHtml}</td>
           ${admissionSelectionQuota}
