@@ -2,13 +2,13 @@ version: '3.7'
 
 networks:
   bridge:
-    external:
-      name: ${NETWORKS}
+    external: true
+    name: ${NETWORKS}
 
 services:
   quota:
     image: nginx:alpine
-    container_name: 0verQuota
+    container_name: ${CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     environment:
@@ -20,8 +20,9 @@ services:
       - bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.quota.entrypoints=websecure"
-      - "traefik.http.routers.quota.tls.certresolver=lets-encr"
-      - "traefik.http.routers.quota.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/quota`)"
-      - "traefik.http.routers.quota.tls.options=default"
-      - "traefik.http.routers.quota.middlewares=secure-headers@file"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=${ENTRYPOINTS}"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=lets-encr"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/quota`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.options=default"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=secure-headers@file,traefik-compress@file"
+        #      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=ipwhitelist@file" # 禁止對外連接
