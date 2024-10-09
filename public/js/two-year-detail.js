@@ -215,7 +215,7 @@ const app = (function () {
           <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
           <dl class="row">
             <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Must be submitted: Yes/No</small></dt>
-            <dd class="col-4 col-md-8">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
+            <dd class="col-4 col-md-8 ${doc.required ? 'text-danger' : ''}">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
       `;
 
       // 判斷是不是師長推薦函
