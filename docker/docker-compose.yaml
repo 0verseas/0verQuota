@@ -16,6 +16,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./app/dist/:/usr/share/nginx/html/quota/
+      - ./error403.html:/usr/share/nginx/error/403.html
+      - ./realip.conf:/etc/nginx/nginx.conf
     networks:
       - bridge
     labels:
