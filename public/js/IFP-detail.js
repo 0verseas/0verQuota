@@ -159,7 +159,7 @@ const app = (function () {
     $deptDescription.html(department.description);
     $deptEngDescription.html(department.eng_description);
     $admissionSelectionQuota.html(department.admission_selection_ratify_quota > 0 ? `${department.admission_selection_ratify_quota} 名` : `僅限聯合分發`);
-    
+
     // 系所招收性別限制
     let genderLimitString = '無限制 Unlimited';
     if (department.gender_limit !== null) {
@@ -199,6 +199,23 @@ const app = (function () {
       $navShenchaItemTab.remove();
     }
 
+    let appendData = '';
+    if(department.has_interview){
+      appendData += `
+        <div>
+          <h4>需要參加面試 <small class="text-muted">Required to take an interview</small></h4>
+          <dl class="row">
+            <dt class="col-md-4">面試資訊 <small class="text-muted">Interview information</small></dt>
+            <dd class="col-md-8">
+              <p>${department.interview_description}</p>
+              <p>${department.interview_eng_description}</p>
+            </dd>
+          </dl>
+        </div>
+      `;
+      $shenchaItemDiv.append(appendData);
+    }
+
     // 審查項目們
     for (let doc of department.application_docs) {
       // 審查項目 上傳檔案限制
@@ -213,12 +230,12 @@ const app = (function () {
         </dd>
       `;
       // 審查項目頭段
-      let appendData = `
+      appendData = `
         <div>
           <h4>${doc.type.name} <small class="text-muted">${doc.type.eng_name}</small></h4>
           <dl class="row">
             <dt class="col-8 col-md-4">是否必繳 <small class="text-muted">Must be submitted: Yes/No</small></dt>
-            <dd class="col-4 col-md-8">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
+            <dd class="col-4 col-md-8 ${doc.required ? 'text-danger' : ''}">${doc.required ? '必繳 Required' : '選繳 Optional'}</dd>
       `;
 
       // 判斷是不是師長推薦函
