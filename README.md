@@ -26,20 +26,25 @@ $ npm run build
 ## Deploy Docker Develop Environment
 Just need to modify related documents(env.js, .env, docker-compose.yaml)
 
-First of all, git clone https://github.com/0verseas/0verQuota.git than switch folder to 0verQuota/, and do below
-  - ``cd 0verQuota/``
-    - switch git branch
+First of all, git clone https://github.com/0verseas/0verQuota.git then switch folder to 0verQuota/, if dev then git clone https://github.com/0verseas/0verQuota.git ./0verQuota-dev/ and do below
+  - ``cd ./0verQuota/`` or ``cd ./0verQuota-dev/``
+    - switch git branch(if dev then do this step)
       - ``sudo git checkout dev``
     - ``sudo cp public/js/env.js.example public/js/env.js``
     - edit public/js/env.js (modify baseUrl)
     - docker build
-      - ``sudo docker run -it --rm -v $PWD:/0verQuota -w /0verQuota node:14.16.0 sh -c 'npm install && npm run build'``
+      - ``sudo npm run docker-build``
+      - if npm command not found then ``npm install``
+    - ``sudo cp ./nginx.conf.example ./nginx.conf``
+    - edit ./nginx.conf (modify allow 'ips range' based on our environment)
+    - ``sudo cp ./realip.conf.example ./realip.conf``
+    - edit ./realip.conf (modify set_real_ip_from 'ips range' based on our docker environment)
 
-Secondly, switch folder to 0verQuota/docker/ and do below
+Secondly, switch folder to 0verQuota/docker/ or 0verQuota-dev/docker/ and do below
 - ``cd docker/``
   - ``sudo cp .env.example .env``
-  - edit .env (modify NETWORKS)
-  - edit docker-compose.yaml (modify the container's label which "traefik.http.routers.quota.rule=Host(`` `input student's domain name here` ``) && PathPrefix(`` `/quota` ``)")
+  - edit .env (modify NETWORKS, DOMAIN_NAME, ENTRYPOINTS)
+  - if you want to exclude IPs other than ours then edit docker-compose.yml open ncnuipwhitlist@file label setting
 
 Finally, did all the above mentioned it after that the last move is docker-compose up
 - ``sudo docker-compose up -d``
@@ -47,8 +52,5 @@ Finally, did all the above mentioned it after that the last move is docker-compo
 If want to stop docker-compose
 - ``sudo docker-compose down``
 
-## Permission denied SOP
-1. use ll check owner group and mode
-2. check group with command `groups`
-3. if you can not see the owner group and mode switch to super user mode
-4. change Permission denied file mode to 664 and directories to 775  Ex:`find . -type d -exec chmod 0775 {} \;`
+If don‘t want to stop container and apply docker-compose edited setting then
+- ``sudo docker-compose up --detach``
