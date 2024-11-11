@@ -24,33 +24,68 @@ $ npm run build
 ```
 
 ## Deploy Docker Develop Environment
-Just need to modify related documents(env.js, .env, docker-compose.yaml)
+### Startup Preparation
+if dev then
+```
+git clone https://github.com/0verseas/0verQuota.git ./0verQuota-dev/
+cd ./0verQuota-dev/
+git checkout dev
+```
+if official then
+```
+git clone https://github.com/0verseas/0verQuota.git
+cd ./0verQuota/
+```
 
-First of all, git clone https://github.com/0verseas/0verQuota.git then switch folder to 0verQuota/, if dev then git clone https://github.com/0verseas/0verQuota.git ./0verQuota-dev/ and do below
-  - ``cd ./0verQuota/`` or ``cd ./0verQuota-dev/``
-    - switch git branch(if dev then do this step)
-      - ``sudo git checkout dev``
-    - ``sudo cp public/js/env.js.example public/js/env.js``
-    - edit public/js/env.js (modify baseUrl)
-    - docker build
-      - ``sudo npm run docker-build``
-      - if npm command not found then ``npm install``
-    - ``sudo cp ./nginx.conf.example ./nginx.conf``
-    - edit ./nginx.conf (modify allow 'ips range' based on our environment)
-    - ``sudo cp ./realip.conf.example ./realip.conf``
-    - edit ./realip.conf (modify set_real_ip_from 'ips range' based on our docker environment)
-
-Secondly, switch folder to 0verQuota/docker/ or 0verQuota-dev/docker/ and do below
-- ``cd docker/``
-  - ``sudo cp .env.example .env``
-  - edit .env (modify NETWORKS, DOMAIN_NAME, ENTRYPOINTS)
-  - if you want to exclude IPs other than ours then edit docker-compose.yml open ncnuipwhitlist@file label setting
-
-Finally, did all the above mentioned it after that the last move is docker-compose up
-- ``sudo docker-compose up -d``
-
-If want to stop docker-compose
-- ``sudo docker-compose down``
-
-If don‘t want to stop container and apply docker-compose edited setting then
-- ``sudo docker-compose up --detach``
+```
+npm install
+cp ./public/js/env.js.example ./public/js/env.js
+cp ./docker/.env.example ./docker/.env
+cp ./docker/nginx.conf.example ./docker/nginx.conf
+cp ./docker/realip.conf.example ./docker/realip.conf
+```
+#### Edit Config Files
+modify baseUrl
+```
+vim ./public/js/env.js
+```
+modfiy NETWORKS, DOMAIN_NAME, ENTRYPOINTS
+*If dev then modfiy COMPOSE_PROJECT_NAME and CONTAINER_NAME*
+```
+vim ./docker/.env
+```
+#### *If need container one of the pages exclude IPs other than ours*
+modify set_real_ip_from 'IPs range' based on our docker environment and uncomment rows of 32-34
+```
+vim ./docker/realip.conf
+```
+modify allow 'IPs range' based on our environment and uncomment allow 'IPs range' and deny all
+*if need URL Directory turn to show the error page then add uncomment row 11 'return 403'*
+```
+vim ./docker/nginx.conf
+```
+#### *If want Container Block Exclude IPs Other than Ours*
+modify uncomment row 30
+```
+vim ./docker/docker-compose.yaml
+```
+### Build
+```
+sudo npm run docker-build
+```
+### StartUp
+*at ./docker/ path*
+```
+sudo docker-compose up -d
+```
+### Stop
+*at ./docker/ path*
+```
+sudo docker-compose down
+```
+### ✨Nonstop Container and Apply New Edit Docker-Compose Setting (Use Only Container is running)✨
+The command will not effect on the running container if you have not edited any of the settings on docker-compose.yaml
+*at ./docker/ path*
+```
+sudo docker-compose up --detach
+```
