@@ -87,6 +87,8 @@ function shuffle(array) {
 
 function _filterInput(){
     let value = $filterInput.val().toLowerCase();
+    const converter = OpenCC.Converter({ from: 'cn', to: 'tw' });
+    value = converter(value);
 
     $expositionList.find('tr').filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
