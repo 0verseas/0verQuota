@@ -1,0 +1,54 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col text-center">
+            <h1>2025臺灣高等教育展—<span class="text-muted sub-title"></span></h1>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="input-group pull-left" style="margin-bottom:15px; width: 40%;">
+        <input type="filter" aria-label="filter" class="form-control" style="height: auto;" id="filter" placeholder="請輸入關鍵字篩選   Please input keyword to filter">
+        <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="button" id="filter-btn">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="input-group pull-right" style="margin-bottom:15px; width: 40%;">
+        <input type="search" aria-label="search" class="form-control" style="height: auto;" id="search" placeholder="請輸入系所關鍵字查詢   Please input keyword to search">
+        <div class="input-group-append">
+            <button class="btn btn-outline-dark" type="button" id="search-btn">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered sortable">
+            <thead class="table-primary">
+                <tr>
+                    <th style="width:10%">
+                        攤位編號
+                        <br/>
+                        <small class="text-muted">index</small>
+                    </th>
+                    <th style="">
+                        學校名稱
+                        <br/>
+                        <small class="text-muted">University</small>
+                    </th>
+                    <th style="">
+                        系所名稱
+                        <br/>
+                        <small class="text-muted">Department</small>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="exposition-list">
+            </tbody>
+        </table>
+    </div>
+</div>
