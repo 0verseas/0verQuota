@@ -1,3 +1,34 @@
+<style type="text/css">
+    /* 預設樣式 */
+    textarea ,
+    textarea::placeholder {
+        font-size: 13px;
+    }
+
+    /* 螢幕寬度小於 768px（手機） */
+    @media (max-width: 767.98px) {
+        textarea,
+        textarea::placeholder {
+            font-size: 11px;
+        }
+    }
+
+    /* 螢幕寬度小於 576px（超小螢幕） */
+    @media (max-width: 575.98px) {
+        textarea,
+        textarea::placeholder {
+            font-size: 9px;
+        }
+    }
+
+    /* 螢幕寬度大於等於 992px（桌機） */
+    @media (min-width: 992px) {
+        textarea,
+        textarea::placeholder {
+            font-size: 13px;
+        }
+    }
+</style>
 <div class="container">
 
     <div class="row">
@@ -8,39 +39,55 @@
 
     <hr/>
 
-    <div class="input-group pull-left" style="margin-bottom:15px; width: 40%;">
-        <input type="filter" aria-label="filter" class="form-control" style="height: auto;" id="filter" placeholder="請輸入關鍵字篩選   Please input keyword to filter">
-        <div class="input-group-append">
-            <button class="btn btn-outline-dark" type="button" id="filter-btn">
-                <i class="fa fa-filter" aria-hidden="true"></i>
-            </button>
+    <div class="row">
+        <div class="col-6 input-group pull-left" style="margin-bottom:15px; width: 40%;">
+            <textarea rows="1" class="form-control" style="resize: none; height: auto; line-height: 1;" id="search"
+                placeholder="請輸入關鍵字進行查詢&#10;Please input keyword to search">
+            </textarea>
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark" type="button" id="search-reset-btn">
+                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark" type="button" id="search-btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-6 input-group pull-right" style="margin-bottom:15px; width: 40%;">
+            <textarea rows="1" class="form-control" style="resize: none; height: auto; line-height: 1;" id="filter"
+                placeholder="請輸入關鍵字進行篩選&#10;Please input keyword to filter">
+            </textarea>
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark" type="button" id="filter-reset-btn">
+                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark" type="button" id="filter-btn">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
 
-    <div class="input-group pull-right" style="margin-bottom:15px; width: 40%;">
-        <input type="search" aria-label="search" class="form-control" style="height: auto;" id="search" placeholder="請輸入系所關鍵字查詢   Please input keyword to search">
-        <div class="input-group-append">
-            <button class="btn btn-outline-dark" type="button" id="search-btn">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-
-    <div class="table-responsive">
+    <div class="table-responsive" style="max-height: 660px; overflow-y: auto;">
         <table class="table table-sm table-striped table-bordered sortable">
             <thead class="table-primary">
                 <tr>
-                    <th style="width:10%">
+                    <th class="table-primary" style="width:10%;position: sticky; top: 0; z-index: 2;">
                         攤位編號
                         <br/>
                         <small class="text-muted">index</small>
                     </th>
-                    <th style="">
+                    <th class="table-primary" style="position: sticky; top: 0; z-index: 2;">
                         學校名稱
                         <br/>
                         <small class="text-muted">University</small>
                     </th>
-                    <th style="">
+                    <th class="table-primary" style="position: sticky; top: 0; z-index: 2;">
                         系所名稱
                         <br/>
                         <small class="text-muted">Department</small>
