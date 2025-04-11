@@ -195,7 +195,7 @@ async function _getExpositionListWithKeyword() {
 
 function _handleFileterReset (){
     $filterInput.val('');
-    value = '';
+    let value = '';
 
     $expositionList.find('tr').filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)

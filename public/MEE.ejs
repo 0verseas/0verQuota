@@ -45,13 +45,13 @@
                 placeholder="請輸入關鍵字進行查詢&#10;Please input keyword to search">
             </textarea>
             <div class="input-group-append">
-                <button class="btn btn-outline-dark" type="button" id="search-reset-btn">
-                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                <button class="btn btn-outline-dark" type="button" id="search-btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="input-group-append">
-                <button class="btn btn-outline-dark" type="button" id="search-btn">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                <button class="btn btn-outline-dark" type="button" id="search-reset-btn">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -61,13 +61,13 @@
                 placeholder="請輸入關鍵字進行篩選&#10;Please input keyword to filter">
             </textarea>
             <div class="input-group-append">
-                <button class="btn btn-outline-dark" type="button" id="filter-reset-btn">
-                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                <button class="btn btn-outline-dark" type="button" id="filter-btn">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="input-group-append">
-                <button class="btn btn-outline-dark" type="button" id="filter-btn">
-                    <i class="fa fa-filter" aria-hidden="true"></i>
+                <button class="btn btn-outline-dark" type="button" id="filter-reset-btn">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -75,8 +75,8 @@
 
     <div class="table-responsive" style="max-height: 660px; overflow-y: auto;">
         <table class="table table-sm table-striped table-bordered sortable">
-            <thead class="table-primary">
-                <tr>
+            <thead class="table-primary" style="position: sticky; top: 0; z-index: 2;">
+                <tr style="position: sticky; top: 0; z-index: 2;">
                     <th class="table-primary" style="width:10%;position: sticky; top: 0; z-index: 2;">
                         攤位編號
                         <br/>
