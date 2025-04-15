@@ -4,9 +4,9 @@
 */
 
 const $expositionList = $('#exposition-list');
-const $filterInput = $('#filter'); // 篩選欄
-const $filterBtn = $('#filter-btn'); // 篩選按鈕
-const $filterResetBtn = $('#filter-reset-btn'); // 篩選重置按鈕
+// const $filterInput = $('#filter'); // 篩選欄
+// const $filterBtn = $('#filter-btn'); // 篩選按鈕
+// const $filterResetBtn = $('#filter-reset-btn'); // 篩選重置按鈕
 const $searchInput = $('#search'); // 搜尋欄
 const $searchBtn = $('#search-btn'); // 搜尋按鈕
 const $searchResetBtn = $('#search-reset-btn'); // 搜尋重置按鈕
@@ -28,7 +28,7 @@ _init();
 
 $searchBtn.on('click', _getExpositionListWithKeyword); // 列表搜尋按鈕事件
 
-$filterBtn.on('click', _filterInput); // 列表篩選按鈕事件
+// $filterBtn.on('click', _filterInput); // 列表篩選按鈕事件
 
 // 偵測是否在搜尋輸入欄按下 enter
 $searchInput.on('keydown', (e)=>{
@@ -39,16 +39,16 @@ $searchInput.on('keydown', (e)=>{
 })
 
 // 偵測是否在篩選輸入欄按下 enter
-$filterInput.on('keydown', (e)=>{
-    if(e.key === 'Enter'){
-        e.preventDefault(); // 阻止換行
-        _filterInput();
-    }
-})
+// $filterInput.on('keydown', (e)=>{
+//     if(e.key === 'Enter'){
+//         e.preventDefault(); // 阻止換行
+//         _filterInput();
+//     }
+// })
 
 $searchResetBtn.on('click', _handleSearchReset); // reset 搜尋結果
 
-$filterResetBtn.on('click', _handleFileterReset); // reset 篩選結果
+// $filterResetBtn.on('click', _handleFileterReset); // reset 篩選結果
 
 async function _init() {
     loading.start();
