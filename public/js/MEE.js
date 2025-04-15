@@ -12,7 +12,7 @@ const $searchBtn = $('#search-btn'); // 搜尋按鈕
 const $searchResetBtn = $('#search-reset-btn'); // 搜尋重置按鈕
 const $subTitle = $('.sub-title');
 
-const $titleArray = ['永平','巴生','吉隆坡','雙溪大年','亞庇','美里'];
+const $titleArray = ['柔佛永平','雪蘭莪巴生','吉隆坡','吉打雙溪大年','沙巴亞庇','砂拉越美里'];
 let stage = 1;
 let isInit = false; // 避免有人都重置了還一直按
 
