@@ -1,9 +1,13 @@
 server {
     listen       80;
     listen  [::]:80;
-    server_name  localhost;
+    server_name  student.overseas.ncnu.edu.tw;
 
     #access_log  /var/log/nginx/host.access.log  main;
+
+    if ($host !~ ^(student\.overseas\.ncnu\.edu\.tw(:\d+)?$) ) {
+        return 444;
+    }
 
     server_tokens off;
 
