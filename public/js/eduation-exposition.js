@@ -10,9 +10,11 @@ const $expositionList = $('#exposition-list');
 const $searchInput = $('#search'); // 搜尋欄
 const $searchBtn = $('#search-btn'); // 搜尋按鈕
 const $searchResetBtn = $('#search-reset-btn'); // 搜尋重置按鈕
+const $countryTitle = $('.country-title');
 const $subTitle = $('.sub-title');
 
 const $titleArray = ['柔佛永平','雪蘭莪巴生','吉隆坡','吉打雙溪大年','沙巴亞庇','砂拉越美里'];
+let countryID = 127;
 let stage = 1;
 let isInit = false; // 避免有人都重置了還一直按
 
@@ -53,7 +55,10 @@ $searchResetBtn.on('click', _handleSearchReset); // reset 搜尋結果
 async function _init() {
     loading.start();
     const params = new URLSearchParams(document.location.search.substring(1));
+    countryID = params.get('countryID') && params.get('countryID').length !== 0 ? params.get('countryID') : 127;
     stage = params.get('stage') && params.get('stage').length !== 0 ? params.get('stage') : 1;
+    let countryTitle = (countryID = 127) ? '馬來西亞' : '印尼';
+    $countryTitle.text(countryTitle)
     $subTitle.text($titleArray[stage-1]);
     try {
         const response = await _getExpositionList();
@@ -123,7 +128,7 @@ function _filterInput(){
 
 
 function _getExpositionList() {
-    return fetch(`${env.baseUrl}/malaysia-exposition/${stage}/school-list`, {
+    return fetch(`${env.baseUrl}/education-exposition/${countryID}/${stage}/school-list`, {
         credentials: 'include'
     });
 }
@@ -135,7 +140,7 @@ async function _getExpositionListWithKeyword() {
 
     loading.start();
     try {
-        const response = await fetch(`${env.baseUrl}/malaysia-exposition/${stage}/school-list/${keyword}`, {
+        const response = await fetch(`${env.baseUrl}/education-exposition/${countryID}/${stage}/school-list/${keyword}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
