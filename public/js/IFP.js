@@ -13,7 +13,6 @@ const app = (function () {
   const $isGroup1 = $('#isGroup1');
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
-  const $showMyanmar = $('#showMyanmar');
   const $showEnglishTaught = $('#showEnglishTaught');
   const $showSchoolFive = $('#showSchoolFive');
 
@@ -62,7 +61,6 @@ const app = (function () {
     includeFirstCategory = true,
     includeSecondCategory = true,
     includeThirdCategory = true,
-    showMyanmarProject = false,
     showEnglishTaughtClass = false,
     showSchoolFiveGraduate = false,
   ) {
@@ -78,7 +76,6 @@ const app = (function () {
       'first-group': includeFirstCategory,
       'second-group': includeSecondCategory,
       'third-group': includeThirdCategory,
-      'myanmar': showMyanmarProject,
       'eng-taught': showEnglishTaughtClass,
       'school5': showSchoolFiveGraduate
     });
@@ -90,7 +87,7 @@ const app = (function () {
     window.history.replaceState({path: newurl}, null, newurl);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate, '2').then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showEnglishTaughtClass, showSchoolFiveGraduate, '2').then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -197,7 +194,6 @@ const app = (function () {
     const includeFirstCategory = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
     const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
     const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
-    const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
     const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
 
@@ -216,7 +212,6 @@ const app = (function () {
       $isGroup1.prop('checked', includeFirstCategory);
       $isGroup2.prop('checked', includeSecondCategory);
       $isGroup3.prop('checked', includeThirdCategory);
-      $showMyanmar.prop('checked', showMyanmarProject);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
       $showSchoolFive.prop('checked', showSchoolFiveGraduate);
 
@@ -228,7 +223,7 @@ const app = (function () {
         filterDepartmentList(
           schoolId, 'IFP', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
-          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,
+          showEnglishTaughtClass, showSchoolFiveGraduate,
         );
       } else {
         loading.complete();
@@ -308,20 +303,6 @@ const app = (function () {
           </a>
         </td>
         `;
-        // 顯示是否為緬甸師培志願
-        if(department.myanmar_teacher_education ){
-          admissionSelectionQuota += `
-              <td>
-                  <span class="td-br">是</span>
-                  <span class="td-br">Yes</span>
-              </td> `;
-        } else{
-          admissionSelectionQuota += `
-              <td>
-                  <span class="td-br">否</span>
-                  <span class="td-br">No</span>
-              </td> `;
-        }
       }
 
       //全英語授課
