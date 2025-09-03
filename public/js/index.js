@@ -14,7 +14,6 @@ const app = (function () {
   const $isGroup1 = $('#isGroup1');
   const $isGroup2 = $('#isGroup2');
   const $isGroup3 = $('#isGroup3');
-  const $showMyanmar = $('#showMyanmar');
   const $showEnglishTaught = $('#showEnglishTaught');
   const $showSchoolFive = $('#showSchoolFive');
   const $showKeyIndustries = $('#showKeyIndustries');
@@ -80,7 +79,6 @@ const app = (function () {
     includeFirstCategory = true,
     includeSecondCategory = true,
     includeThirdCategory = true,
-    showMyanmarProject = false,
     showEnglishTaughtClass = false,
     showSchoolFiveGraduate = false,
     showKeyIndustries = false
@@ -97,7 +95,6 @@ const app = (function () {
       'first-group': includeFirstCategory,
       'second-group': includeSecondCategory,
       'third-group': includeThirdCategory,
-      'myanmar': showMyanmarProject,
       'eng-taught': showEnglishTaughtClass,
       'school5': showSchoolFiveGraduate,
       'key-industry': showKeyIndustries,
@@ -115,7 +112,7 @@ const app = (function () {
     if(!showKeyIndustries) isExtendedDepartment.push(0);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate, isExtendedDepartment.toString()).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, includeFirstCategory, includeSecondCategory, includeThirdCategory, showEnglishTaughtClass, showSchoolFiveGraduate, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
@@ -207,7 +204,6 @@ const app = (function () {
     const includeFirstCategory = params.has('first-group') ? JSON.parse(params.get('first-group')) : true;
     const includeSecondCategory = params.has('second-group') ? JSON.parse(params.get('second-group')) : true;
     const includeThirdCategory = params.has('third-group') ? JSON.parse(params.get('third-group')) : true;
-    const showMyanmarProject = params.has('myanmar')? JSON.parse(params.get('myanmar')): false;
     const showEnglishTaughtClass = params.has('eng-taught')? JSON.parse(params.get('eng-taught')): false;
     const showSchoolFiveGraduate = params.has('school5')? JSON.parse(params.get('school5')): false;
     const showKeyIndustries = params.has('key-industry')? JSON.parse(params.get('key-industry')): false;
@@ -227,7 +223,6 @@ const app = (function () {
       $isGroup1.prop('checked', includeFirstCategory);
       $isGroup2.prop('checked', includeSecondCategory);
       $isGroup3.prop('checked', includeThirdCategory);
-      $showMyanmar.prop('checked', showMyanmarProject);
       $showEnglishTaught.prop('checked', showEnglishTaughtClass);
       $showSchoolFive.prop('checked', showSchoolFiveGraduate);
       $showKeyIndustries.prop('checked', showKeyIndustries);
@@ -240,7 +235,7 @@ const app = (function () {
         filterDepartmentList(
           schoolId, 'bachelor', keyword, departmentGroupId,
           includeFirstCategory, includeSecondCategory, includeThirdCategory,
-          showMyanmarProject, showEnglishTaughtClass, showSchoolFiveGraduate,showKeyIndustries
+          showEnglishTaughtClass, showSchoolFiveGraduate,showKeyIndustries
         );
       } else {
         loading.complete();
@@ -314,7 +309,6 @@ const app = (function () {
           <span class="td-br">United Distribution only</span>
         </td>
         <td> - </td>
-        <td> - </td>
       `;
       // 有名額要連審查項目一起顯示
       if (department.admission_selection_ratify_quota > 0) {
@@ -327,20 +321,6 @@ const app = (function () {
           </a>
         </td>
         `;
-        // 顯示是否為緬甸師培志願
-        if(department.myanmar_teacher_education ){
-          admissionSelectionQuota += `
-              <td>
-                  <span class="td-br">是</span>
-                  <span class="td-br">Yes</span>
-              </td> `;
-        } else{
-          admissionSelectionQuota += `
-              <td>
-                  <span class="td-br">否</span>
-                  <span class="td-br">No</span>
-              </td> `;
-        }
         // 有個人申請顯示是否餘額留用
         if (!!department.admission_quota_pass === true) {
           admissionSelectionQuota += `
