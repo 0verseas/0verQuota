@@ -87,7 +87,7 @@ const app = (function () {
     if(showKeyIndustries) isExtendedDepartment.push(1);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {      if (!response.ok) {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {      if (!response.ok) {
         switch (response.statusCode) {
           case 404:
             $resultBody.html(`<tr><td colspan=12>無符合條件的系所</td></tr>`);

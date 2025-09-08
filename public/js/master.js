@@ -86,7 +86,7 @@ const app = (function () {
     let isExtendedDepartment = [];
     if(showKeyIndustries) isExtendedDepartment.push(1);
 
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
