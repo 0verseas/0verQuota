@@ -85,7 +85,7 @@ const app = (function () {
     if(showIFP) isExtendedDepartment.push(2);
 
     // 過濾系所
-    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, false, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
+    API.getDepartments(schoolId, systemId, departmentGroupId, keyword, true, true, true, showEnglishTaughtClass, false, isExtendedDepartment.toString()).then(response => {
       if (!response.ok) {
         switch (response.statusCode) {
           case 404:
