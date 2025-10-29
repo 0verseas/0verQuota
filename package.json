@@ -10,7 +10,7 @@
 	},
 	"scripts": {
 		"build": "NODE_ENV=production harp ./ dist && babel dist/js -d dist/js",
-		"docker-build": "docker run -it --rm -v $PWD:/0verQuota -w /0verQuota node:22.20.0 sh -c 'npm install && npm run build' ",
+		"docker-build": "docker run -it --rm -v $PWD:/0verQuota -w /0verQuota node:22.20.0 sh -c 'npm install chalk && npm install && npm run build' ",
 		"test-build": "NODE_ENV=test harp ./ dist && babel dist/js -d dist/js",
 		"serve": "harp ./"
 	},
