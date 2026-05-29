@@ -14,10 +14,10 @@ const $countryTitle = $('.country-title');
 const $subTitle = $('.sub-title');
 
 const $titleArray = {
-    127:['柔佛永平','雪蘭莪巴生','吉隆坡','吉打雙溪大年','沙巴亞庇','砂拉越美里'],
+    128:['柔佛永平','吉隆坡','檳城','砂拉越詩巫','沙巴亞庇'],
     109:['雅加達','萬隆','錫江','泗水','棉蘭']
 };
-let countryID = 127;
+let countryID = 128;
 let stage = 1;
 let isInit = false; // 避免有人都重置了還一直按
 
@@ -58,9 +58,9 @@ $searchResetBtn.on('click', _handleSearchReset); // reset 搜尋結果
 async function _init() {
     loading.start();
     const params = new URLSearchParams(document.location.search.substring(1));
-    countryID = params.get('countryID') && params.get('countryID').length !== 0 ? params.get('countryID') : 127;
+    countryID = params.get('countryID') && params.get('countryID').length !== 0 ? params.get('countryID') : 128;
     stage = params.get('stage') && params.get('stage').length !== 0 ? params.get('stage') : 1;
-    let countryTitle = (countryID == 127) ? '馬來西亞' : '印尼';
+    let countryTitle = (countryID == 128) ? '馬來西亞' : '印尼';
     $countryTitle.text(countryTitle)
     $subTitle.text($titleArray[countryID][stage-1]);
     try {
