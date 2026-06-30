@@ -14,8 +14,8 @@ const $countryTitle = $('.country-title');
 const $subTitle = $('.sub-title');
 
 const $titleArray = {
-    128:['柔佛永平','吉隆坡','檳城','砂拉越詩巫','沙巴亞庇'],
-    109:['雅加達','萬隆','錫江','泗水','棉蘭']
+    128:['','柔佛新山','吉隆坡','檳城','砂拉越詩巫','沙巴亞庇','巴生中華獨立中學','巴生濱華中學','烏魯冷岳福建公會','芙蓉中華中學','吉隆坡中華國民型中學'],
+    109:['','雅加達','萬隆','錫江','泗水','棉蘭']
 };
 let countryID = 128;
 let stage = 1;
@@ -62,7 +62,7 @@ async function _init() {
     stage = params.get('stage') && params.get('stage').length !== 0 ? params.get('stage') : 1;
     let countryTitle = (countryID == 128) ? '馬來西亞' : '印尼';
     $countryTitle.text(countryTitle)
-    $subTitle.text($titleArray[countryID][stage-1]);
+    $subTitle.text($titleArray[countryID][stage]);
     try {
         const response = await _getExpositionList();
         if (!response.ok) { throw response; }
