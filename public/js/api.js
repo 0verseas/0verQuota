@@ -46,8 +46,6 @@ const API = (function () {
         systemPropertyName = 'graduate_departments';
       } else if (systemId === 'twoYear') {
         systemPropertyName = 'two_year_tech_departments';
-      } else if (systemId === 'youngAssociate') {
-        systemPropertyName = 'young_associate_departments';
       }
       // 暫存拉到的資料
       const data = response.data;
@@ -72,32 +70,7 @@ const API = (function () {
     const request =  fetch(`${baseUrl}/department-groups?system_id=${systemId}&school_code=${schoolId}`, {
       credentials: 'include'
     });
-    try {
-      if(systemId=='youngAssociate') {
-        const datas = await _requestHandle(request);
-        if(!datas.ok) {throw datas};
-        const json = await datas.data;
-        let group_to_values = await json.reduce(function (obj, item) {
-          obj[item.id + ',' + item.title + ',' + item.engTitle] = (obj[item.id + ',' + item.title + ',' + item.engTitle]) || [];
-          obj[item.id + ',' + item.title + ',' + item.engTitle].push({subId: item.subId, subTitle: item.subTitle, subEngTitle: item.subEngTitle});
-          return obj;
-        }, {});
-
-        let groups = await Object.keys(group_to_values).map(function (key) {
-          key =  key.split(',');
-          return {id: key[0], title: key[1], engTitle: key[2], subTitle: group_to_values[key]};
-        });
-
-        localStorage.groupList = JSON.stringify(groups);
-        return groups;
-      }
-
-      return _requestHandle(request);
-
-    } catch (e) {
-      // console.log('Boooom!!');
-      // console.log(e);
-    }
+    return _requestHandle(request);
   }
 
   // http request 的中介處理

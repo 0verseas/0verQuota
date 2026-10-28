@@ -265,18 +265,30 @@ const app = (function () {
 
       //全英語授課
       let engTaughtHtml;
-      if(department.has_eng_taught){
-        engTaughtHtml= `
-              <td>
-                  <span class="td-br">是</span>
-                  <span class="td-br">Yes</span>
-              </td> `;
-      } else {
-        engTaughtHtml= `
-              <td>
-                  <span class="td-br">否</span>
-                  <span class="td-br">Not</span>
-              </td> `;
+      switch(department.has_eng_taught){
+        case 1:
+          engTaughtHtml =`
+            <td>
+              <span class="td-br">全英文授課</span>
+              <span class="td-br">Taught entirely in English</span>
+            </td>
+          `;
+          break;
+        case 2:
+          engTaughtHtml =`
+            <td>
+              <span class="td-br">依校系分則規定</span>
+              <span class="td-br">According to department rules</span>
+            </td>
+          `;
+          break;
+        default:
+          engTaughtHtml =`
+            <td>
+              <span class="td-br">中文授課</span>
+              <span class="td-br">Taught in Chinese</span>
+            </td>
+          `;
       }
 
       // 擺放各系所資料

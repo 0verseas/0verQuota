@@ -212,8 +212,16 @@ const app = (function () {
     }
 
     //是否為全英語授課
-    let englishTaughtString = (department.has_eng_taught) ?'是 Yes':'否 Not';
-    $englishTaught.html(`${englishTaughtString}`);
+    switch(department.has_eng_taught){
+      case 1:
+        $englishTaught.html(`全英文授課 Taught entirely in English`);
+        break;
+      case 2:
+        $englishTaught.html(`依校系分則規定 According to department rules`);
+        break;
+      default:
+        $englishTaught.html(`中文授課 Taught in Chinese`);
+    }
 
     // 審查項目有才顯示
     if (!Array.isArray(department.application_docs) || !department.application_docs.length) {
