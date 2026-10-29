@@ -278,7 +278,7 @@ const app = (function () {
           engTaughtHtml =`
             <td>
               <span class="td-br">依校系分則規定</span>
-              <span class="td-br">According to department rules</span>
+              <span class="td-br">Subject to department regulations</span>
             </td>
           `;
           break;

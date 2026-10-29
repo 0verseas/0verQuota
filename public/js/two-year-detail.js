@@ -193,7 +193,7 @@ const app = (function () {
         $englishTaught.html(`全英文授課 Taught entirely in English`);
         break;
       case 2:
-        $englishTaught.html(`依校系分則規定 According to department rules`);
+        $englishTaught.html(`依校系分則規定 Subject to department regulations`);
         break;
       default:
         $englishTaught.html(`中文授課 Taught in Chinese`);
